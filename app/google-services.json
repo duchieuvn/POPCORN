@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "586032080420",
+    "firebase_url": "https://cakey-df786-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "cakey-df786",
+    "storage_bucket": "cakey-df786.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586032080420:android:283363647c933d57061ab1",
+        "android_client_info": {
+          "package_name": "com.popcorn.cakey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586032080420-ug4mjh7krhdhka0steah6tn9gfte60sh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbBsER05VapkGsnD2egHf6pB9cAcbcNGc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586032080420-ug4mjh7krhdhka0steah6tn9gfte60sh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
