@@ -36,13 +36,13 @@ class SignupActivity : AppCompatActivity() {
 
                 TextUtils.isEmpty(binding.etEmail.text.toString().trim { it <= ' ' }) -> {
                     // Toast.makeText(this, getString(R.string.email_required), Toast.LENGTH_SHORT).show()
-                    binding.etUsername.error = getString(R.string.email_required)
+                    binding.etEmail.error = getString(R.string.email_required)
                     binding.etEmail.requestFocus()
                 }
 
                 TextUtils.isEmpty(binding.etPassword.text.toString().trim { it <= ' ' }) -> {
                     // Toast.makeText(this, getString(R.string.password_required), Toast.LENGTH_SHORT).show()
-                    binding.etUsername.error = getString(R.string.password_required)
+                    binding.etPassword.error = getString(R.string.password_required)
                     binding.etPassword.requestFocus()
                 }
 
