@@ -26,7 +26,7 @@ class SignupActivity : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         binding.btnSignup.setOnClickListener {
-            // Check if any field is empty
+            // Check if any field is empty, validate email and confirm password
             when {
                 TextUtils.isEmpty(binding.etUsername.text.toString().trim { it <= ' ' }) -> {
                     // Toast.makeText(this, getString(R.string.username_required), Toast.LENGTH_SHORT).show()

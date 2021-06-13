@@ -13,7 +13,7 @@ class AuthActivity : AppCompatActivity() {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-//        setContentView(R.layout.activity_auth)
+        // setContentView(R.layout.activity_auth)
 
         binding.btnSignupEmail.setOnClickListener{
             val intent = Intent(this, SignupActivity::class.java)
