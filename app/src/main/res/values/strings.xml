@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Cakey</string>
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="confirm_password_hint">Confirm Password</string>
+    <string name="signup">Sign up</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="username_hint">Username</string>
 </resources>
