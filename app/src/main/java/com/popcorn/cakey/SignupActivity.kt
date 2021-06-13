@@ -26,29 +26,34 @@ class SignupActivity : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         binding.btnSignup.setOnClickListener {
+            val username = binding.etUsername
+            val email = binding.etEmail
+            val pwd = binding.etPassword
+            val cpwd = binding.etConfirmPassword
             // Check if any field is empty, validate email and confirm password
             when {
-                TextUtils.isEmpty(binding.etUsername.text.toString().trim { it <= ' ' }) -> {
-                    // Toast.makeText(this, getString(R.string.username_required), Toast.LENGTH_SHORT).show()
-                    binding.etUsername.error = getString(R.string.username_required)
-                    binding.etUsername.requestFocus()
+                TextUtils.isEmpty(username.text.toString().trim { it <= ' ' }) -> {
+                    Toast.makeText(this, getString(R.string.username_required), Toast.LENGTH_SHORT).show()
                 }
 
-                TextUtils.isEmpty(binding.etEmail.text.toString().trim { it <= ' ' }) -> {
-                    // Toast.makeText(this, getString(R.string.email_required), Toast.LENGTH_SHORT).show()
-                    binding.etEmail.error = getString(R.string.email_required)
-                    binding.etEmail.requestFocus()
+                TextUtils.isEmpty(email.text.toString().trim { it <= ' ' }) -> {
+                    Toast.makeText(this, getString(R.string.email_required), Toast.LENGTH_SHORT).show()
                 }
 
-                TextUtils.isEmpty(binding.etPassword.text.toString().trim { it <= ' ' }) -> {
-                    // Toast.makeText(this, getString(R.string.password_required), Toast.LENGTH_SHORT).show()
-                    binding.etPassword.error = getString(R.string.password_required)
-                    binding.etPassword.requestFocus()
+                (!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()) -> {
+                    Toast.makeText(this, getString(R.string.email_invalid), Toast.LENGTH_SHORT).show()
                 }
 
-                !Patterns.EMAIL_ADDRESS.matcher(binding.etEmail.text).matches() -> {
-                    binding.etEmail.error = getString(R.string.email_invalid)
-                    binding.etEmail.requestFocus()
+                TextUtils.isEmpty(pwd.text.toString().trim { it <= ' ' }) -> {
+                    Toast.makeText(this, getString(R.string.password_required), Toast.LENGTH_SHORT).show()
+                }
+
+                (pwd.length() < resources.getInteger(R.integer.password_min_length)) -> {
+                    Toast.makeText(this, getString(R.string.password_too_short), Toast.LENGTH_SHORT).show()
+                }
+                // TODO: Fix compare string
+                (pwd.text != cpwd.text) -> {
+                    Toast.makeText(this, getString(R.string.password_mismatch), Toast.LENGTH_SHORT).show()
                 }
             }
         }

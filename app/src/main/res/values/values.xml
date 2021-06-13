@@ -2,4 +2,5 @@
 <resources>
     <dimen name="layout_width">300dp</dimen>
     <dimen name="box_corner_radius">8dp</dimen>
+    <integer name="password_min_length">6</integer>
 </resources>

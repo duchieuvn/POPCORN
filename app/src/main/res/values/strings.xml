@@ -1,14 +1,18 @@
 <resources>
     <string name="app_name">Cakey</string>
+
     <string name="username_hint">Username</string>
+    <string name="username_required">Username is required!</string>
+
     <string name="email_hint">Email</string>
+    <string name="email_required">Email is required!</string>
+    <string name="email_invalid">Invalid Email</string>
+
     <string name="password_hint">Password</string>
     <string name="confirm_password_hint">Confirm Password</string>
-
-    <string name="username_required">Username is required!</string>
-    <string name="email_required">Email is required!</string>
     <string name="password_required">Password is required!</string>
-    <string name="email_invalid">Invalid Email</string>
+    <string name="password_too_short">Password is too short</string>
+    <string name="password_mismatch">Password Mismatch</string>
 
     <string name="signup">Sign up</string>
     <string name="login">Login</string>
