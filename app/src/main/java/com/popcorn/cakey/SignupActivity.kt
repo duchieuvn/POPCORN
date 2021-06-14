@@ -1,11 +1,11 @@
 package com.popcorn.cakey
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
@@ -18,7 +18,6 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var pwd: String
     private lateinit var cPwd: String
     private lateinit var fireAuth: FirebaseAuth
-    private lateinit var fireDB: FirebaseDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +32,6 @@ class SignupActivity : AppCompatActivity() {
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         fireAuth = FirebaseAuth.getInstance()
-        fireDB = FirebaseDatabase.getInstance()
 
         binding.btnSignup.setOnClickListener {
             username = binding.etUsername.text.toString().trim()
@@ -68,16 +66,16 @@ class SignupActivity : AppCompatActivity() {
                             if (task.isSuccessful) {
                                 val profileChange = UserProfileChangeRequest.Builder()
                                     .setDisplayName(username).build()
+                                // Add username to Auth
                                 fireAuth.currentUser!!.updateProfile(profileChange)
-                                    .addOnSuccessListener(this) {
-                                        showToast(getString(R.string.signup_succeed, username))
-                                    }
+                                showToast(getString(R.string.signup_succeed, username))
+                                // TODO: start mainActivity, currently waiting for UI design
+                                finishAffinity()
                             } else showToast(R.string.signup_failed)
                             unblockSignup()
                         }
                 }
             }
-
         }
     }
 
