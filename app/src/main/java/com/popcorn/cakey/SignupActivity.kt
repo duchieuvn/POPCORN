@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
-import com.google.firebase.database.FirebaseDatabase
 import com.popcorn.cakey.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
@@ -41,22 +39,22 @@ class SignupActivity : AppCompatActivity() {
             // Check if any field is empty, validate email and confirm password
             when {
                 TextUtils.isEmpty(username) -> {
-                    showToast(R.string.username_required)
+                    Utils.showToast(this, R.string.username_required)
                 }
                 TextUtils.isEmpty(email) -> {
-                    showToast(R.string.email_required)
+                    Utils.showToast(this, R.string.email_required)
                 }
                 (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) -> {
-                    showToast(R.string.email_invalid)
+                    Utils.showToast(this, R.string.email_invalid)
                 }
                 TextUtils.isEmpty(pwd) -> {
-                    showToast(R.string.password_required)
+                    Utils.showToast(this, R.string.password_required)
                 }
                 (pwd.length < resources.getInteger(R.integer.password_min_length)) -> {
-                    showToast(R.string.password_too_short)
+                    Utils.showToast(this, R.string.password_too_short)
                 }
                 (pwd != cPwd) -> {
-                    showToast(R.string.password_mismatch)
+                    Utils.showToast(this, R.string.password_mismatch)
                 }
                 else -> {
                     blockSignup()
@@ -68,10 +66,11 @@ class SignupActivity : AppCompatActivity() {
                                     .setDisplayName(username).build()
                                 // Add username to Auth
                                 fireAuth.currentUser!!.updateProfile(profileChange)
-                                showToast(getString(R.string.signup_succeed, username))
+                                Utils.showToast(this, getString(R.string.auth_succeed, username))
                                 // TODO: start mainActivity, currently waiting for UI design
                                 finishAffinity()
-                            } else showToast(R.string.signup_failed)
+                            } else
+                                Utils.showToast(this, R.string.signup_failed)
                             unblockSignup()
                         }
                 }
@@ -87,13 +86,5 @@ class SignupActivity : AppCompatActivity() {
     private fun unblockSignup() {
         binding.progressBar.visibility = View.GONE
         binding.btnSignup.isEnabled = true
-    }
-
-    private fun showToast(resId: Int) {
-        Toast.makeText(this, resId, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showToast(text: CharSequence) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
     }
 }
