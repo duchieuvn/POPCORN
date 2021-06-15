@@ -3,7 +3,6 @@ package com.popcorn.cakey
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -57,7 +56,7 @@ class SignupActivity : AppCompatActivity() {
                     Utils.showToast(this, R.string.password_mismatch)
                 }
                 else -> {
-                    blockSignup()
+                    Utils.blockInput(binding.progressBar, binding.btnSignup)
                     fireAuth.createUserWithEmailAndPassword(email, pwd)
                         // Bind listener life cycle to this activity, to prevent activity leak
                         .addOnCompleteListener(this) { task ->
@@ -71,20 +70,10 @@ class SignupActivity : AppCompatActivity() {
                                 finishAffinity()
                             } else
                                 Utils.showToast(this, R.string.signup_failed)
-                            unblockSignup()
+                            Utils.unblockInput(binding.progressBar, binding.btnSignup)
                         }
                 }
             }
         }
-    }
-
-    private fun blockSignup() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.btnSignup.isEnabled = false
-    }
-
-    private fun unblockSignup() {
-        binding.progressBar.visibility = View.GONE
-        binding.btnSignup.isEnabled = true
     }
 }

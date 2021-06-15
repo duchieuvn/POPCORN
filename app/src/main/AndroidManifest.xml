@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
+        <activity android:name=".ForgotPasswordActivity"></activity>
         <activity android:name=".AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,8 +17,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:parentActivityName=".AuthActivity"/>
-        <activity android:name=".SignupActivity" android:parentActivityName=".AuthActivity"/>
+        <activity
+            android:name=".LoginActivity"
+            android:parentActivityName=".AuthActivity" />
+        <activity
+            android:name=".SignupActivity"
+            android:parentActivityName=".AuthActivity" />
     </application>
 
 </manifest>

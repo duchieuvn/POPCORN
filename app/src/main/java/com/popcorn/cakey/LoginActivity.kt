@@ -3,7 +3,6 @@ package com.popcorn.cakey
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.popcorn.cakey.databinding.ActivityLoginBinding
 
@@ -18,7 +17,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-//        setContentView(R.layout.activity_login)
+        // setContentView(R.layout.activity_login)
 
         val actionBar = supportActionBar
         actionBar!!.title = getString(R.string.login)
@@ -37,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
                     Utils.showToast(this, R.string.password_required)
                 }
                 else -> {
-                    blockLogin()
+                    Utils.blockInput(binding.progressBar, binding.btnLogin)
                     fireAuth.signInWithEmailAndPassword(email, pwd)
                         .addOnCompleteListener(this) { task ->
                             if (task.isSuccessful) {
@@ -47,20 +46,10 @@ class LoginActivity : AppCompatActivity() {
                                 finishAffinity()
                             } else
                                 binding.loginError.text = getString(R.string.login_failed)
-                            unblockLogin()
+                            Utils.unblockInput(binding.progressBar, binding.btnLogin)
                         }
                 }
             }
         }
-    }
-
-    private fun blockLogin() {
-        binding.progressBar.visibility = View.VISIBLE
-        binding.btnLogin.isEnabled = false
-    }
-
-    private fun unblockLogin() {
-        binding.progressBar.visibility = View.GONE
-        binding.btnLogin.isEnabled = true
     }
 }
