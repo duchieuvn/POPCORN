@@ -1,5 +1,6 @@
 package com.popcorn.cakey
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -50,6 +51,11 @@ class LoginActivity : AppCompatActivity() {
                         }
                 }
             }
+        }
+
+        binding.forgotPassword.setOnClickListener{
+            val intent = Intent(this, ForgotPasswordActivity::class.java)
+            startActivity(intent)
         }
     }
 }
