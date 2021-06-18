@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.popcorn.cakey">
 
     <application
@@ -9,8 +10,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
-        <activity android:name=".ForgotPasswordActivity"></activity>
-        <activity android:name=".AuthActivity">
+        <activity
+            android:name=".AuthActivity"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +21,16 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".AuthActivity" />
+            android:parentActivityName=".AuthActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".SignupActivity"
-            android:parentActivityName=".AuthActivity" />
+            android:parentActivityName=".AuthActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
