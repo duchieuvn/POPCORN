@@ -3,13 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/pink"
     tools:context=".SplashActivity">
 
     <ImageView
         android:id="@+id/splash_logo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#FFA8A8"
+        android:layout_height="670dp"
         android:src="@drawable/splash_screen" />
 
     <ProgressBar
@@ -17,8 +17,19 @@
         android:layout_height="wrap_content"
         android:indeterminate="true"
         android:indeterminateTint="@color/blue_variant"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="465dp"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_marginStart="70dp"
         android:layout_marginEnd="70dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/company"
+        android:textSize="20sp"
+        android:fontFamily="@font/baloo_bold"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"/>
 </RelativeLayout>
