@@ -10,7 +10,7 @@ import android.view.WindowManager
 
 class SplashActivity : AppCompatActivity() {
 
-    private val splashTime : Long = 3000
+    private val splashTime : Long = 2000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

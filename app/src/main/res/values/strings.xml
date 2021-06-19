@@ -19,6 +19,7 @@
     <string name="signup_failed">Failed to register. Please try again!</string>
     <string name="login">Login</string>
     <string name="login_failed">Invalid email or password</string>
+    <string name="signup_from_login">Don&apos;t have an Account? Sign up</string>
     <string name="auth_succeed">Welcome %1$s!</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="submit_forgot_pass_email">Submit</string>
