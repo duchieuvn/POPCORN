@@ -23,7 +23,6 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:parentActivityName=".SplashActivity"
             android:screenOrientation="behind" />
         <activity
             android:name=".SignupActivity"
