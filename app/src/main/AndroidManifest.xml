@@ -27,15 +27,15 @@
             tools:ignore="LockedOrientationActivity"/>
         <activity
             android:name=".ForgotPasswordActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".LoginActivity"
             android:parentActivityName=".AuthActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
         <activity
             android:name=".SignupActivity"
             android:parentActivityName=".AuthActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="behind" />
     </application>
 
 </manifest>
