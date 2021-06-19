@@ -22,14 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ForgotPasswordActivity"
-            android:screenOrientation="behind" />
-        <activity
             android:name=".LoginActivity"
             android:parentActivityName=".SplashActivity"
             android:screenOrientation="behind" />
         <activity
             android:name=".SignupActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="behind" />
+        <activity
+            android:name=".ForgotPasswordActivity"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind" />
     </application>

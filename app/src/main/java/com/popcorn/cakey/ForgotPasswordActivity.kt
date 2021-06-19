@@ -19,7 +19,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         // setContentView(R.layout.activity_forgot_password)
 
         val actionBar = supportActionBar
-        actionBar!!.title = getString(R.string.login)
+        actionBar!!.title = getString(R.string.forgot_password)
         actionBar.setDisplayHomeAsUpEnabled(true)
 
         fireAuth = FirebaseAuth.getInstance()
