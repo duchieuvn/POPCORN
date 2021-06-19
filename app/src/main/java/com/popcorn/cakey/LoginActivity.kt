@@ -20,10 +20,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
         // setContentView(R.layout.activity_login)
 
-        val actionBar = supportActionBar
-        actionBar!!.title = getString(R.string.login)
-        actionBar.setDisplayHomeAsUpEnabled(true)
-
         fireAuth = FirebaseAuth.getInstance()
 
         binding.btnLogin.setOnClickListener {
