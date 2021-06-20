@@ -4,8 +4,8 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.UserProfileChangeRequest
+// import com.google.firebase.auth.FirebaseAuth
+// import com.google.firebase.auth.UserProfileChangeRequest
 import com.popcorn.cakey.databinding.ActivitySignupBinding
 
 class SignupActivity : AppCompatActivity() {
@@ -14,7 +14,7 @@ class SignupActivity : AppCompatActivity() {
     private lateinit var email: String
     private lateinit var pwd: String
     private lateinit var cPwd: String
-    private lateinit var fireAuth: FirebaseAuth
+    // private lateinit var fireAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +28,7 @@ class SignupActivity : AppCompatActivity() {
         actionBar!!.title = getString(R.string.signup)
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        fireAuth = FirebaseAuth.getInstance()
+        // fireAuth = FirebaseAuth.getInstance()
 
         binding.btnSignup.setOnClickListener {
             username = binding.etUsername.text.toString().trim()
@@ -57,21 +57,21 @@ class SignupActivity : AppCompatActivity() {
                 }
                 else -> {
                     Utils.blockInput(binding.progressBar, binding.btnSignup)
-                    fireAuth.createUserWithEmailAndPassword(email, pwd)
-                        // Bind listener life cycle to this activity, to prevent activity leak
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                val profileChange = UserProfileChangeRequest.Builder()
-                                    .setDisplayName(username).build()
-                                // Add username to Auth
-                                fireAuth.currentUser!!.updateProfile(profileChange)
-                                Utils.showToast(this, getString(R.string.auth_succeed, username))
-                                // TODO: start mainActivity, currently waiting for UI design
-                                finishAffinity()
-                            } else
-                                Utils.showToast(this, R.string.signup_failed)
-                            Utils.unblockInput(binding.progressBar, binding.btnSignup)
-                        }
+                    // fireAuth.createUserWithEmailAndPassword(email, pwd)
+                    //     // Bind listener life cycle to this activity, to prevent activity leak
+                    //     .addOnCompleteListener(this) { task ->
+                    //         if (task.isSuccessful) {
+                    //             val profileChange = UserProfileChangeRequest.Builder()
+                    //                 .setDisplayName(username).build()
+                    //             // Add username to Auth
+                    //             fireAuth.currentUser!!.updateProfile(profileChange)
+                    //             Utils.showToast(this, getString(R.string.auth_succeed, username))
+                    //             // TODO: start mainActivity, currently waiting for UI design
+                    //             finishAffinity()
+                    //         } else
+                    //             Utils.showToast(this, R.string.signup_failed)
+                    //         Utils.unblockInput(binding.progressBar, binding.btnSignup)
+                    //     }
                 }
             }
         }

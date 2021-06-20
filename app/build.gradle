@@ -3,7 +3,8 @@ plugins {
     id 'kotlin-android'
     // DEPRECATED, USE VIEW BINDING INSTEAD
     // id 'kotlin-android-extensions'
-    id 'com.google.gms.google-services'
+    // Firebase dependencies
+    // id 'com.google.gms.google-services'
 }
 
 android {
@@ -41,17 +42,27 @@ android {
     }
 }
 
+ext {
+    parseVersion = "1.26.0"
+}
+
 dependencies {
 
     // implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.3.0'
     implementation 'com.google.android.material:material:1.3.0'
-    implementation platform('com.google.firebase:firebase-bom:28.1.0')
-    implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.firebase:firebase-database-ktx'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    // Firebase dependencies
+    // implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    // implementation 'com.google.firebase:firebase-auth-ktx'
+    // implementation 'com.google.firebase:firebase-database-ktx'
+    // Parse dependencies
+    implementation "com.github.parse-community.Parse-SDK-Android:parse:$parseVersion"
+    implementation "com.github.parse-community.Parse-SDK-Android:ktx:$parseVersion"
+    implementation "com.github.parse-community.Parse-SDK-Android:coroutines:$parseVersion"
+    
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
