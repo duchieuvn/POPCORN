@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
+import com.parse.ParseUser
 // import com.google.firebase.auth.FirebaseAuth
 // import com.google.firebase.auth.UserProfileChangeRequest
 import com.popcorn.cakey.databinding.ActivitySignupBinding
@@ -57,6 +58,20 @@ class SignupActivity : AppCompatActivity() {
                 }
                 else -> {
                     Utils.blockInput(binding.progressBar, binding.btnSignup)
+                    val user = ParseUser()
+                    user.username = username
+                    user.email = email
+                    user.setPassword(pwd)
+                    user.signUpInBackground { e ->
+                        if (e == null) {
+                            Utils.showToast(this, getString(R.string.auth_succeed, username))
+                            // TODO: start mainActivity, currently waiting for UI design
+                            finishAffinity()
+                        } else {
+                            Utils.showToast(this, R.string.signup_failed)
+                            Utils.unblockInput(binding.progressBar, binding.btnSignup)
+                        }
+                    }
                     // fireAuth.createUserWithEmailAndPassword(email, pwd)
                     //     // Bind listener life cycle to this activity, to prevent activity leak
                     //     .addOnCompleteListener(this) { task ->
@@ -66,7 +81,6 @@ class SignupActivity : AppCompatActivity() {
                     //             // Add username to Auth
                     //             fireAuth.currentUser!!.updateProfile(profileChange)
                     //             Utils.showToast(this, getString(R.string.auth_succeed, username))
-                    //             // TODO: start mainActivity, currently waiting for UI design
                     //             finishAffinity()
                     //         } else
                     //             Utils.showToast(this, R.string.signup_failed)
