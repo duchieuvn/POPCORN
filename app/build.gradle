@@ -2,7 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     // DEPRECATED, USE VIEW BINDING INSTEAD
-    // id 'kotlin-android-extensions'
+    //id 'kotlin-android-extensions'
     id 'com.google.gms.google-services'
 
 }
@@ -29,7 +29,7 @@ android {
     }
 
     buildFeatures {
-            viewBinding = true
+            viewBinding true
     }
 
     compileOptions {
