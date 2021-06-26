@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.popcorn.cakey">
 
     <application
@@ -10,12 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
-        
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash_Screen"
-            tools:ignore="LockedOrientationActivity">
+            android:theme="@style/Splash_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,6 +31,8 @@
             android:name=".ForgotPasswordActivity"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind" />
+        <activity android:name=".FAQsActivity"/>
+
     </application>
 
 </manifest>
