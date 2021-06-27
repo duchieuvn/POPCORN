@@ -25,4 +25,6 @@
     <string name="submit_forgot_pass_email">Submit</string>
 
     <string name="faqs">Frequently Asked Questions</string>
+
+    <string name="edit_profile">Edit Profile</string>
 </resources>
