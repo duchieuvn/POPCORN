@@ -30,5 +30,9 @@
     <string name="profile_id">Identification</string>
     <string name="profile_name">Username</string>
     <string name="profile_email">Email</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="edit_achieve">Edit achievement</string>
+    <string name="logout">Log out</string>
+
 
 </resources>

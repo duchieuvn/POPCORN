@@ -31,14 +31,15 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:background="@color/white"
             android:layout_width="20dp"
             android:layout_height="20dp"
+            android:background="@color/white"
             android:src="@drawable/avatar" />
+
         <TextView
-            android:layout_marginStart="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
             android:text="@string/profile_achievement"
             android:textColor="@color/pink"
             android:textSize="20sp"
@@ -92,7 +93,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.75dp"
+        android:layout_height="0.5dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="25dp"
@@ -134,7 +135,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.75dp"
+        android:layout_height="0.5dp"
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="25dp"
@@ -180,6 +181,30 @@
         android:layout_marginLeft="25dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="25dp"
+        android:layout_marginBottom="60dp"
         android:background="@color/gray" />
 
+    <Button
+        android:id="@+id/edit_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_profile"
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/change_badge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/edit_achieve"
+        android:layout_gravity="center"
+        />
+
+    <Button
+        android:id="@+id/logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:text="@string/logout"
+        android:textStyle="bold" />
 </LinearLayout>
