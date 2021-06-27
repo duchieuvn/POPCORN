@@ -13,4 +13,5 @@
     <color name="blue_variant">#2286c3</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#CCCCCC</color>
 </resources>

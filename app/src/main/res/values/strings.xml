@@ -26,5 +26,9 @@
 
     <string name="faqs">Frequently Asked Questions</string>
 
-    <string name="edit_profile">Edit Profile</string>
+    <string name="profile_achievement">Wales MasterChef</string>
+    <string name="profile_id">Identification</string>
+    <string name="profile_name">Username</string>
+    <string name="profile_email">Email</string>
+
 </resources>
