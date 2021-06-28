@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
-
+        <activity android:name=".EditProfile"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -31,8 +31,7 @@
             android:name=".ForgotPasswordActivity"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind" />
-        <activity android:name=".FAQsActivity"/>
-
+        <activity android:name=".FAQsActivity" />
     </application>
 
 </manifest>

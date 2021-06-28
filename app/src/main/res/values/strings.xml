@@ -27,12 +27,16 @@
     <string name="faqs">Frequently Asked Questions</string>
 
     <string name="profile_achievement">Wales MasterChef</string>
-    <string name="profile_id">Identification</string>
-    <string name="profile_name">Username</string>
+    <string name="profile_id">Cakey ID</string>
+    <string name="profile_name">Name</string>
     <string name="profile_email">Email</string>
-    <string name="edit_profile">Edit profile</string>
-    <string name="edit_achieve">Edit achievement</string>
+    <string name="profile_level">Level</string>
+    <string name="profile_premium">Premium</string>
+    <string name="profile_password">Password</string>
+    <string name="edit_profile">Edit profile and password</string>
+    <string name="change_achieve">Change achievement</string>
     <string name="logout">Log out</string>
+    <string name="submit">Submit changes</string>
 
 
 </resources>
