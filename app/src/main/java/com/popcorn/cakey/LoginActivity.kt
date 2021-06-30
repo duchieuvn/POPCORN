@@ -1,17 +1,19 @@
 package com.popcorn.cakey
 
+// import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import com.google.firebase.auth.FirebaseAuth
+import androidx.appcompat.app.AppCompatActivity
+import com.parse.ParseUser
 import com.popcorn.cakey.databinding.ActivityLoginBinding
+
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var email: String
+    private lateinit var username: String
     private lateinit var pwd: String
-    private lateinit var fireAuth: FirebaseAuth
+    // private lateinit var fireAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,41 +22,52 @@ class LoginActivity : AppCompatActivity() {
         setContentView(view)
         // setContentView(R.layout.activity_login)
 
-        fireAuth = FirebaseAuth.getInstance()
+        // fireAuth = FirebaseAuth.getInstance()
 
         binding.btnLogin.setOnClickListener {
-            email = binding.etEmail.text.toString().trim()
+            username = binding.etEmail.text.toString().trim()
             pwd = binding.etPassword.text.toString().trim()
             when {
-                TextUtils.isEmpty(email) -> {
-                    Utils.showToast(this, R.string.email_required)
+                TextUtils.isEmpty(username) -> {
+                    Utils.showToast(this, R.string.username_required)
                 }
                 TextUtils.isEmpty(pwd) -> {
                     Utils.showToast(this, R.string.password_required)
                 }
                 else -> {
                     Utils.blockInput(binding.progressBar, binding.btnLogin)
-                    fireAuth.signInWithEmailAndPassword(email, pwd)
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                val username = fireAuth.currentUser!!.displayName
-                                Utils.showToast(this, getString(R.string.auth_succeed, username))
-                                // TODO: start mainActivity, currently waiting for UI design
-                                finishAffinity()
-                            } else
-                                binding.loginError.text = getString(R.string.login_failed)
+                    ParseUser.logInInBackground(username, pwd) { user, e ->
+                        if (user != null) {
+                            Utils.showToast(this, getString(R.string.auth_succeed, user.email))
+                            // TODO: start mainActivity, currently waiting for UI design
+                            finishAffinity()
+                        } else {
+                            // Signup failed. Look at the ParseException to see what happened.
+                            binding.loginError.text = getString(R.string.login_failed)
                             Utils.unblockInput(binding.progressBar, binding.btnLogin)
                         }
+                    }
+                    // fireAuth.signInWithEmailAndPassword(email, pwd)
+                    //     .addOnCompleteListener(this) { task ->
+                    //         if (task.isSuccessful) {
+                    //             val username = fireAuth.currentUser!!.displayName
+                    //             Utils.showToast(this, getString(R.string.auth_succeed, username))
+                    //             // TODO: start mainActivity, currently waiting for UI design
+                    //             finishAffinity()
+                    //         } else
+                    //             binding.loginError.text = getString(R.string.login_failed)
+                    //         Utils.unblockInput(binding.progressBar, binding.btnLogin)
+                    //     }
                 }
             }
         }
 
-        binding.forgotPassword.setOnClickListener{
+        binding.forgotPassword.setOnClickListener {
             val intent = Intent(this, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
 
-        binding.signup.setOnClickListener{
+        binding.signup.setOnClickListener {
             val intent = Intent(this, SignupActivity::class.java)
             startActivity(intent)
         }
