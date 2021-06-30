@@ -1,10 +1,12 @@
 package com.popcorn.cakey
 
-import androidx.appcompat.app.AppCompatActivity
+// import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import android.text.TextUtils
-// import com.google.firebase.auth.FirebaseAuth
+import androidx.appcompat.app.AppCompatActivity
+import com.parse.ParseUser
 import com.popcorn.cakey.databinding.ActivityForgotPasswordBinding
+
 
 class ForgotPasswordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityForgotPasswordBinding
@@ -25,13 +27,20 @@ class ForgotPasswordActivity : AppCompatActivity() {
         // fireAuth = FirebaseAuth.getInstance()
 
         binding.btnSubmit.setOnClickListener {
-            // email = binding.etEmail.text.toString().trim()
-            // if (TextUtils.isEmpty(email))
-            //     Utils.showToast(this, R.string.email_required)
-            // else {
-            //     fireAuth.sendPasswordResetEmail(email)
-            //     finish()
-            // }
+            email = binding.etEmail.text.toString().trim()
+            if (TextUtils.isEmpty(email))
+                Utils.showToast(this, R.string.email_required)
+            else {
+                // fireAuth.sendPasswordResetEmail(email)
+                ParseUser.requestPasswordResetInBackground(email) { e ->
+                    if (e == null) {
+                        Utils.showToast(this, "Please check your email")
+                    } else {
+                        Utils.showToast(this, e.message!!)
+                    }
+                }
+                finish()
+            }
         }
     }
 }
