@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:gravity="center">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ingredientList"
+        android:layout_marginStart="10dp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Step"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="@string/inputStep" />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/step_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:onClick="optionsStep"
+
+        android:src="@drawable/ic_more_vert"
+        android:contentDescription="@string/usageAdd" />
+
+
+</LinearLayout>

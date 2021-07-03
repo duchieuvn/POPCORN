@@ -73,4 +73,8 @@ dependencies {
     implementation "androidx.drawerlayout:drawerlayout:1.1.1"
     //Edit_profile circle ava
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //Get image from gallery
+    implementation 'com.github.dhaval2404:imagepicker:2.1'
+
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Cakey</string>
-    <string name="company">v1.0.0 by @POPCORN Inc. 2021</string>
+    <string name="company">v1.0 by @POPCORN Inc. 2021</string>
 
     <string name="username_hint">Username</string>
     <string name="username_required">Username is required!</string>
@@ -24,6 +24,7 @@
     <string name="forgot_password">Forgot Password?</string>
     <string name="submit_forgot_pass_email">Submit</string>
 
+    <!-- FAQs activity-->
     <string name="faqs">Frequently Asked Questions</string>
 
     <string name="profile_achievement">Wales MasterChef</string>
@@ -38,5 +39,31 @@
     <string name="logout">Log out</string>
     <string name="submit">Submit changes</string>
 
+    <!-- Write blog activity-->
+    <string name="title">Titles</string>
+    <string name="description">Description</string>
+    <string name="usageImage">Upload 1 photo to blog</string>
+    <string name="servings">Servings</string>
+    <string name="hint_ser">4 people</string>
 
+    <string name="cooking_time">Cooking time</string>
+    <string name="minutes">30 minutes</string>
+
+    <string name="ingredient_lists">Ingredient Lists</string>
+    <string name="quantity">20g</string>
+    <string name="name_ing">sugar</string>
+
+    <string name="delete">Delete</string>
+    <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="guidelines">Guidelines</string>
+    <string name="inputStep">Input step here</string>
+
+    <string name="add_but">Add</string>
+    <string name="usageAdd">Click to add</string>
+
+    <string name="video">Video (Optional)</string>
+
+    <string name="post_Blogs">Post</string>
 </resources>
