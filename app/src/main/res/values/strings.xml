@@ -40,7 +40,7 @@
     <string name="submit">Submit changes</string>
 
     <!-- Write blog activity-->
-    <string name="title">Titles</string>
+    <string name="title">Blog Title</string>
     <string name="description">Description</string>
     <string name="usageImage">Upload 1 photo to blog</string>
     <string name="servings">Servings</string>
