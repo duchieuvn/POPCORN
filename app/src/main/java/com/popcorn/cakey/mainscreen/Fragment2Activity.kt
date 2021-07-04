@@ -1,15 +1,16 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.mainscreen
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.popcorn.cakey.R
 
 
 class Fragment2Activity: Fragment(R.layout.activity_fragment2) {
     companion object{
-        fun newInstance(): Fragment2Activity{
+        fun newInstance(): Fragment2Activity {
            return Fragment2Activity()
         }
     }
