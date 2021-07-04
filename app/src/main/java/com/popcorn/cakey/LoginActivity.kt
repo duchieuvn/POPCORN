@@ -20,7 +20,6 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        // setContentView(R.layout.activity_login)
 
         // fireAuth = FirebaseAuth.getInstance()
 
