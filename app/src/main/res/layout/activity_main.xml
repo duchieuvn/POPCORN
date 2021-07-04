@@ -28,6 +28,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.fragment.app.FragmentContainerView
+            android:orientation="horizontal"
             android:id="@+id/one_fragment"
             android:name="com.popcorn.cakey.Fragment1Activity"
             android:layout_width="match_parent"
