@@ -37,7 +37,7 @@
 
         <activity android:name=".FAQsActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".mainscreen.MainActivity"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen">

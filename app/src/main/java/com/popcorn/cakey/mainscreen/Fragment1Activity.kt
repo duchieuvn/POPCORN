@@ -1,6 +1,5 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.mainscreen
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.popcorn.cakey.R
 
 
 class Fragment1Activity: Fragment() {
@@ -23,18 +23,18 @@ class Fragment1Activity: Fragment() {
     }
     @Override
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        val view: View=inflater.inflate(R.layout.activity_fragment1,container,false)
         layoutManager= LinearLayoutManager(this.context,LinearLayoutManager.HORIZONTAL,false)
-        recyclerView.findViewById<RecyclerView>(R.id.recyclerView)
+        recyclerView=view.findViewById(R.id.suggestionView)
         recyclerView.layoutManager=layoutManager
         recyclerView.adapter=RecyclerApdater()
-
-        val view: View=inflater.inflate(R.layout.activity_suggestion,container,false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        R.id.recyclerView.apply{
+        R.id.suggestionView.apply{
             layoutManager=LinearLayoutManager(activity)
             adapter=RecyclerApdater()
         }
@@ -42,12 +42,10 @@ class Fragment1Activity: Fragment() {
 }
 class RecyclerApdater: RecyclerView.Adapter<RecyclerApdater.ViewHolder>(){
 
-    private var title= arrayOf("ID1", "ID2","ID3", "ID4")
-    private var image= intArrayOf(R.drawable.avatar,R.drawable.avatar,R.drawable.avatar,R.drawable.avatar)
+    private var title= arrayOf("anh1", "anh2","anh3", "anh4","anh5", "anh6","anh7", "anh8")
+    private var image= intArrayOf(R.drawable.avatar,R.drawable.avatar,R.drawable.avatar,
+        R.drawable.avatar,R.drawable.avatar,R.drawable.avatar,R.drawable.avatar,R.drawable.avatar)
 
-    fun RecyclerApdater(){
-
-    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerApdater.ViewHolder {
         val v= LayoutInflater.from(parent.context).inflate(R.layout.activity_suggestion,parent,false)
         return ViewHolder(v)
@@ -63,12 +61,8 @@ class RecyclerApdater: RecyclerView.Adapter<RecyclerApdater.ViewHolder>(){
     }
 
     inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
-        var itemImage: ImageView
-        var itemTitle: TextView
+        var itemImage: ImageView = itemView.findViewById(R.id.thumnail)
+        var itemTitle: TextView = itemView.findViewById(R.id.username)
 
-        init{
-            itemImage=itemView.findViewById(R.id.thumnail)
-            itemTitle=itemView.findViewById(R.id.username)
-        }
     }
 }
