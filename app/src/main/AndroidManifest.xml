@@ -11,16 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
 
+
         <activity android:name=".EditProfile" />
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Splash_Screen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".LoginActivity"
@@ -34,9 +32,22 @@
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind" />
 
+
         <activity android:name=".WriteBlogActivity"/>
 
         <activity android:name=".FAQsActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="behind"
+            android:theme="@style/Main_Screen">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+
 
     </application>
 

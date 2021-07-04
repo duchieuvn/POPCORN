@@ -66,4 +66,10 @@
     <string name="video">Video (Optional)</string>
 
     <string name="post_Blogs">Post</string>
+
+
+    <string name="suggestion">Suggestion</string>
+    <string name="search">Search</string>
+    <string name="setting">Setting</string>
+
 </resources>
