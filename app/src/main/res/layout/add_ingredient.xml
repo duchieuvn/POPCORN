@@ -9,7 +9,7 @@
     android:gravity="center">
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="100dp"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/ingredientList"
         android:layout_marginStart="15dp"
@@ -24,7 +24,22 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="200dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ingredientList"
+        android:layout_marginStart="15dp"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/unit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/unit" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/ingredientList"
         android:layout_marginStart="10dp"
@@ -50,4 +65,7 @@
 
         android:onClick="optionsIngredient"
         android:contentDescription="@string/usageAdd" />
+
+
+
 </LinearLayout>

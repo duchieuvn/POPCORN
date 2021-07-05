@@ -6,8 +6,11 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputEditText
@@ -19,6 +22,44 @@ class WriteBlogActivity : AppCompatActivity() {
     private var stepOptions: ImageView? = null
     private lateinit var fab:FloatingActionButton
     private lateinit var blogImage:ImageView
+    private lateinit var stepImage:ImageView
+    private lateinit var currentView:View
+
+    private val startForBlogImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            if (resultCode == Activity.RESULT_OK) {
+                //Image Uri will not be null for RESULT_OK
+                val uri: Uri = data?.data!!
+
+                // Use Uri object instead of File to avoid storage permissions
+                blogImage.setImageURI(uri)
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            }
+        }
+    private val startForStepImageResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            val resultCode = result.resultCode
+            val data = result.data
+
+            if (resultCode == Activity.RESULT_OK) {
+                //Image Uri will not be null for RESULT_OK
+                val uri: Uri = data?.data!!
+
+                stepImage = currentView.findViewById(R.id.stepImage)
+                stepImage.setImageURI(uri)
+
+            } else if (resultCode == ImagePicker.RESULT_ERROR) {
+                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,33 +75,31 @@ class WriteBlogActivity : AppCompatActivity() {
                 .crop()
                 .compress(1024)			//Final image size will be less than 1 MB(Optional)
                 .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                .start()
+                .createIntent { intent ->
+                    startForBlogImageResult.launch(intent)
+                }
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when (resultCode) {
-            Activity.RESULT_OK -> {
-                //Image Uri will not be null for RESULT_OK
-                val uri: Uri = data?.data!!
 
-                // Use Uri object instead of File to avoid storage permissions
-                blogImage.setImageURI(uri)
-
-                /*ImagePicker.with(this)
-                    .saveDir(File(getFilesDir(), "ImagePicker"))
-                    .start()
-                */
-            }
-            ImagePicker.RESULT_ERROR -> {
-                Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
-            }
-            else -> {
-                Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
-            }
-        }
+    fun setView(v:View)
+    {
+        currentView = v
     }
+    fun addStepImage(v:View)
+    {
+        setView(v)
+        ImagePicker.with(this)
+            .crop()
+            .compress(1024)			//Final image size will be less than 1 MB(Optional)
+            .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
+            .createIntent { intent ->
+                startForStepImageResult.launch(intent)
+            }
+
+
+    }
+
     fun optionsIngredient(v:View)
     {
         ingredientOptions = findViewById(R.id.ingredient_option)
@@ -133,7 +172,10 @@ class WriteBlogActivity : AppCompatActivity() {
 
     fun addStep(v:View) {
         val view = layoutInflater.inflate(R.layout.add_step, null)
+        val image = layoutInflater.inflate(R.layout.add_image, null)
         layoutStep!!.addView(view)
+        layoutStep!!.addView(image)
+
     }
 
 

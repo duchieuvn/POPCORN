@@ -197,7 +197,7 @@
             android:onClick="addIngredient">
         </Button>
 
-        <!-- Directions -->
+        <!-- Guidelines -->
         <TextView
             android:id="@+id/guideline"
 
@@ -217,9 +217,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/guideline"
-
             android:orientation="vertical">
         </LinearLayout>
+
         <Button
             android:id="@+id/button_add_steps"
 
