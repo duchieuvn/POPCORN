@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        card_view:cardPreventCornerOverlap="true"
+        card_view:cardElevation="2dp"
+        card_view:cardBackgroundColor="@color/white"
+        card_view:cardCornerRadius="4dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/blogImage"
+                android:layout_width="200dp"
+                android:layout_height="match_parent"
+                android:src="@color/blue">
+            </com.google.android.material.imageview.ShapeableImageView>
+
+            <TextView
+                android:id="@+id/blogTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="205dp"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/pink_variant"
+                android:text="@string/suggestion"
+                android:textAllCaps="true"
+                android:textSize="20sp">
+            </TextView>
+            <TextView
+                android:id="@+id/blogIntro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="210dp"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/black"
+                android:text="@string/suggestion"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                >
+            </TextView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/read_more"
+                android:textSize="12sp">
+
+            </Button>
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
