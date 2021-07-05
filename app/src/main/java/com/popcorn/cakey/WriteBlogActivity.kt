@@ -142,7 +142,13 @@ class WriteBlogActivity : AppCompatActivity() {
 
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.delete -> layoutStep!!.removeView(v.parent as View)
+                R.id.delete ->
+                {
+                    val nextView = layoutStep!!.getChildAt(layoutStep!!.indexOfChild(v)+2)
+
+                    layoutStep!!.removeView(nextView)
+                    layoutStep!!.removeView(v.parent as View)
+                }
                 R.id.add -> addStep(v)
             }
             true
@@ -200,18 +206,22 @@ class WriteBlogActivity : AppCompatActivity() {
             val contentIngredient: View = layoutList!!.getChildAt(i)
 
             val quantity: TextInputEditText = contentIngredient.findViewById(R.id.quantity)
+            val unit: TextInputEditText = contentIngredient.findViewById(R.id.unit)
             val nameIng: TextInputEditText = contentIngredient.findViewById((R.id.nameIngredient))
 
             Toast.makeText(this, quantity.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, unit.text, Toast.LENGTH_SHORT).show()
             Toast.makeText(this, nameIng.text, Toast.LENGTH_SHORT).show()
         }
 
         for (i in 0 until layoutStep!!.childCount) {
-            val contentGuidelines: View = layoutStep!!.getChildAt(i)
+            if (i % 2 == 0) {
+                val contentGuidelines: View = layoutStep!!.getChildAt(i)
 
-            val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
+                val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
 
-            Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+            }
         }
 
 

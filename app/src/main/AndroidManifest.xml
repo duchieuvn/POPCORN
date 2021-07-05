@@ -34,6 +34,7 @@
 
 
         <activity android:name=".WriteBlogActivity"/>
+
         <activity android:name=".FAQsActivity" />
         <activity
             android:name=".mainscreen.MainActivity"

@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
 
                 android:hint="@string/title"
+
                 android:ellipsize="start"
                 android:gravity="center_vertical"
                 android:textSize="20sp">
