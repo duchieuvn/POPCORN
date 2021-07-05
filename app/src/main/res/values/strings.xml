@@ -50,7 +50,8 @@
     <string name="minutes">30 minutes</string>
 
     <string name="ingredient_lists">Ingredient Lists</string>
-    <string name="quantity">20g</string>
+    <string name="quantity">1000</string>
+    <string name="unit">grams</string>
     <string name="name_ing">sugar</string>
 
     <string name="delete">Delete</string>
