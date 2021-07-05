@@ -8,6 +8,7 @@
     >
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/suggestionItem"
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:cardCornerRadius="4dp"
@@ -34,7 +35,6 @@
                     android:src="@color/ic_launcher_background">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
-
                 <TextView
                     android:id="@+id/username"
                     android:layout_width="wrap_content"
@@ -53,6 +53,13 @@
                     tools:targetApi="o">
 
                 </TextView>
+
+                <View
+                    android:layout_width="3dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="97dp"
+                    android:background="@color/white">
+                </View>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

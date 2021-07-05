@@ -7,19 +7,26 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="170dp"
         card_view:cardPreventCornerOverlap="true"
-        card_view:cardElevation="2dp"
         card_view:cardBackgroundColor="@color/white"
-        card_view:cardCornerRadius="4dp">
+        card_view:cardCornerRadius="20dp"
+        card_view:strokeColor="@color/black">
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/blogImage"
                 android:layout_width="200dp"
-                android:layout_height="match_parent"
-                android:src="@color/blue">
+                android:layout_height="165dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="1dp"
+                android:layout_marginTop="2dp"
+                android:src="@color/blue"
+               >
+
             </com.google.android.material.imageview.ShapeableImageView>
 
             <TextView
@@ -51,14 +58,23 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_marginStart="290dp"
+                android:layout_marginTop="120dp"
+                android:layout_marginEnd="9dp"
+                android:layout_marginBottom="10dp"
                 android:text="@string/read_more"
                 android:textSize="12sp">
-
             </Button>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="5dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="165dp"
+                android:layout_marginEnd="0dp"
+                android:background="@color/white">
+
+            </View>
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>

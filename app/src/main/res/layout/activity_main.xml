@@ -11,10 +11,10 @@
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp"
+            android:layout_marginBottom="96dp"
             android:isScrollContainer="true"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
-            app:layout_constraintBottom_toTopOf="@+id/one_fragment"
+            app:layout_constraintBottom_toTopOf="@+id/two_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -28,12 +28,11 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.fragment.app.FragmentContainerView
-            android:orientation="horizontal"
             android:id="@+id/one_fragment"
             android:name="com.popcorn.cakey.mainscreen.Fragment1Activity"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            android:layout_marginBottom="0dp"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/two_fragment"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -44,16 +43,14 @@
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/two_fragment"
             android:name="com.popcorn.cakey.mainscreen.Fragment2Activity"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="503dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:layout_constraintTop_toBottomOf="@+id/one_fragment"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
             tools:layout="@layout/activity_fragment2" />
 
 
