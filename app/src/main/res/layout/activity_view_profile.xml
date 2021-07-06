@@ -278,14 +278,14 @@
         android:background="@color/gray" />
 
     <Button
-        android:id="@+id/submit_changes"
+        android:id="@+id/vie_profile_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/edit_profile"
         android:layout_gravity="center"
         />
     <Button
-        android:id="@+id/change_badge"
+        android:id="@+id/view_profile_achieve"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change_achieve"

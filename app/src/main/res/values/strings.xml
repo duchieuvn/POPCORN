@@ -27,6 +27,7 @@
     <!-- FAQs activity-->
     <string name="faqs">Frequently Asked Questions</string>
 
+    <!-- profile activity-->
     <string name="profile_achievement">Wales MasterChef</string>
     <string name="profile_id">Cakey ID</string>
     <string name="profile_name">Name</string>
@@ -34,11 +35,18 @@
     <string name="profile_level">Level</string>
     <string name="profile_premium">Premium</string>
     <string name="profile_password">Password</string>
+
     <string name="edit_profile">Edit profile and password</string>
     <string name="change_achieve">Change achievement</string>
     <string name="logout">Log out</string>
     <string name="submit">Submit changes</string>
+
     <string name="ac_title">Achievements</string>
+    <string-array name="ac_lists">
+        <item>Junior Baker</item>
+        <item>Senior Baker</item>
+        <item>Toriko</item>
+    </string-array>
 
     <!-- Write blog activity-->
     <string name="title">Blog Title</string>
@@ -74,5 +82,7 @@
     <string name="search">Search</string>
     <string name="setting">Setting</string>
     <string name="read_more">Read More</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

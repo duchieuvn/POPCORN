@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.popcorn.cakey.R
@@ -52,5 +53,7 @@ class EditProfile : AppCompatActivity() {
                     startForAvatar.launch(intent)
                 }
         }
+
     }
+
 }

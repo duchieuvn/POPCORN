@@ -10,8 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
-        <activity android:name=".profile.Achievement"></activity>
-        <activity android:name=".profile.ViewProfile">
+
+        <activity android:name=".profile.Achievement">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
