@@ -38,6 +38,7 @@
     <string name="change_achieve">Change achievement</string>
     <string name="logout">Log out</string>
     <string name="submit">Submit changes</string>
+    <string name="ac_title">Achievements</string>
 
     <!-- Write blog activity-->
     <string name="title">Blog Title</string>
