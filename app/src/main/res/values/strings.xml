@@ -52,14 +52,15 @@
     <string name="title">Blog Title</string>
     <string name="description">Description</string>
     <string name="usageImage">Upload 1 photo to blog</string>
+    <string name="required">Required*</string>
+
     <string name="servings">Servings</string>
     <string name="hint_ser">4 people</string>
-
     <string name="cooking_time">Cooking time</string>
     <string name="minutes">30 minutes</string>
 
-    <string name="ingredient_lists">Ingredient Lists</string>
-    <string name="quantity">1000</string>
+    <string name="ingredient_lists">Ingredients List</string>
+    <string name="quantity">100</string>
     <string name="unit">grams</string>
     <string name="name_ing">sugar</string>
 

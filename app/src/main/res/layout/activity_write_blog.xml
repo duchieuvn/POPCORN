@@ -19,14 +19,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            app:helperText="@string/required"
+            app:helperTextTextColor="@color/red"
+
+            app:endIconMode="clear_text"
+
+            app:errorEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/detailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:hint="@string/title"
 
                 android:ellipsize="start"
@@ -55,11 +60,11 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="240dp"
-            android:layout_marginEnd="65dp"
 
-            android:src="@drawable/ic_add"
-            android:contentDescription="@string/usageAdd">
+            android:layout_marginTop="268dp"
+            android:layout_marginEnd="63dp"
+            android:contentDescription="@string/usageAdd"
+            android:src="@drawable/ic_add">
 
         </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
@@ -80,7 +85,11 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/description">
+            android:layout_below="@id/description"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+            app:endIconMode="clear_text">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contentDes"
                 android:layout_width="match_parent"
@@ -88,6 +97,7 @@
 
                 android:inputType="textMultiLine"
                 android:minLines="3"
+
                 android:gravity="top"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -113,14 +123,24 @@
             android:layout_marginStart="40dp"
 
             app:hintAnimationEnabled="false"
-            app:hintEnabled="false">
+            app:hintEnabled="false"
+
+            app:helperText="@string/required"
+            app:helperTextTextColor="@color/red"
+
+            app:errorEnabled="true"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numSer"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:inputType="number"
+
                 android:gravity="center"
+
                 android:hint="@string/hint_ser"/>
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -130,7 +150,7 @@
             android:layout_width="130dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/servings"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="5dp"
 
             android:text="@string/cooking_time"
@@ -141,14 +161,17 @@
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/cooking_time"
             android:layout_below="@id/servings"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="10dp"
 
             app:hintAnimationEnabled="false"
             app:hintEnabled="false"
 
-            android:gravity="center">
+            android:gravity="center"
+
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/timeCook"
 
@@ -157,7 +180,9 @@
 
                 android:gravity="center"
 
-                android:hint="@string/minutes"/>
+                android:inputType="time"
+
+                android:hint="@string/minutes" />
         </com.google.android.material.textfield.TextInputLayout>
 
 

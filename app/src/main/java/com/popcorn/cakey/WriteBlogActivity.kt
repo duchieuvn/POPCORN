@@ -184,46 +184,120 @@ class WriteBlogActivity : AppCompatActivity() {
 
     }
 
-
-    fun postBlog(v: View) {
+    private fun validateBlog() : Boolean
+    {
         val title: TextInputEditText = findViewById(R.id.detailTitle)
-
-
-        val descriptionBlog: TextInputEditText = findViewById(R.id.contentDes)
-
 
         val serving: TextInputEditText = findViewById(R.id.numSer)
 
-
-        val cookingTime: TextInputEditText = findViewById(R.id.timeCook)
-
-        Toast.makeText(this, title.text, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, descriptionBlog.text, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, serving.text, Toast.LENGTH_SHORT).show()
-        Toast.makeText(this, cookingTime.text, Toast.LENGTH_SHORT).show()
-
-        for (i in 0 until layoutList!!.childCount) {
-            val contentIngredient: View = layoutList!!.getChildAt(i)
-
-            val quantity: TextInputEditText = contentIngredient.findViewById(R.id.quantity)
-            val unit: TextInputEditText = contentIngredient.findViewById(R.id.unit)
-            val nameIng: TextInputEditText = contentIngredient.findViewById((R.id.nameIngredient))
-
-            Toast.makeText(this, quantity.text, Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, unit.text, Toast.LENGTH_SHORT).show()
-            Toast.makeText(this, nameIng.text, Toast.LENGTH_SHORT).show()
+        if (title.text.toString().isEmpty())
+        {
+            title.error = "Title required!"
+            title.requestFocus()
+            return false
         }
 
-        for (i in 0 until layoutStep!!.childCount) {
-            if (i % 2 == 0) {
-                val contentGuidelines: View = layoutStep!!.getChildAt(i)
+        if (serving.text.toString().isEmpty())
+        {
+            serving.error = "Servings required!"
+            serving.requestFocus()
+            return false
+        }
 
-                val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
+        if (layoutList!!.childCount <= 0)
+        {
+            Toast.makeText(this, "Ingredients list required!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else{
+            for (i in 0 until layoutList!!.childCount) {
+                val contentIngredient: View = layoutList!!.getChildAt(i)
 
-                Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+                val quantity: TextInputEditText = contentIngredient.findViewById(R.id.quantity)
+                val unit: TextInputEditText = contentIngredient.findViewById(R.id.unit)
+                val nameIng: TextInputEditText = contentIngredient.findViewById((R.id.nameIngredient))
+
+                if (quantity.text.toString().isEmpty()) {
+                    quantity.error = "Quantity required!"
+                    quantity.requestFocus()
+                    return false
+                }
+                if (unit.text.toString().isEmpty()) {
+                    unit.error = "Quantity required!"
+                    unit.requestFocus()
+                    return false
+                };
+                if (nameIng.toString().isEmpty()) {
+                    nameIng.error = "Name ingredient required!"
+                    nameIng.requestFocus()
+                    return false
+                }
+
             }
         }
 
+        if (layoutStep!!.childCount <= 0)
+        {
+            Toast.makeText(this, "Guidelines required!", Toast.LENGTH_SHORT).show()
+            return false
+        }
+        else{
+            for (i in 0 until layoutStep!!.childCount) {
+                if (i % 2 == 0) {
+                    val contentGuidelines: View = layoutStep!!.getChildAt(i)
 
+                    val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
+
+                    if (step.text.toString().isEmpty()) {
+                        step.error = "Step required!"
+                        step.requestFocus()
+                        return false
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+    fun postBlog(v: View) {
+        if (validateBlog())
+        {
+            val title: TextInputEditText = findViewById(R.id.detailTitle)
+
+            val descriptionBlog: TextInputEditText = findViewById(R.id.contentDes)
+
+
+            val serving: TextInputEditText = findViewById(R.id.numSer)
+
+
+            val cookingTime: TextInputEditText = findViewById(R.id.timeCook)
+
+            Toast.makeText(this, title.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, descriptionBlog.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, serving.text, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, cookingTime.text, Toast.LENGTH_SHORT).show()
+
+            for (i in 0 until layoutList!!.childCount) {
+                val contentIngredient: View = layoutList!!.getChildAt(i)
+
+                val quantity: TextInputEditText = contentIngredient.findViewById(R.id.quantity)
+                val unit: TextInputEditText = contentIngredient.findViewById(R.id.unit)
+                val nameIng: TextInputEditText = contentIngredient.findViewById((R.id.nameIngredient))
+
+                Toast.makeText(this, quantity.text, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, unit.text, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, nameIng.text, Toast.LENGTH_SHORT).show()
+            }
+
+            for (i in 0 until layoutStep!!.childCount) {
+                if (i % 2 == 0) {
+                    val contentGuidelines: View = layoutStep!!.getChildAt(i)
+
+                    val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
+
+                    Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
 }

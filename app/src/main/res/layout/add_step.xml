@@ -12,8 +12,14 @@
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+
         app:hintAnimationEnabled="false"
-        app:hintEnabled="false">
+        app:hintEnabled="false"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+
+        app:helperText="@string/required"
+        app:helperTextTextColor="@color/red">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/Step"
@@ -30,6 +36,7 @@
         android:id="@+id/step_option"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
 
         android:onClick="optionsStep"
 
