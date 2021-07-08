@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
 
-        <activity android:name=".profile.Achievement">
-
-        </activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -38,6 +35,13 @@
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen" />
+
+        <activity android:name=".profile.Achievement"
+            android:parentActivityName=".profile.ViewProfile">
+        </activity>
+        <activity android:name=".profile.EditProfile"
+            android:parentActivityName=".profile.ViewProfile">
+        </activity>
         <activity android:name=".profile.ViewProfile">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
