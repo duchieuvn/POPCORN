@@ -1,23 +1,36 @@
 package com.popcorn.cakey.profile
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
-import android.widget.Toast
-import androidx.fragment.app.FragmentManager
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import androidx.databinding.DataBindingUtil
+import com.popcorn.cakey.ForgotPasswordActivity
 import com.popcorn.cakey.R
-import com.popcorn.cakey.profile.EditProfile
+import com.popcorn.cakey.databinding.ActivityViewProfileBinding
 
 class ViewProfile : AppCompatActivity() {
     private lateinit var bt: Button
+    private var inputText: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_view_profile)
+        val binding: ActivityViewProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_view_profile)
 
-        bt = findViewById(R.id.view_profile_achieve);
+        binding.insertID="1"
+
+        binding.btEditprofile.setOnClickListener{
+            val intent = Intent(this, EditProfile::class.java)
+            startActivity(intent)
+        }
+
+        binding.btAchieve.setOnClickListener {
+            val intent = Intent(this,Achievement::class.java)
+            startActivity(intent)
+        }
+
+
+
     }
 }
 
