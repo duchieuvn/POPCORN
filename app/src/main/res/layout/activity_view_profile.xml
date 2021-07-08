@@ -4,23 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
-        <variable
-            name="insertID"
-            type="String" />
-        <variable
-            name="insertName"
-            type="String" />
-        <variable
-            name="insertMail"
-            type="String" />
-        <variable
-            name="insertPremium"
-            type="String" />
-        <variable
-            name="insertLevel"
-            type="String" />
-
+    <variable
+        name="insertID"
+        type="String" />
     </data>
 
     <ScrollView
@@ -84,12 +70,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
                     android:text="@string/profile_level"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     tools:layout_editor_absoluteX="65dp"
                     tools:layout_editor_absoluteY="217dp" />
 
@@ -97,7 +83,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{insertLevel}"
+                    android:text="16 (15/100)"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:layout_editor_absoluteX="118dp"
@@ -130,12 +116,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
                     android:text="@string/profile_premium"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     tools:layout_editor_absoluteX="65dp"
                     tools:layout_editor_absoluteY="217dp" />
 
@@ -143,7 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{insertPremium}"
+                    android:text="5 days left"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:layout_editor_absoluteX="146dp"
@@ -232,12 +218,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
                     android:text="@string/profile_name"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     tools:layout_editor_absoluteX="65dp"
                     tools:layout_editor_absoluteY="217dp" />
 
@@ -245,7 +231,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{insertName}"
+                    android:text="Monsieur Tuna"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:layout_editor_absoluteX="123dp"
@@ -287,12 +273,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:paddingStart="15dp"
-                    android:paddingEnd="15dp"
                     android:text="@string/profile_email"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:textStyle="bold"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
                     tools:layout_editor_absoluteX="65dp"
                     tools:layout_editor_absoluteY="217dp" />
 
@@ -300,7 +286,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@{insertMail}"
+                    android:text="cakey@gmail.com"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     tools:layout_editor_absoluteX="120dp"

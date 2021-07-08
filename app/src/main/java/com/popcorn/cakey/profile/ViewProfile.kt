@@ -10,29 +10,15 @@ import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
 
 class ViewProfile : AppCompatActivity() {
+    private lateinit var bt: Button
+    private var inputText: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityViewProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_view_profile)
 
-        //Set user's data
-        var doge: Int=1
-        var premium: Int=9
-        binding.insertID="19127097"
-        binding.insertName="Phanh dai de"
-        binding.insertMail="yuuhizaka194@gmail.com"
-        binding.insertLevel=doge.toString() + " ("+ doge.toString()+"/100)"
-        if (premium>0)
-        {
-            binding.insertPremium=premium.toString()
-            if (premium == 1) binding.insertPremium+=" day left"
-            else binding.insertPremium+=" days left"
-        }
-        else binding.insertPremium="Not activated"
+        binding.insertID="1"
 
-
-
-        //Set buttons
         binding.btEditprofile.setOnClickListener{
             val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)
