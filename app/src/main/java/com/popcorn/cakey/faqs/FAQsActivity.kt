@@ -1,9 +1,10 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.faqs
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ExpandableListAdapter
 import android.widget.ExpandableListView
+import com.popcorn.cakey.R
 
 
 class FAQsActivity : AppCompatActivity() {
@@ -47,6 +48,10 @@ class FAQsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_faqs)
         expandableListView = findViewById(R.id.expandableListView)
+
+        val actionBar = supportActionBar
+        actionBar!!.title = getString(R.string.faqs)
+        actionBar.setDisplayHomeAsUpEnabled(true)
 
         if (expandableListView != null) {
             val listData = data

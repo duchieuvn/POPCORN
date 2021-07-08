@@ -11,9 +11,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
 
-        <activity android:name=".profile.Achievement">
-
-        </activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -31,20 +28,38 @@
             android:name=".ForgotPasswordActivity"
             android:parentActivityName=".LoginActivity"
             android:screenOrientation="behind" />
-        <activity android:name=".WriteBlogActivity" />
-        <activity android:name=".FAQsActivity" />
-        <activity
-            android:name=".mainscreen.MainActivity"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="behind"
-            android:theme="@style/Main_Screen" />
-        <activity android:name=".profile.ViewProfile">
+
+        <activity android:name=".WriteBlogActivity"
+            android:parentActivityName=".mainscreen.MainActivity">
+
+        </activity>
+
+        <activity android:name=".faqs.FAQsActivity"
+            android:parentActivityName=".mainscreen.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".mainscreen.MainActivity"
+            android:parentActivityName=".LoginActivity"
+            android:screenOrientation="behind"
+            android:theme="@style/Main_Screen" />
+
+        <activity android:name=".profile.Achievement"
+            android:parentActivityName=".profile.ViewProfile">
+        </activity>
+
+        <activity android:name=".profile.EditProfile"
+            android:parentActivityName=".profile.ViewProfile">
+        </activity>
+
+        <activity android:name=".profile.ViewProfile"/>
+
+
     </application>
 
 </manifest>

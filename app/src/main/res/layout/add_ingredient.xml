@@ -83,13 +83,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <ImageView
-        android:id="@+id/ingredient_option"
+        android:id="@+id/ingredientOption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_more_vert"
 
-        android:onClick="optionsIngredient"
         android:contentDescription="@string/usageAdd" />
 
 

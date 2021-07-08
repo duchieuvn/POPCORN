@@ -1,4 +1,4 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.faqs
 import android.content.Context
 import android.graphics.Typeface
 import android.view.LayoutInflater
@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
+import com.popcorn.cakey.R
 
 import kotlin.collections.HashMap
 

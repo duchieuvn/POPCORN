@@ -5,14 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/baloo_bold"
-        android:text="@string/faqs"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="30sp" />
+
 
     <ExpandableListView
         android:id="@+id/expandableListView"

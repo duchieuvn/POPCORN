@@ -16,26 +16,26 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/blogTitle"
 
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:endIconMode="clear_text"
+            app:errorEnabled="true"
 
             app:helperText="@string/required"
-            app:helperTextTextColor="@color/red"
 
-            app:endIconMode="clear_text"
-
-            app:errorEnabled="true">
+            app:helperTextTextColor="@color/red">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/detailTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/title"
-
                 android:ellipsize="start"
+
                 android:gravity="center_vertical"
+                android:hint="@string/title"
                 android:textSize="20sp">
 
             </com.google.android.material.textfield.TextInputEditText>
@@ -43,18 +43,17 @@
 
         <ImageView
             android:id="@+id/blogImage"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="5dp"
-            android:layout_below="@id/blogTitle"
-
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:src="@drawable/splash_screen"
-            android:contentDescription="@string/usageImage">
-        </ImageView>
+            android:layout_below="@id/blogTitle"
+
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:contentDescription="@string/usageImage"
+            android:src="@drawable/splash_screen"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addImage"
+            android:id="@+id/fab_addImage"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -64,18 +63,16 @@
             android:layout_marginTop="268dp"
             android:layout_marginEnd="63dp"
             android:contentDescription="@string/usageAdd"
-            android:src="@drawable/ic_add">
-
-        </com.google.android.material.floatingactionbutton.FloatingActionButton>
+            android:src="@drawable/ic_add"/>
 
         <TextView
             android:id="@+id/description"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/blogImage"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="5dp"
-            android:layout_below="@id/blogImage"
 
             android:text="@string/description"
             android:textSize="20sp" />
@@ -83,22 +80,23 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/detailDes"
 
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_below="@id/description"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
             app:endIconMode="clear_text">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/contentDes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
+                android:gravity="top"
                 android:inputType="textMultiLine"
-                android:minLines="3"
 
-                android:gravity="top"/>
+                android:minLines="3" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -111,79 +109,40 @@
             android:layout_marginBottom="5dp"
 
             android:text="@string/servings"
-            android:textSize="20sp">
-        </TextView>
+            android:textSize="20sp"/>
+
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/servings"
             android:layout_below="@id/detailDes"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="40dp"
 
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
+            android:layout_toEndOf="@id/servings"
+            app:errorEnabled="true"
 
             app:helperText="@string/required"
             app:helperTextTextColor="@color/red"
 
-            app:errorEnabled="true"
+            app:hintAnimationEnabled="false"
 
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            app:hintEnabled="false">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/numSer"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:inputType="number"
-
                 android:gravity="center"
 
-                android:hint="@string/hint_ser"/>
+                android:hint="@string/hint_ser"
+
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/cooking_time"
-
-            android:layout_width="130dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/servings"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="5dp"
-
-            android:text="@string/cooking_time"
-            android:textSize="20sp">
-        </TextView>
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/cooking_time"
-            android:layout_below="@id/servings"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="10dp"
-            android:layout_marginStart="10dp"
-
-            app:hintAnimationEnabled="false"
-            app:hintEnabled="false"
-
-            android:gravity="center"
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/timeCook"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:gravity="center"
-
-                android:inputType="time"
-
-                android:hint="@string/minutes" />
-        </com.google.android.material.textfield.TextInputLayout>
 
 
         <!-- List ingredients. -->
@@ -192,8 +151,8 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/cooking_time"
-            android:layout_marginTop="30dp"
+            android:layout_below="@id/servings"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="5dp"
 
             android:text="@string/ingredient_lists"
@@ -207,8 +166,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/ingredientList"
 
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"/>
+
         <Button
             android:id="@+id/button_add_ing"
 
@@ -218,10 +177,8 @@
             android:layout_centerInParent="true"
 
             android:text="@string/add_but"
-            android:textStyle="bold"
 
-            android:onClick="addIngredient">
-        </Button>
+            android:textStyle="bold"/>
 
         <!-- Guidelines -->
         <TextView
@@ -243,8 +200,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/guideline"
-            android:orientation="vertical">
-        </LinearLayout>
+            android:orientation="vertical"/>
 
         <Button
             android:id="@+id/button_add_steps"
@@ -256,19 +212,17 @@
             android:layout_marginBottom="10dp"
 
             android:text="@string/add_but"
-            android:textStyle="bold"
 
-            android:onClick="addStep"/>
-
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/video"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/button_add_steps"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:layout_below="@id/button_add_steps"
 
             android:text="@string/video"
             android:textSize="20sp" />
@@ -300,8 +254,7 @@
             android:layout_marginBottom="10dp"
 
             android:text="@string/post_Blogs"
-            android:textStyle="bold"
 
-            android:onClick="postBlog"/>
+            android:textStyle="bold" />
     </RelativeLayout>
 </ScrollView>

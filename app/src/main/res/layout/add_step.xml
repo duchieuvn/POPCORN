@@ -38,7 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
 
-        android:onClick="optionsStep"
 
         android:src="@drawable/ic_more_vert"
         android:contentDescription="@string/usageAdd" />
