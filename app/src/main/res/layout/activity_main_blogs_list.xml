@@ -55,17 +55,6 @@
                 >
             </TextView>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="290dp"
-                android:layout_marginTop="120dp"
-                android:layout_marginEnd="9dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/read_more"
-                android:textSize="12sp">
-            </Button>
-
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="5dp"

@@ -15,8 +15,7 @@
             app:cardElevation="1dp"
             app:cardMaxElevation="2dp"
             app:cardBackgroundColor="@color/white"
-            android:layout_centerInParent="true"
-            app:cardPreventCornerOverlap="true">
+            android:layout_centerInParent="true">
 
 
             <RelativeLayout
@@ -25,41 +24,17 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/thumnail"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
+                    android:layout_width="85dp"
+                    android:layout_height="85dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="10dp"
                     android:scaleType="centerCrop"
                     android:src="@color/ic_launcher_background">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_below="@id/thumnail"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginEnd="0dp"
-                    android:layout_marginRight="5dp"
-                    android:autoSizeMaxTextSize="12dp"
-                    android:autoSizeMinTextSize="8dp"
-                    android:autoSizeTextType="uniform"
-                    android:text="@string/suggestion"
-                    android:textColor="@color/black"
-                    tools:targetApi="o">
 
-                </TextView>
-
-                <View
-                    android:layout_width="3dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="97dp"
-                    android:background="@color/white">
-                </View>
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 
