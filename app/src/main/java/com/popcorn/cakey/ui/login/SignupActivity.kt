@@ -1,13 +1,17 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Patterns
 import androidx.appcompat.app.AppCompatActivity
 import com.parse.ParseUser
+import com.popcorn.cakey.R
+import com.popcorn.cakey.Utils
 // import com.google.firebase.auth.FirebaseAuth
 // import com.google.firebase.auth.UserProfileChangeRequest
 import com.popcorn.cakey.databinding.ActivitySignupBinding
+import com.popcorn.cakey.mainscreen.MainActivity
 
 class SignupActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignupBinding
@@ -65,7 +69,8 @@ class SignupActivity : AppCompatActivity() {
                     user.signUpInBackground { e ->
                         if (e == null) {
                             Utils.showToast(this, getString(R.string.auth_succeed, username))
-                            // TODO: start mainActivity, currently waiting for UI design
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
                             finishAffinity()
                         } else {
                             Utils.showToast(this, R.string.signup_failed)

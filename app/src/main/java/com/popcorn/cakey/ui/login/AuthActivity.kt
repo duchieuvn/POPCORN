@@ -1,4 +1,4 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.ui.login
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

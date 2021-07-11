@@ -1,4 +1,4 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.ui.login
 
 // import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
@@ -6,7 +6,11 @@ import android.os.Bundle
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.parse.ParseUser
+import com.popcorn.cakey.R
+import com.popcorn.cakey.SplashActivity
+import com.popcorn.cakey.Utils
 import com.popcorn.cakey.databinding.ActivityLoginBinding
+import com.popcorn.cakey.mainscreen.MainActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -38,7 +42,8 @@ class LoginActivity : AppCompatActivity() {
                     ParseUser.logInInBackground(username, pwd) { user, e ->
                         if (user != null) {
                             Utils.showToast(this, getString(R.string.auth_succeed, user.email))
-                            // TODO: start mainActivity, currently waiting for UI design
+                            val intent = Intent(this, MainActivity::class.java)
+                            startActivity(intent)
                             finishAffinity()
                         } else {
                             // Signup failed. Look at the ParseException to see what happened.
@@ -51,7 +56,7 @@ class LoginActivity : AppCompatActivity() {
                     //         if (task.isSuccessful) {
                     //             val username = fireAuth.currentUser!!.displayName
                     //             Utils.showToast(this, getString(R.string.auth_succeed, username))
-                    //             // TODO: start mainActivity, currently waiting for UI design
+                    //             //start mainActivity, currently waiting for UI design
                     //             finishAffinity()
                     //         } else
                     //             binding.loginError.text = getString(R.string.login_failed)

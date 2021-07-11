@@ -1,10 +1,12 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.ui.login
 
 // import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.parse.ParseUser
+import com.popcorn.cakey.R
+import com.popcorn.cakey.Utils
 import com.popcorn.cakey.databinding.ActivityForgotPasswordBinding
 
 

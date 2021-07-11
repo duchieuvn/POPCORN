@@ -14,51 +14,41 @@
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Splash_Screen" >
-
-        </activity>
+            android:theme="@style/Splash_Screen" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:screenOrientation="behind" />
         <activity
-            android:name=".SignupActivity"
-            android:parentActivityName=".LoginActivity"
+            android:name=".ui.login.SignupActivity"
+            android:parentActivityName=".ui.login.LoginActivity"
             android:screenOrientation="behind" />
         <activity
-            android:name=".ForgotPasswordActivity"
-            android:parentActivityName=".LoginActivity"
+            android:name=".ui.login.ForgotPasswordActivity"
+            android:parentActivityName=".ui.login.LoginActivity"
             android:screenOrientation="behind" />
-
-        <activity android:name=".WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity">
-
-        </activity>
-
-        <activity android:name=".faqs.FAQsActivity"
-            android:parentActivityName=".mainscreen.MainActivity">
+        <activity
+            android:name=".mainscreen.MainActivity"
+            android:parentActivityName=".ui.login.LoginActivity"
+            android:screenOrientation="behind"
+            android:theme="@style/Main_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".mainscreen.MainActivity"
-            android:parentActivityName=".LoginActivity"
-            android:screenOrientation="behind"
-            android:theme="@style/Main_Screen" />
-
-        <activity android:name=".profile.Achievement"
-            android:parentActivityName=".profile.ViewProfile">
-        </activity>
-
-        <activity android:name=".profile.EditProfile"
-            android:parentActivityName=".profile.ViewProfile">
-        </activity>
-
-        <activity android:name=".profile.ViewProfile"/>
-
+            android:name=".WriteBlogActivity"
+            android:parentActivityName=".mainscreen.MainActivity" />
+        <activity
+            android:name=".faqs.FAQsActivity"
+            android:parentActivityName=".mainscreen.MainActivity" />
+        <activity
+            android:name=".profile.Achievement"
+            android:parentActivityName=".profile.ViewProfile" />
+        <activity
+            android:name=".profile.EditProfile"
+            android:parentActivityName=".profile.ViewProfile" />
+        <activity android:name=".profile.ViewProfile" />
 
     </application>
 
