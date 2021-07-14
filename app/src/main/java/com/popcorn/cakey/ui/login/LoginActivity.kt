@@ -7,7 +7,6 @@ import android.text.TextUtils
 import androidx.appcompat.app.AppCompatActivity
 import com.parse.ParseUser
 import com.popcorn.cakey.R
-import com.popcorn.cakey.SplashActivity
 import com.popcorn.cakey.Utils
 import com.popcorn.cakey.databinding.ActivityLoginBinding
 import com.popcorn.cakey.mainscreen.MainActivity
