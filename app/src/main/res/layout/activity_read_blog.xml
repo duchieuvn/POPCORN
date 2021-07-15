@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="insertTitle"
+            type="String" />
+        <variable
+            name="insertAuthor"
+            type="String" />
+        <variable
+            name="insertServings"
+            type="String" />
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".blog.ReadBlogActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <TextView
+                android:id="@+id/blogTitle"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+
+                android:text="@{insertTitle}"
+                android:textSize="20sp"
+
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/blogCover"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/blogCover"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="30dp"
+
+                app:layout_constraintTop_toBottomOf="@id/blogTitle"
+                app:layout_constraintBottom_toTopOf="@id/author"
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:src="@drawable/avatar" />
+
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintTop_toBottomOf="@id/blogCover"
+                app:layout_constraintBottom_toTopOf="@id/servings"
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:textAlignment="textEnd"
+
+                android:text="@{insertAuthor}"/>
+
+            <TextView
+                android:id="@+id/servings"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintTop_toBottomOf="@id/author"
+                app:layout_constraintBottom_toTopOf="@id/ingredientList"
+                app:layout_constraintStart_toStartOf="parent"/>
+
+            <TextView
+                android:id="@+id/ingredientList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintTop_toBottomOf="@id/servings"
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:text="@string/ingredient_lists"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:id="@+id/detailIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintTop_toBottomOf="@id/ingredientList"
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:orientation="vertical"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+
+</layout>
