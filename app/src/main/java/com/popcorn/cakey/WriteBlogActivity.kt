@@ -12,6 +12,8 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputEditText
+import com.parse.ParseObject
+import com.parse.ParseUser
 import com.popcorn.cakey.databinding.ActivityWriteBlogBinding
 import com.popcorn.cakey.mainscreen.MainActivity
 import com.popcorn.cakey.profile.Achievement
@@ -169,6 +171,7 @@ class WriteBlogActivity : AppCompatActivity() {
         //Post blogs
         binding.buttonPost.setOnClickListener {
             if (validateBlog()) {
+
 
                 Toast.makeText(this, binding.detailTitle.text, Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, binding.contentDes.text, Toast.LENGTH_SHORT).show()

@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
+        <activity android:name=".TestActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="portrait"
@@ -32,6 +33,7 @@
             android:theme="@style/Main_Screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -48,7 +50,6 @@
             android:name=".profile.EditProfile"
             android:parentActivityName=".profile.ViewProfile" />
         <activity android:name=".profile.ViewProfile" />
-
     </application>
 
 </manifest>
