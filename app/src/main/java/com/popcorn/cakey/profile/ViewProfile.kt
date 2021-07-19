@@ -19,10 +19,10 @@ class ViewProfile : AppCompatActivity() {
         //Set user's data
         var doge: Int=1
         var premium: Int=9
-        binding.insertID="19127097"
-        binding.insertName="Phanh dai de"
-        binding.insertMail="yuuhizaka194@gmail.com"
-        binding.insertLevel=doge.toString() + " ("+ doge.toString()+"/100)"
+        binding.insertID= user.objectId
+        binding.insertName= user.getString("username")
+        binding.insertMail= user.getString("email")
+        binding.insertLevel= user.getInt("level").toString()
         if (premium>0)
         {
             binding.insertPremium=premium.toString()
