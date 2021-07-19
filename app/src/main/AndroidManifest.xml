@@ -42,10 +42,8 @@
         <activity android:name=".blog.ReadBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"/>
         <activity
-            android:name=".WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity">
-
-        </activity>
+            android:name=".blog.WriteBlogActivity"
+            android:parentActivityName=".mainscreen.MainActivity"/>
         <activity
             android:name=".faqs.FAQsActivity"
             android:parentActivityName=".mainscreen.MainActivity" />

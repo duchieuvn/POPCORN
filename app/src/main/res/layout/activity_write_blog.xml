@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".WriteBlogActivity">
+    tools:context=".blog.WriteBlogActivity">
 
     <RelativeLayout
         android:id="@+id/rootLayout"
@@ -227,17 +227,23 @@
             android:text="@string/video"
             android:textSize="20sp" />
 
-        <Button
-            android:id="@+id/button_add_video"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/VideoLink"
 
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/video"
-            android:layout_centerInParent="true"
+
             android:layout_marginBottom="10dp"
 
-            android:text="@string/add_but"
-            android:textStyle="bold" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/insertLink"
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <Button
@@ -245,16 +251,32 @@
 
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/button_add_video"
+            android:layout_below="@id/VideoLink"
             android:layout_alignParentEnd="true"
 
-            android:layout_centerVertical="true"
-            android:layout_marginTop="5dp"
             android:layout_marginEnd="2dp"
             android:layout_marginBottom="10dp"
 
             android:text="@string/post_Blogs"
 
             android:textStyle="bold" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/buttonCancel"
+
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/button_post"
+            android:layout_below="@id/VideoLink"
+            android:layout_marginEnd="20dp"
+
+            android:text="@string/cancel"
+            android:textColor="@color/black"
+
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:backgroundTint="@color/transparent"
+
+            app:strokeColor="@color/pink_variant"
+            app:strokeWidth="2dp" />
     </RelativeLayout>
 </ScrollView>

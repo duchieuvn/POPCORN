@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.Utils
-import com.popcorn.cakey.WriteBlogActivity
 import com.popcorn.cakey.databinding.ActivityLoginBinding
 import com.popcorn.cakey.mainscreen.MainActivity
 
@@ -42,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
                     ParseUser.logInInBackground(username, pwd) { user, e ->
                         if (user != null) {
                             Utils.showToast(this, getString(R.string.auth_succeed, user.email))
-                            val intent = Intent(this, WriteBlogActivity::class.java)
+                            val intent = Intent(this, MainActivity::class.java)
                             startActivity(intent)
                             finishAffinity()
                         } else {

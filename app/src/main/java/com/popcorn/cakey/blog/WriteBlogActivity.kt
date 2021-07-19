@@ -1,6 +1,7 @@
-package com.popcorn.cakey
+package com.popcorn.cakey.blog
 
 import android.app.Activity
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -8,19 +9,19 @@ import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.parse.ParseObject
-import com.parse.ParseQuery
 import com.parse.ParseUser
+import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityWriteBlogBinding
+import com.popcorn.cakey.mainscreen.MainActivity
 
 
 class WriteBlogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteBlogBinding
-    private var ingredientOptions: ImageView? = null
-    private var stepOptions: ImageView? = null
     private lateinit var stepImage: ImageView
     private lateinit var currentView: View
 
@@ -169,12 +170,10 @@ class WriteBlogActivity : AppCompatActivity() {
 
         //Post blogs
         binding.buttonPost.setOnClickListener {
-
-
             if (validateBlog()) {
-                var user = ParseUser.getCurrentUser()
+                val user = ParseUser.getCurrentUser()
 
-                var blog = ParseObject("Blog")
+                val blog = ParseObject("Blog")
                 blog.put("userID", user)
                 blog.put("title", binding.detailTitle.text.toString())
                 blog.put("description", binding.contentDes.text.toString())
@@ -185,9 +184,9 @@ class WriteBlogActivity : AppCompatActivity() {
                 Toast.makeText(this, binding.contentDes.text, Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, binding.numSer.text, Toast.LENGTH_SHORT).show()
 
-                var name = mutableListOf<String>()
-                var amount = mutableListOf<Int>()
-                var measurement = mutableListOf<String>()
+                val name = mutableListOf<String>()
+                val amount = mutableListOf<Int>()
+                val measurement = mutableListOf<String>()
 
                 for (i in 0 until binding.detailList.childCount) {
                     val contentIngredient: View = binding.detailList.getChildAt(i)
@@ -208,13 +207,13 @@ class WriteBlogActivity : AppCompatActivity() {
                     measurement.add(unit.text.toString())
                 }
 
-                var ingre = ParseObject("Ingredient")
-                ingre.put("name", name)
-                ingre.put("amount", amount)
-                ingre.put("measurement", measurement)
-                ingre.save()
+                val ingredient = ParseObject("Ingredient")
+                ingredient.put("name", name)
+                ingredient.put("amount", amount)
+                ingredient.put("measurement", measurement)
+                ingredient.save()
 
-                var title = mutableListOf<String>()
+                val title = mutableListOf<String>()
 
                 for (i in 0 until binding.detailStep.childCount) {
                     if (i % 2 == 0) {
@@ -227,25 +226,34 @@ class WriteBlogActivity : AppCompatActivity() {
                     }
                 }
 
-                var step = ParseObject("Step")
+                val step = ParseObject("Step")
                 step.put("title", title)
                 step.save()
 
-                blog.put("ingredient", ingre)
+                blog.put("ingredient", ingredient)
                 blog.put("step", step)
                 blog.saveInBackground()
 
                 //move to main screens
-                /*
-
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                */
-
             }
         }
-    }
 
+        //Cancel blog
+        binding.buttonCancel.setOnClickListener {
+            val builder = AlertDialog.Builder(this)
+
+            builder.setTitle("Cakey Warning!!!")
+            builder.setMessage("You do not save this blog.")
+            builder.setPositiveButton("GO TO MAIN"){ _, _ ->
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
+            builder.setNegativeButton("BACK TO BLOG") { _, _ ->}
+            builder.show()
+            }
+        }
 
     private fun setView(v: View) {
         currentView = v
@@ -264,8 +272,6 @@ class WriteBlogActivity : AppCompatActivity() {
                 startForStepImageResult.launch(intent)
             }
     }
-
-
 
     private fun validateBlog(): Boolean {
         if (binding.detailTitle.text.toString().isEmpty()) {
@@ -332,6 +338,5 @@ class WriteBlogActivity : AppCompatActivity() {
 
         return true
     }
-
 
 }
