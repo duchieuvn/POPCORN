@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
 
@@ -12,6 +13,8 @@ class ViewProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityViewProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_view_profile)
+
+        var user = ParseUser.getCurrentUser()
 
         //Set user's data
         var doge: Int=1

@@ -1,20 +1,21 @@
 package com.popcorn.cakey
 
 import android.app.Activity
-import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputEditText
+import com.parse.ParseObject
+import com.parse.ParseQuery
+import com.parse.ParseUser
 import com.popcorn.cakey.databinding.ActivityWriteBlogBinding
-import com.popcorn.cakey.mainscreen.MainActivity
-import com.popcorn.cakey.profile.Achievement
+
 
 class WriteBlogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteBlogBinding
@@ -168,11 +169,25 @@ class WriteBlogActivity : AppCompatActivity() {
 
         //Post blogs
         binding.buttonPost.setOnClickListener {
+
+
             if (validateBlog()) {
+                var user = ParseUser.getCurrentUser()
+
+                var blog = ParseObject("Blog")
+                blog.put("userID", user)
+                blog.put("title", binding.detailTitle.text.toString())
+                blog.put("description", binding.contentDes.text.toString())
+                blog.put("serve",binding.numSer.text.toString().toInt())
+
 
                 Toast.makeText(this, binding.detailTitle.text, Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, binding.contentDes.text, Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, binding.numSer.text, Toast.LENGTH_SHORT).show()
+
+                var name = mutableListOf<String>()
+                var amount = mutableListOf<Int>()
+                var measurement = mutableListOf<String>()
 
                 for (i in 0 until binding.detailList.childCount) {
                     val contentIngredient: View = binding.detailList.getChildAt(i)
@@ -182,10 +197,24 @@ class WriteBlogActivity : AppCompatActivity() {
                     val nameIng: TextInputEditText =
                         contentIngredient.findViewById((R.id.nameIngredient))
 
+
                     Toast.makeText(this, quantity.text, Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, unit.text, Toast.LENGTH_SHORT).show()
                     Toast.makeText(this, nameIng.text, Toast.LENGTH_SHORT).show()
+
+                    //database purpose (Model class)
+                    name.add(nameIng.text.toString())
+                    amount.add(quantity.text.toString().toInt())
+                    measurement.add(unit.text.toString())
                 }
+
+                var ingre = ParseObject("Ingredient")
+                ingre.put("name", name)
+                ingre.put("amount", amount)
+                ingre.put("measurement", measurement)
+                ingre.save()
+
+                var title = mutableListOf<String>()
 
                 for (i in 0 until binding.detailStep.childCount) {
                     if (i % 2 == 0) {
@@ -194,12 +223,25 @@ class WriteBlogActivity : AppCompatActivity() {
                         val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
 
                         Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+                        title.add(step.text.toString())
                     }
                 }
 
+                var step = ParseObject("Step")
+                step.put("title", title)
+                step.save()
+
+                blog.put("ingredient", ingre)
+                blog.put("step", step)
+                blog.saveInBackground()
+
                 //move to main screens
+                /*
+
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
+                */
+
             }
         }
     }

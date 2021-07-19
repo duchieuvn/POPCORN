@@ -10,13 +10,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="behind"
             android:theme="@style/Splash_Screen" />
         <activity
             android:name=".ui.login.LoginActivity"
-            android:screenOrientation="behind" />
+            android:screenOrientation="behind">
+
+        </activity>
+
         <activity
             android:name=".ui.login.SignupActivity"
             android:parentActivityName=".ui.login.LoginActivity"
@@ -39,7 +43,9 @@
             android:parentActivityName=".mainscreen.MainActivity"/>
         <activity
             android:name=".WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity" />
+            android:parentActivityName=".mainscreen.MainActivity">
+
+        </activity>
         <activity
             android:name=".faqs.FAQsActivity"
             android:parentActivityName=".mainscreen.MainActivity" />
