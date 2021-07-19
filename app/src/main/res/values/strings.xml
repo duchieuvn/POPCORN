@@ -48,7 +48,7 @@
         <item>Toriko</item>
     </string-array>
 
-    <!-- Write blog activity-->
+    <!-- Blog package-->
     <string name="title">Blog Title</string>
     <string name="description">Description</string>
     <string name="usageImage">Upload 1 photo to blog</string>
@@ -63,6 +63,8 @@
     <string name="quantity">100</string>
     <string name="unit">grams</string>
     <string name="name_ing">sugar</string>
+    <string name="calculateIngredient">Ingredients</string>
+    <string name="askPortion">How many people do you want to serve?</string>
 
     <string name="delete">Delete</string>
     <string name="add">Add</string>
