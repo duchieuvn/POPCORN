@@ -84,8 +84,13 @@
 
     <string name="suggestion">Suggestion</string>
     <string name="search">Search</string>
-    <string name="setting">Setting</string>
+    <string name="Account">Account</string>
     <string name="read_more">Read More</string>
+    <string name="Home">Home</string>
+    <string name="Favorite">Favorite</string>
+    <string name="Course">Course</string>
+    <string name="Write">Write</string>
+    <string name="Help">Help</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
