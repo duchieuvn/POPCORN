@@ -20,6 +20,9 @@
         <variable
             name="insertLevel"
             type="String" />
+        <variable
+            name="insertTitle"
+            type="String" />
 
     </data>
 
@@ -344,7 +347,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="123dp"
                 android:paddingBottom="5dp"
-                android:text="@string/profile_achievement"
+                android:text="@{insertID}"
                 android:textColor="@color/pink"
                 android:textSize="20sp"
                 android:textStyle="bold"

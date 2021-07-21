@@ -8,10 +8,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.parse.ParseUser
 import com.popcorn.cakey.R
+import com.popcorn.cakey.databinding.ActivityEditProfileBinding
+import com.popcorn.cakey.databinding.ActivityViewProfileBinding
 
 class EditProfile : AppCompatActivity() {
     private lateinit var fab: FloatingActionButton
@@ -37,7 +41,17 @@ class EditProfile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
+        val binding: ActivityEditProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_edit_profile)
 
+        var user = ParseUser.getCurrentUser()
+
+        //Set user's data
+        binding.insertID= user.objectId
+        binding.insertName= user.getString("username")
+        binding.insertMail= user.getString("email")
+        binding.insertPassword= user.getString("password")
+
+        //Set avatar's change
         avatar = findViewById(R.id.avatarImg);
         fab = findViewById(R.id.Addbutton);
 
@@ -53,6 +67,16 @@ class EditProfile : AppCompatActivity() {
                     startForAvatar.launch(intent)
                 }
         }
+
+        //Set button - send info to parse Server
+        binding.btSubmitChanges.setOnClickListener {
+            //user.image=avatar
+            user.email=binding.insertMail
+            user.setPassword(binding.insertPassword)
+            user.username=binding.insertName
+            Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 

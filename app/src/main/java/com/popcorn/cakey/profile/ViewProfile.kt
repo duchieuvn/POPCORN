@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
+import com.parse.ParseObject
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
@@ -17,12 +18,14 @@ class ViewProfile : AppCompatActivity() {
         var user = ParseUser.getCurrentUser()
 
         //Set user's data
-        var doge: Int=1
-        var premium: Int=9
+        var premium: Int=-1
+        var level = user.getInt("level")
         binding.insertID= user.objectId
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
-        binding.insertLevel= user.getInt("level").toString()
+        binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
+        binding.insertTitle="Waka lulu"
+
         if (premium>0)
         {
             binding.insertPremium=premium.toString()
