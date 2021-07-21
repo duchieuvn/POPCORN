@@ -10,6 +10,7 @@ import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.parse.ParseUser
 import com.popcorn.cakey.R
+import com.popcorn.cakey.UserModel
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
 
 
@@ -30,6 +31,11 @@ class ViewProfile : AppCompatActivity() {
         binding.insertMail= user.getString("email")
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
         binding.insertTitle="Lulu tuyet voi"
+
+        var userModel = UserModel()
+        var objectLevel = userModel.getLevel(level)
+
+        Log.d("ttt", "description " + objectLevel.getString("description"))
 
 
         if (premium>0)
