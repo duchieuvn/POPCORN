@@ -1,13 +1,17 @@
 package com.popcorn.cakey.profile
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.parse.ParseObject
+import com.parse.ParseQuery
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
+
 
 class ViewProfile : AppCompatActivity() {
 
@@ -20,11 +24,13 @@ class ViewProfile : AppCompatActivity() {
         //Set user's data
         var premium: Int=-1
         var level = user.getInt("level")
+
         binding.insertID= user.objectId
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
-        binding.insertTitle="Waka lulu"
+        binding.insertTitle="Lulu tuyet voi"
+
 
         if (premium>0)
         {
