@@ -82,8 +82,11 @@
     <string name="rating">Rate this blog</string>
     <string name="cmt">Comments</string>
 
+    <!-- main screen -->
     <string name="suggestion">Suggestion</string>
     <string name="search">Search</string>
+
+    <!-- navigation drawer-->
     <string name="Account">Account</string>
     <string name="read_more">Read More</string>
     <string name="Home">Home</string>
@@ -91,6 +94,9 @@
     <string name="Course">Course</string>
     <string name="Write">Write</string>
     <string name="Help">Help</string>
+
+    <!-- search-->
+    <string name="Search_hint">type name, ingredient</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 

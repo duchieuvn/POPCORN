@@ -1,9 +1,12 @@
 package com.popcorn.cakey.mainscreen
 
+import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
+import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationView
 import com.parse.ParseUser
@@ -13,7 +16,6 @@ import com.popcorn.cakey.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var menuBar: androidx.appcompat.widget.Toolbar
     private lateinit var navigation: NavigationView
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +55,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
+
+        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        if (menu != null) {
+            (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
+                setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            }
+        }
         return true
     }
 }
