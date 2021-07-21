@@ -29,7 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15dp">
-
             <TextView
                 android:id="@+id/blogTitle"
                 android:layout_width="match_parent"
@@ -163,7 +162,6 @@
                 app:layout_constraintTop_toBottomOf="@id/divider2"
                 app:layout_constraintLeft_toRightOf="@id/ingredientList"
 
-
                 android:background="@drawable/ic_calculate"/>
 
             <androidx.recyclerview.widget.RecyclerView
@@ -185,6 +183,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailIngredient" />
+
             <TextView
                 android:id="@+id/guideline"
                 android:layout_width="match_parent"
@@ -216,6 +215,67 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailStep" />
+
+            <TextView
+                android:id="@+id/rating"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+
+                android:text="@string/rating"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+
+            <ImageButton
+                android:id="@+id/like"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="8dp"
+
+                app:layout_constraintLeft_toRightOf="@id/rating"
+                app:layout_constraintTop_toBottomOf="@+id/divider4"
+
+                android:background="@drawable/ic_thumb_up"
+                android:backgroundTint="@color/pink" />
+
+            <ImageButton
+                android:id="@+id/dislike"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="20dp"
+
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_thumb_down"
+                android:backgroundTint="@color/pink"
+
+                app:layout_constraintLeft_toRightOf="@id/like"
+                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+            <TextView
+                android:id="@+id/cmtSection"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rating"
+
+                android:text="@string/cmt"
+                android:textSize="20sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/detailCmt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:layout_constraintTop_toBottomOf="@id/cmtSection"
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:orientation="vertical"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

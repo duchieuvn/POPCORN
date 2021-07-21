@@ -79,7 +79,8 @@
     <string name="video">Video (Optional)</string>
 
     <string name="post_Blogs">Post</string>
-
+    <string name="rating">Rate this blog</string>
+    <string name="cmt">Comments</string>
 
     <string name="suggestion">Suggestion</string>
     <string name="search">Search</string>

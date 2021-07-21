@@ -1,15 +1,17 @@
 package com.popcorn.cakey.blog
 
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
+
 
 class ReadBlogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,7 +22,7 @@ class ReadBlogActivity : AppCompatActivity() {
         var defaultServing = 4
         binding.insertTitle = "Uong nuoc moi ngay"
         binding.insertAuthor = "Thanh Truc"
-        binding.insertServings = defaultServing.toString() + " people"
+        binding.insertServings = "$defaultServing people"
         binding.authorAvatar.setImageResource(R.drawable.avatar)
         binding.blogCover.setImageResource(R.drawable.avatar)
 
@@ -65,12 +67,13 @@ class ReadBlogActivity : AppCompatActivity() {
             val dialogLayout = inflater.inflate(R.layout.ingredients_calculator_dialog, null)
 
             val insertNumberServings  = dialogLayout.findViewById<TextInputEditText>(R.id.insertNumberServings)
-            insertNumberServings.setHint(defaultServing.toString())
+            insertNumberServings.hint = defaultServing.toString()
 
             builder.setView(dialogLayout)
 
-            builder.setPositiveButton("OK") { dialogInterface, i ->
-                if (!insertNumberServings.text.toString().equals(""))
+            builder.setTitle("Cakey ask")
+            builder.setPositiveButton("OK") { _, _ ->
+                if (insertNumberServings.text.toString() != "")
                 {
                     defaultServing = insertNumberServings.text.toString().toInt()
 
@@ -91,9 +94,59 @@ class ReadBlogActivity : AppCompatActivity() {
                 }
 
             }
-            builder.setNegativeButton("CANCEL") {dialogInterface, i -> Int}
+            builder.setNegativeButton("CANCEL") { _, _ -> Int}
 
             builder.show()
         }
+
+        var likeClick = true
+        var dislikeClick = true
+        //Rating
+        binding.like.setOnClickListener {
+            if (likeClick)
+            {
+                if (dislikeClick)
+                {
+                    binding.like.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink_variant)
+                    likeClick = false
+                }
+
+            }
+            else
+            {
+                likeClick = true
+                binding.like.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink)
+            }
+        }
+
+        binding.dislike.setOnClickListener {
+            if (dislikeClick)
+            {
+                if (likeClick) {
+                    binding.dislike.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink_variant)
+                    dislikeClick = false
+                }
+            }
+            else
+            {
+                dislikeClick = true
+                binding.dislike.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink)
+            }
+        }
+
+        //Comment section
+        val cmtView = binding.detailCmt
+        cmtView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
+        val cmt = ArrayList<String>()
+        cmt.add("Ngon qua")
+        cmt.add("Hay qua")
+
+        val user = ArrayList<String>()
+        user.add("clone1")
+        user.add("clone2")
+
+        val cmtAdapter = CommentSection(user,cmt)
+        cmtView.adapter = cmtAdapter
     }
 }
