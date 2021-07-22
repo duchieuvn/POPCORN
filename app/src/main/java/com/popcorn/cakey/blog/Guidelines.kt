@@ -25,7 +25,7 @@ class Guidelines(private val step : ArrayList<String>) : RecyclerView.Adapter<Gu
         fun bindItems(step:String, index : Int) {
             val Step = itemView.findViewById(R.id.step) as TextView
 
-            val numberStep = "Step " + index.toString() + " : " + step
+            val numberStep = "Step $index : $step"
             Step.text = numberStep
         }
 
