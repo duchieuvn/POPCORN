@@ -12,6 +12,7 @@ import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.UserModel
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
+import com.popcorn.cakey.ui.login.LoginActivity
 
 
 class ViewProfile : AppCompatActivity() {
@@ -57,8 +58,14 @@ class ViewProfile : AppCompatActivity() {
         binding.btAchieve.setOnClickListener {
             val intent = Intent(this,Achievement::class.java)
             startActivity(intent)
-        }
 
+        }
+        binding.btLogout.setOnClickListener{
+            ParseUser.logOut()
+            val intent = Intent(this,LoginActivity::class.java)
+            startActivity(intent)
+            finishAffinity()
+        }
 
 
     }

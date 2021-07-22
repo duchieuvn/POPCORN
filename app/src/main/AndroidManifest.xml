@@ -33,14 +33,14 @@
             android:parentActivityName=".ui.login.LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".mainscreen.SearchActivity"
+        <activity
+            android:name=".mainscreen.SearchActivity"
             android:parentActivityName=".mainscreen.MainActivity">
             <meta-data
                 android:name="android.app.searchable"
@@ -48,6 +48,7 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+
         </activity>
 
         <activity android:name=".blog.ReadBlogActivity"
