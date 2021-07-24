@@ -1,23 +1,30 @@
 package com.popcorn.cakey.blog
 
+import android.R.attr
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.*
+import android.widget.ImageView
+import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toBitmap
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputEditText
+import com.parse.ParseFile
 import com.parse.ParseObject
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityWriteBlogBinding
 import com.popcorn.cakey.mainscreen.MainActivity
+import java.io.ByteArrayOutputStream
 
 
 class WriteBlogActivity : AppCompatActivity() {
@@ -223,6 +230,16 @@ class WriteBlogActivity : AppCompatActivity() {
 
                         Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
                         title.add(step.text.toString())
+                    }
+                    else{
+
+                        val bitmap = binding.detailStep.getChildAt(i).findViewById<ImageView>(R.id.stepImage).drawable.toBitmap()
+
+                        val stream = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                        val data: ByteArray = stream.toByteArray()
+                        val file = ParseFile("step", data)
+
                     }
                 }
 
