@@ -95,4 +95,6 @@ dependencies {
     // alternately - if using Java8, use the following instead of lifecycle-compiler
     implementation("androidx.lifecycle:lifecycle-common-java8:2.4.0-alpha02")
 
+    //Youtube_clip
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 }

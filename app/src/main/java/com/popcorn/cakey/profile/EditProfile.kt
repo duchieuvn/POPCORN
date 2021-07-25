@@ -72,14 +72,16 @@ class EditProfile : AppCompatActivity() {
         binding.btSubmitChanges.setOnClickListener {
             // 2 dau // la chet, //// la song'
             //user.image=avatar
-           //// user.put("email",binding.insertMail)
+            user.put("email",binding.insertMail.toString())
            // user.setPassword(binding.insertPassword)
-           ////user.put("username",binding.insertName)
-           //// user.saveInBackground()
+            user.put("username",binding.insertName.toString())
+            user.saveInBackground()
             Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
         }
 
-
+        val actionBar = supportActionBar
+        actionBar!!.title = getString(R.string.profile)
+        actionBar.setDisplayHomeAsUpEnabled(true)
     }
 
 }

@@ -24,19 +24,19 @@ class Achievement : AppCompatActivity() {
         val binding: ActivityAchievementBinding = DataBindingUtil.setContentView(this,R.layout.activity_achievement)
 
         //Set value - adapter
-        //var arrayList = ArrayList<String>();
-        //arrayList.add("Super")
-        //arrayList.add("Pink")
+        var arrayList = ArrayList<String>();
+        arrayList.add("Super")
+        arrayList.add("Pink")
 
-        var userModel = UserModel()
-        var user= ParseUser.getCurrentUser()
+        //var userModel = UserModel()
+        //var user= ParseUser.getCurrentUser()
         // get 1 line: var objectLevel = userModel.getLevel(1)
         //Get 1 list
-        var achi = userModel.getAchieList(user.getInt("level"))
+        //var achi = userModel.getAchieList(user.getInt("level"))
 
 
 
-        var arrayAdapter= ArrayAdapter<String>(applicationContext,R.layout.dropdown_item,achi)
+        var arrayAdapter= ArrayAdapter<String>(applicationContext,R.layout.dropdown_item,arrayList)
         binding.autoText.setAdapter(arrayAdapter)
         binding.autoText.threshold=1
 
@@ -57,7 +57,9 @@ class Achievement : AppCompatActivity() {
 
         atv = findViewById(R.id.autoText)
 */
-
+        val actionBar = supportActionBar
+        actionBar!!.title = getString(R.string.profile)
+        actionBar.setDisplayHomeAsUpEnabled(true)
 
     }
 

@@ -28,6 +28,7 @@
     <string name="faqs">Frequently Asked Questions</string>
 
     <!-- profile activity-->
+    <string name="profile">Profile</string>
     <string name="profile_achievement">Wales MasterChef</string>
     <string name="profile_id">Cakey ID</string>
     <string name="profile_name">Name</string>
