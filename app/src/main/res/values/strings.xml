@@ -41,7 +41,9 @@
     <string name="logout">Log out</string>
     <string name="submit">Submit changes</string>
 
+    <!-- achievement activity-->
     <string name="ac_title">Achievements</string>
+    <string name="preview">Preview</string>
     <string-array name="ac_lists">
         <item>Junior Baker</item>
         <item>Senior Baker</item>

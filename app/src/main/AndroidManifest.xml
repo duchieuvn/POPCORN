@@ -17,10 +17,6 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="behind">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <activity
@@ -36,10 +32,7 @@
             android:parentActivityName=".ui.login.LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -70,7 +63,12 @@
 
         <activity
             android:name=".profile.Achievement"
-            android:parentActivityName=".profile.ViewProfile" />
+            android:parentActivityName=".profile.ViewProfile" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".profile.EditProfile"
             android:parentActivityName=".profile.ViewProfile" />

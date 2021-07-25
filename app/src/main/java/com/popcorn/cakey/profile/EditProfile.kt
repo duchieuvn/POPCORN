@@ -58,7 +58,7 @@ class EditProfile : AppCompatActivity() {
         fab.setOnClickListener {
             ImagePicker.with(this)
                 .crop()
-                .compress(1024)            //Final image size will be less than 1 MB(Optional)
+                .compress(1024)   //Final image size will be less than 1 MB(Optional)
                 .maxResultSize(
                     1080,
                     1080
@@ -70,10 +70,12 @@ class EditProfile : AppCompatActivity() {
 
         //Set button - send info to parse Server
         binding.btSubmitChanges.setOnClickListener {
+            // 2 dau // la chet, //// la song'
             //user.image=avatar
-            user.email=binding.insertMail
-            user.setPassword(binding.insertPassword)
-            user.username=binding.insertName
+           //// user.put("email",binding.insertMail)
+           // user.setPassword(binding.insertPassword)
+           ////user.put("username",binding.insertName)
+           //// user.saveInBackground()
             Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
         }
 

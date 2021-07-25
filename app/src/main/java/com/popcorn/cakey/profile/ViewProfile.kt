@@ -31,16 +31,9 @@ class ViewProfile : AppCompatActivity() {
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
-        binding.insertTitle="Lulu tuyet voi"
+        //create
+        binding.insertTitle=user.getString("badge")
 
-        //var userModel = UserModel()
-       //var objectLevel = userModel.getLevel(2)
-       // Log.d("ttt", "description " + objectLevel.getString("description"))
-
-        //var achi = userModel.getAchieList(level)
-        //for (item in achi){
-        //    Log.d("ttt", "achivement " + item )
-        //}
 
         if (premium>0)
         {
