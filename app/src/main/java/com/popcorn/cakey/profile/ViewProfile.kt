@@ -23,6 +23,7 @@ class ViewProfile : AppCompatActivity() {
 
         var user = ParseUser.getCurrentUser()
 
+
         //Set user's data
         var premium: Int=-1
         var level = user.getInt("level")
@@ -32,8 +33,10 @@ class ViewProfile : AppCompatActivity() {
         binding.insertMail= user.getString("email")
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
         //create
-        binding.insertTitle=user.getString("badge")
+        binding.insertTitle=user.getString("bagde")
 
+        Log.d("ttt", binding.insertID + binding.insertName + binding.insertMail + binding.insertLevel + binding.insertTitle)
+        Log.d("ttt", user.getString("expireDate").toString())
 
         if (premium>0)
         {

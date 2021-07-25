@@ -1,6 +1,5 @@
 package com.popcorn.cakey.blog
 
-import android.R.attr
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -220,7 +219,11 @@ class WriteBlogActivity : AppCompatActivity() {
                 ingredient.put("measurement", measurement)
                 ingredient.save()
 
-                val title = mutableListOf<String>()
+                var title = ArrayList<String>()
+
+                var step = ParseObject("Step")
+                val relation = step.getRelation<ParseObject>("photo")
+
 
                 for (i in 0 until binding.detailStep.childCount) {
                     if (i % 2 == 0) {
@@ -229,33 +232,43 @@ class WriteBlogActivity : AppCompatActivity() {
                         val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
 
                         Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+
                         title.add(step.text.toString())
                     }
-                    else{
+                    else {
+                        if (binding.detailStep.getChildAt(i) != null) {
+                            val bitmap = binding.detailStep.getChildAt(i)
+                                .findViewById<ImageView>(R.id.stepImage).drawable.toBitmap()
 
-                        val bitmap = binding.detailStep.getChildAt(i).findViewById<ImageView>(R.id.stepImage).drawable.toBitmap()
+                            val stream = ByteArrayOutputStream()
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                            val data: ByteArray = stream.toByteArray()
+                            var filename = "step" + i.toString() +".jpeg"
+                            val file = ParseFile(filename, data)
 
-                        val stream = ByteArrayOutputStream()
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                        val data: ByteArray = stream.toByteArray()
-                        val file = ParseFile("step", data)
+                            var photo = ParseObject("Files")
+                            photo.put("path", file)
 
+                            relation.add(photo)
+
+                        }
                     }
                 }
 
-                val step = ParseObject("Step")
                 step.put("title", title)
-                step.save()
+                step.saveInBackground()
 
                 blog.put("ingredient", ingredient)
                 blog.put("step", step)
                 blog.saveInBackground()
 
                 //move to main screens
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, WriteBlogActivity::class.java)
                 startActivity(intent)
             }
         }
+
+
 
         //Cancel blog
         binding.buttonCancel.setOnClickListener {
