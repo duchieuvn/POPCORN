@@ -37,10 +37,10 @@ class ViewProfile : AppCompatActivity() {
        //var objectLevel = userModel.getLevel(2)
        // Log.d("ttt", "description " + objectLevel.getString("description"))
 
-        var achi = userModel.getAchieList(level)
-        for (item in achi){
-            Log.d("ttt", "achivement " + item )
-        }
+        //var achi = userModel.getAchieList(level)
+        //for (item in achi){
+        //    Log.d("ttt", "achivement " + item )
+        //}
 
         if (premium>0)
         {
