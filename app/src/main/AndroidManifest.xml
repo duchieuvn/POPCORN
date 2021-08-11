@@ -34,7 +34,9 @@
             android:name=".mainscreen.MainActivity"
             android:parentActivityName=".ui.login.LoginActivity"
             android:screenOrientation="behind"
-            android:theme="@style/Main_Screen"></activity>
+            android:theme="@style/Main_Screen">
+
+        </activity>
         <activity
             android:name=".mainscreen.SearchActivity"
             android:parentActivityName=".mainscreen.MainActivity">
@@ -48,12 +50,15 @@
         </activity>
         <activity
             android:name=".blog.ReadBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity">
+            android:parentActivityName=".mainscreen.MainActivity"
+            android:theme="@style/Blog">
 
         </activity>
         <activity
             android:name=".blog.WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity" />
+            android:parentActivityName=".mainscreen.MainActivity" >
+
+        </activity>
         <activity android:name=".blog.Course">
 
         </activity>

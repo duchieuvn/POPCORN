@@ -2,38 +2,66 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/ingredientCalculator"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+
+        android:background="@drawable/round_style"
+        android:backgroundTint="@color/blue"
+        android:padding="10dp"
+
+        android:text="@string/ingredientsCalculator"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/askP"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
 
         android:text="@string/askPortion"
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
 
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toBottomOf="@id/ingredientCalculator" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/portion"
-        android:layout_width="80dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+
         android:gravity="center"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
 
-        app:layout_constraintTop_toBottomOf="@id/askP"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/askP">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/insertNumberServings"
 
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
+            android:gravity="center"
 
             android:inputType="number"/>
 

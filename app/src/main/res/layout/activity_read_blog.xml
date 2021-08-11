@@ -8,281 +8,458 @@
         <variable
             name="insertTitle"
             type="String" />
+
         <variable
             name="insertDescription"
             type="String" />
+
         <variable
             name="insertAuthor"
             type="String" />
+
         <variable
             name="insertServings"
             type="String" />
 
+        <variable
+            name="insertUsername"
+            type="String" />
+
+        <variable
+            name="insertLike"
+            type="String" />
+
+        <variable
+            name="insertDislike"
+            type="String" />
+
     </data>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".blog.ReadBlogActivity">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_height="wrap_content"
+        tools:context=".blog.ReadBlogActivity"
+        android:orientation="vertical">
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="15dp">
-            <TextView
-                android:id="@+id/blogTitle"
-                android:background="@drawable/round_style"
-                android:backgroundTint="@color/blue"
+            android:layout_marginTop="0dp"
+            android:isScrollContainer="true"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/read_blog_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp"
+                android:layout_height="?attr/actionBarSize"
 
-                android:text="@{insertTitle}"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textAlignment="center"
+                app:menu="@menu/menu_report"
+                app:layout_scrollFlags="scroll|enterAlways"/>
+        </com.google.android.material.appbar.AppBarLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/authorAvatar"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/authorAvatar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-
-                app:civ_border_color="@color/pink_variant"
-                app:civ_border_width="2dp"
-
-                app:layout_constraintTop_toBottomOf="@id/blogTitle"
-                app:layout_constraintBottom_toTopOf="@id/blogDescription"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/author"/>
-
-            <TextView
-                android:id="@+id/author"
-
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_marginStart="5dp"
-
-                app:layout_constraintLeft_toRightOf="@id/authorAvatar"
-                app:layout_constraintTop_toBottomOf="@id/blogTitle"
-
-
-                android:text="@{insertAuthor}" />
-
-            <TextView
-                android:id="@+id/blogDescription"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"
+                android:layout_gravity="top|center"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"
+                android:paddingBottom="20dp">
 
-                android:text="@{insertDescription}"
+                <TextView
+                    android:id="@+id/blogTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="10dp"
 
-                app:layout_constraintTop_toBottomOf="@id/authorAvatar"
-                app:layout_constraintBottom_toTopOf="@id/blogCover"
-                app:layout_constraintStart_toStartOf="parent" />
+                    android:background="@drawable/round_style"
+                    android:backgroundTint="@color/blue"
+                    android:padding="10dp"
 
-            <ImageView
-                android:id="@+id/blogCover"
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
+                    android:text="@{insertTitle}"
+                    android:textAlignment="center"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
 
-                app:layout_constraintTop_toBottomOf="@id/blogDescription"
-                app:layout_constraintBottom_toTopOf="@id/divider"
-                app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintBottom_toTopOf="@id/authorAvatar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <View
-                android:id="@+id/divider"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="20dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/blogCover" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/authorAvatar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
 
-            <TextView
-                android:id="@+id/servings"
+                    app:civ_border_color="@color/pink_variant"
+                    app:civ_border_width="2dp"
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                    app:layout_constraintBottom_toTopOf="@id/blogDescription"
+                    app:layout_constraintRight_toLeftOf="@id/author"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/blogTitle" />
 
-                android:textSize="20sp"
-                android:text="@string/servings"
+                <TextView
+                    android:id="@+id/author"
 
-                app:layout_constraintTop_toBottomOf="@id/divider"
-                app:layout_constraintStart_toStartOf="parent"/>
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="25dp"
 
-            <TextView
-                android:id="@+id/numSer"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
-                android:textSize="20sp"
-                android:text="@{insertServings}"
-
-                app:layout_constraintTop_toBottomOf="@id/divider"
-               app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/servings"/>
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/servings" />
-
-            <TextView
-                android:id="@+id/ingredientList"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
-                app:layout_constraintTop_toBottomOf="@id/divider2"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:text="@string/ingredient_lists"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/calculateIngredient"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="5dp"
-
-                app:layout_constraintTop_toBottomOf="@id/divider2"
-                app:layout_constraintLeft_toRightOf="@id/ingredientList"
-
-                android:background="@drawable/ic_calculate"/>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailIngredient"
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                app:layout_constraintTop_toBottomOf="@id/calculateIngredient"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:orientation="vertical"/>
-            <View
-                android:id="@+id/divider3"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailIngredient" />
-
-            <TextView
-                android:id="@+id/guideline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-
-                app:layout_constraintTop_toBottomOf="@id/divider3"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:text="@string/guidelines"
-                android:textSize="20sp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailStep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                app:layout_constraintTop_toBottomOf="@id/guideline"
-                app:layout_constraintStart_toStartOf="parent"
-
-                android:orientation="vertical"/>
-
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:layout_marginTop="10dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailStep" />
-
-            <TextView
-                android:id="@+id/rating"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-
-                android:text="@string/rating"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+                    android:text="@{insertAuthor}"
+                    app:layout_constraintLeft_toRightOf="@id/authorAvatar"
 
 
-            <ImageButton
-                android:id="@+id/like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/blogTitle" />
 
-                app:layout_constraintLeft_toRightOf="@id/rating"
-                app:layout_constraintTop_toBottomOf="@+id/divider4"
+                <TextView
+                    android:id="@+id/blogDescription"
 
-                android:background="@drawable/ic_thumb_up"
-                android:backgroundTint="@color/pink" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
 
-            <ImageButton
-                android:id="@+id/dislike"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
+                    android:text="@string/description"
+                    android:textSize="20sp"
 
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_thumb_down"
-                android:backgroundTint="@color/pink"
+                    app:layout_constraintBottom_toTopOf="@id/detailDescription"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/authorAvatar" />
 
-                app:layout_constraintLeft_toRightOf="@id/like"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
+                <TextView
+                    android:id="@+id/detailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"
 
-            <TextView
-                android:id="@+id/cmtSection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                    android:text="@{insertDescription}"
+                    android:textAlignment="gravity"
+                    app:layout_constraintBottom_toTopOf="@id/blogCover"
+                    app:layout_constraintTop_toBottomOf="@id/blogDescription" />
 
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/rating"
+                <ImageView
+                    android:id="@+id/blogCover"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
 
-                android:text="@string/cmt"
-                android:textSize="20sp"/>
+                    app:layout_constraintBottom_toTopOf="@id/divider"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/blogDescription" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailCmt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/blogCover" />
 
-                app:layout_constraintTop_toBottomOf="@id/cmtSection"
-                app:layout_constraintStart_toStartOf="parent"
+                <TextView
+                    android:id="@+id/servings"
 
-                android:orientation="vertical"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@string/servings"
+                    android:textSize="20sp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                <TextView
+                    android:id="@+id/numSer"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@{insertServings}"
+                    android:textSize="20sp"
+
+                    app:layout_constraintLeft_toRightOf="@id/servings"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider" />
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/servings" />
+
+                <TextView
+                    android:id="@+id/ingredientList"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@string/ingredient_lists"
+                    android:textSize="20sp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+                <Button
+                    android:id="@+id/calculateIngredient"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="10dp"
+
+                    android:background="@drawable/ic_calculate"
+                    app:layout_constraintLeft_toRightOf="@id/ingredientList"
+
+                    app:layout_constraintTop_toBottomOf="@id/divider2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailIngredient"
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toBottomOf="@id/calculateIngredient" />
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailIngredient" />
+
+                <TextView
+                    android:id="@+id/guideline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@string/guidelines"
+                    android:textSize="20sp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider3" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailStep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toBottomOf="@id/guideline" />
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailStep" />
+
+                <TextView
+                    android:id="@+id/youtube"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+
+                    android:text="@string/video"
+                    android:textSize="20sp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider4" />
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/youtube" />
+
+                <TextView
+                    android:id="@+id/rating"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+
+                    android:text="@string/rating"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+                <ImageButton
+                    android:id="@+id/like"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="8dp"
+
+                    android:background="@drawable/ic_thumb_up"
+                    android:backgroundTint="@color/pink"
+
+                    app:layout_constraintLeft_toRightOf="@id/rating"
+                    app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+                <TextView
+                    android:id="@+id/numLike"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+
+                    android:text="@{insertLike}"
+                    android:textSize="20sp"
+
+                    app:layout_constraintLeft_toRightOf="@id/like"
+                    app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+                <ImageButton
+                    android:id="@+id/dislike"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="20dp"
+
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_thumb_down"
+                    android:backgroundTint="@color/pink"
+
+                    app:layout_constraintLeft_toRightOf="@id/numLike"
+                    app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+                <TextView
+                    android:id="@+id/numDislike"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="8dp"
+
+                    android:text="@{insertDislike}"
+                    android:textSize="20sp"
+
+                    app:layout_constraintLeft_toRightOf="@id/dislike"
+                    app:layout_constraintTop_toBottomOf="@+id/divider5" />
+
+                <View
+                    android:id="@+id/divider6"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rating" />
+
+                <TextView
+                    android:id="@+id/cmtSection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+
+                    android:text="@string/cmt"
+                    android:textSize="20sp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/detailCmt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:orientation="vertical"
+                    app:layout_constraintStart_toStartOf="parent"
+
+                    app:layout_constraintTop_toBottomOf="@id/cmtSection" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/userAvatar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="30dp"
+                    app:civ_border_color="@color/pink_variant"
+                    app:civ_border_width="2dp"
+
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detailCmt" />
+
+                <TextView
+                    android:id="@+id/userName"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="30dp"
+
+                    android:text="@{insertUsername}"
+                    android:textStyle="bold"
+
+                    app:layout_constraintLeft_toRightOf="@id/userAvatar"
+                    app:layout_constraintTop_toBottomOf="@id/detailCmt" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/userCmt"
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="30dp"
+
+                    app:hintAnimationEnabled="false"
+                    app:hintEnabled="false"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+
+                    app:layout_constraintStart_toEndOf="@id/userName"
+                    app:layout_constraintTop_toBottomOf="@id/detailCmt">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:gravity="center"
+
+                        android:hint="@string/cmtHere" />
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+        </ScrollView>
+
+    </LinearLayout>
+
 
 
 </layout>

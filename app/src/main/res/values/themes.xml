@@ -36,5 +36,13 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name = "Blog" parent = "Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorPrimaryVariant">@color/pink</item>
+        <item name="colorOnPrimary">@color/white</item>
+    </style>
 
 </resources>

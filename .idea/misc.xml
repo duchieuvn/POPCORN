@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_edit_profile.xml" value="0.11865942028985507" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_main_blogs_list.xml" value="0.1796875" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_read_blog.xml" value="0.12182971014492754" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_view_profile.xml" value="0.11865942028985507" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_write_blog.xml" value="0.1796875" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/comment_section.xml" value="0.11865942028985507" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/ingredients_calculator_dialog.xml" value="0.1796875" />
+        <entry key="..\:/POPCORN/app/src/main/res/menu/main_menu.xml" value="0.1796875" />
+        <entry key="..\:/POPCORN/app/src/main/res/menu/menu_report.xml" value="0.1796875" />
+        <entry key="..\:/POPCORN/app/src/main/res/menu/menu_write_blog.xml" value="0.1425925925925926" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

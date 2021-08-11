@@ -1,7 +1,14 @@
 package com.popcorn.cakey.blog
 
 
+
+
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -11,6 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
+import com.popcorn.cakey.mainscreen.MainActivity
+import com.popcorn.cakey.ui.login.LoginActivity
 
 
 class ReadBlogActivity : AppCompatActivity() {
@@ -20,11 +29,23 @@ class ReadBlogActivity : AppCompatActivity() {
         val binding:ActivityReadBlogBinding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
 
         var defaultServing = 4
-        binding.insertTitle = "Uong nuoc moi ngay"
+        binding.insertTitle = "Tiramisu"
         binding.insertAuthor = "Thanh Truc"
         binding.insertServings = "$defaultServing people"
         binding.authorAvatar.setImageResource(R.drawable.avatar)
         binding.blogCover.setImageResource(R.drawable.avatar)
+        binding.userAvatar.setImageResource(R.drawable.avatar)
+        binding.insertUsername = "Duc Hieu"
+        binding.insertDescription = "Tiramisu is a classic Italian no-bake dessert made with layers of coffee-soaked ladyfingers and incredible mascarpone cream. The custard-like cream is excellent and contains no raw egg."
+        binding.insertLike = "500"
+        binding.insertDislike = "100"
+
+
+        setSupportActionBar(binding.readBlogToolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        //supportActionBar?.setDisplayShowHomeEnabled(true);
+        supportActionBar?.title = "Tiramisu"
+        //binding.readBlogToolbar.title = "Tiramisu"
 
         //Ingredients lists
         val ingredientsListView = binding.detailIngredient
@@ -67,15 +88,15 @@ class ReadBlogActivity : AppCompatActivity() {
             val dialogLayout = inflater.inflate(R.layout.ingredients_calculator_dialog, null)
 
             val insertNumberServings  = dialogLayout.findViewById<TextInputEditText>(R.id.insertNumberServings)
-            insertNumberServings.hint = defaultServing.toString()
+            insertNumberServings.hint = "$defaultServing people"
 
             builder.setView(dialogLayout)
 
-            builder.setTitle("Cakey ask")
             builder.setPositiveButton("OK") { _, _ ->
                 if (insertNumberServings.text.toString() != "")
                 {
                     defaultServing = insertNumberServings.text.toString().toInt()
+                    binding.insertServings = "$defaultServing people"
 
                     //reload ingredient
                     quantity.clear()
@@ -149,4 +170,22 @@ class ReadBlogActivity : AppCompatActivity() {
         val cmtAdapter = CommentSection(user,cmt)
         cmtView.adapter = cmtAdapter
     }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_report, menu)
+
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem) : Boolean{
+        when (item.itemId) {
+            R.id.app_bar_report -> {
+                Toast.makeText(applicationContext, "Reported", Toast.LENGTH_LONG).show()
+                //val intent = Intent(this, MainActivity::class.java)
+                //startActivity(intent)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }
+

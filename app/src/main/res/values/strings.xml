@@ -68,6 +68,7 @@
     <string name="name_ing">sugar</string>
     <string name="calculateIngredient">Ingredients</string>
     <string name="askPortion">How many people do you want to serve?</string>
+    <string name="ingredientsCalculator">Ingredients Calculator</string>
 
     <string name="delete">Delete</string>
     <string name="add">Add</string>
@@ -84,6 +85,9 @@
     <string name="post_Blogs">Post</string>
     <string name="rating">Rate this blog</string>
     <string name="cmt">Comments</string>
+    <string name="cmtHere">Leave a comment here.</string>
+
+    <string name="report">Report</string>
 
     <!-- main screen -->
     <string name="suggestion">Suggestion</string>
