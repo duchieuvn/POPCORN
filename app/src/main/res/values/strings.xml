@@ -89,6 +89,10 @@
 
     <string name="report">Report</string>
 
+    <!-- Report package-->
+    <string name="reportTitle">Help us understand the problem.</string>
+    <string name="reportQuestion">What is going on with this Blog (Recipe)?</string>
+
     <!-- main screen -->
     <string name="suggestion">Suggestion</string>
     <string name="search">Search</string>

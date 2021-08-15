@@ -19,6 +19,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.mainscreen.MainActivity
+import com.popcorn.cakey.report.ReportActivity
 import com.popcorn.cakey.ui.login.LoginActivity
 
 
@@ -128,6 +129,7 @@ class ReadBlogActivity : AppCompatActivity() {
             {
                 if (dislikeClick)
                 {
+                    //binding.insertLike = (binding.insertLike.toInt()+1).toString()
                     binding.like.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink_variant)
                     likeClick = false
                 }
@@ -135,6 +137,7 @@ class ReadBlogActivity : AppCompatActivity() {
             }
             else
             {
+                //binding.insertLike = (binding.insertLike.toInt()-1).toString()
                 likeClick = true
                 binding.like.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink)
             }
@@ -144,12 +147,14 @@ class ReadBlogActivity : AppCompatActivity() {
             if (dislikeClick)
             {
                 if (likeClick) {
+                    //binding.insertDislike = (binding.insertDislike.toInt()+1).toString()
                     binding.dislike.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink_variant)
                     dislikeClick = false
                 }
             }
             else
             {
+                //binding.insertDislike = (binding.insertDislike.toInt()-1).toString()
                 dislikeClick = true
                 binding.dislike.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink)
             }
@@ -180,8 +185,8 @@ class ReadBlogActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.app_bar_report -> {
                 Toast.makeText(applicationContext, "Reported", Toast.LENGTH_LONG).show()
-                //val intent = Intent(this, MainActivity::class.java)
-                //startActivity(intent)
+                val intent = Intent(this, ReportActivity::class.java)
+                startActivity(intent)
                 return true
             }
         }

@@ -4,13 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/POPCORN/app/src/main/res/layout/activity_edit_profile.xml" value="0.11865942028985507" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_faqs.xml" value="0.1" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/activity_main_blogs_list.xml" value="0.1796875" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/activity_read_blog.xml" value="0.12182971014492754" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/activity_report.xml" value="0.1796875" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/activity_view_profile.xml" value="0.11865942028985507" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/activity_write_blog.xml" value="0.1796875" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/comment_section.xml" value="0.11865942028985507" />
         <entry key="..\:/POPCORN/app/src/main/res/layout/ingredients_calculator_dialog.xml" value="0.1796875" />
+        <entry key="..\:/POPCORN/app/src/main/res/layout/list_groups.xml" value="0.1" />
         <entry key="..\:/POPCORN/app/src/main/res/menu/main_menu.xml" value="0.1796875" />
         <entry key="..\:/POPCORN/app/src/main/res/menu/menu_report.xml" value="0.1796875" />
         <entry key="..\:/POPCORN/app/src/main/res/menu/menu_write_blog.xml" value="0.1425925925925926" />

@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
-
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="behind"
@@ -17,10 +16,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:screenOrientation="behind">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".ui.login.SignupActivity"
@@ -34,9 +30,7 @@
             android:name=".mainscreen.MainActivity"
             android:parentActivityName=".ui.login.LoginActivity"
             android:screenOrientation="behind"
-            android:theme="@style/Main_Screen">
-
-        </activity>
+            android:theme="@style/Main_Screen"></activity>
         <activity
             android:name=".mainscreen.SearchActivity"
             android:parentActivityName=".mainscreen.MainActivity">
@@ -52,25 +46,26 @@
             android:name=".blog.ReadBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"
             android:theme="@style/Blog">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".blog.WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity" >
-
-        </activity>
-        <activity android:name=".blog.Course">
-
-        </activity>
+            android:parentActivityName=".mainscreen.MainActivity"/>
+        <activity android:name=".blog.Course"/>
+        <activity
+            android:name=".report.ReportActivity"
+            android:parentActivityName=".blog.ReadBlogActivity"
+            android:exported="true" />
         <activity
             android:name=".faqs.FAQsActivity"
             android:parentActivityName=".mainscreen.MainActivity" />
-        <activity android:name=".profile.ViewProfile"></activity>
+        <activity android:name=".profile.ViewProfile" />
         <activity
             android:name=".profile.Achievement"
-            android:parentActivityName=".profile.ViewProfile">
-
-        </activity>
+            android:parentActivityName=".profile.ViewProfile"/>
         <activity
             android:name=".profile.EditProfile"
             android:parentActivityName=".profile.ViewProfile" />
