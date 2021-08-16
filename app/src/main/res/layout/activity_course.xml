@@ -14,6 +14,12 @@
         <variable
             name="insertAuthor"
             type="String" />
+        <variable
+            name="insertLike"
+            type="String" />
+        <variable
+            name="insertDislike"
+            type="String" />
     </data>
 
     <ScrollView
@@ -87,7 +93,7 @@
                 android:id="@+id/blogCover"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
-
+                android:paddingTop="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/blogDescription" />
 
@@ -133,9 +139,23 @@
 
                 app:layout_constraintLeft_toRightOf="@id/rating"
                 app:layout_constraintTop_toBottomOf="@+id/divider4"
+                android:src="@drawable/ic_thumb_up"
+                android:background="@drawable/circle_style"
+                android:backgroundTint="@color/pink"
+                app:tint="@color/white"
+                />
 
-                android:background="@drawable/ic_thumb_up"
-                android:backgroundTint="@color/pink" />
+            <TextView
+                android:id="@+id/numLike"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="@{insertLike}"
+                android:textSize="20sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/like" />
 
             <ImageButton
                 android:id="@+id/dislike"
@@ -144,12 +164,25 @@
                 android:layout_marginStart="20dp"
 
                 android:layout_marginTop="8dp"
-                android:background="@drawable/ic_thumb_down"
+                android:src="@drawable/ic_thumb_down"
+                android:background="@drawable/circle_style"
                 android:backgroundTint="@color/pink"
+                app:tint="@color/white"
 
-                app:layout_constraintLeft_toRightOf="@id/like"
+                app:layout_constraintLeft_toRightOf="@+id/numLike"
                 app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
+            <TextView
+                android:id="@+id/numDislike"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="5dp"
+                android:text="@{insertDislike}"
+                android:textSize="20sp"
+
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/dislike" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

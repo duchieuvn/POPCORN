@@ -15,7 +15,9 @@ class Course : AppCompatActivity() {
 
         binding.insertTitle = "Tiramisu"
         binding.insertAuthor = "Thanh Truc"
-
+        binding.insertLike="1904"
+        binding.insertDislike="2001"
+        binding.insertDescription="tao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien ne"
         binding.authorAvatar.setImageResource(R.drawable.avatar)
         binding.blogCover.setImageResource(R.drawable.avatar)
         var likeClick = true
