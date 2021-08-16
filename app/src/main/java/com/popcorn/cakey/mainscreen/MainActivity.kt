@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
         if (currentUser == null) {
             val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)

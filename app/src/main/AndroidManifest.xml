@@ -52,18 +52,13 @@
             android:parentActivityName=".mainscreen.MainActivity"
             android:theme="@style/Blog">
 
-<<<<<<< Updated upstream
         </activity>
         <activity
             android:name=".blog.WriteBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"/>
         <activity android:name=".blog.Course">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-=======
->>>>>>> Stashed changes
+
+
         </activity>
         <activity
             android:name=".report.ReportActivity"
