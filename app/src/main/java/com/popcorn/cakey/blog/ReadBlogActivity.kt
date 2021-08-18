@@ -18,9 +18,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
-import com.popcorn.cakey.mainscreen.MainActivity
 import com.popcorn.cakey.report.ReportActivity
-import com.popcorn.cakey.ui.login.LoginActivity
 
 
 class ReadBlogActivity : AppCompatActivity() {

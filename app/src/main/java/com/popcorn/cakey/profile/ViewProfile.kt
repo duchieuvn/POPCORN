@@ -3,16 +3,12 @@ package com.popcorn.cakey.profile
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import com.parse.ParseObject
-import com.parse.ParseQuery
 import com.parse.ParseUser
 import com.popcorn.cakey.R
-import com.popcorn.cakey.UserModel
 import com.popcorn.cakey.databinding.ActivityViewProfileBinding
-import com.popcorn.cakey.ui.login.LoginActivity
+import com.popcorn.cakey.auth.LoginActivity
 
 
 class ViewProfile : AppCompatActivity() {
@@ -61,7 +57,7 @@ class ViewProfile : AppCompatActivity() {
         }
         binding.btLogout.setOnClickListener{
             ParseUser.logOut()
-            val intent = Intent(this,LoginActivity::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
             finishAffinity()
         }

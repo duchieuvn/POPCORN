@@ -1,4 +1,4 @@
-package com.popcorn.cakey.ui.login
+package com.popcorn.cakey.auth
 
 // import com.google.firebase.auth.FirebaseAuth
 import android.content.Intent
@@ -11,8 +11,6 @@ import com.popcorn.cakey.Utils
 import com.popcorn.cakey.blog.WriteBlogActivity
 
 import com.popcorn.cakey.databinding.ActivityLoginBinding
-
-import com.popcorn.cakey.profile.ViewProfile
 
 
 class LoginActivity : AppCompatActivity() {

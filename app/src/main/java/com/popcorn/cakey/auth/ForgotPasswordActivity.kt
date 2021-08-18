@@ -1,4 +1,4 @@
-package com.popcorn.cakey.ui.login
+package com.popcorn.cakey.auth
 
 // import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle

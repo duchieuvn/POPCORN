@@ -14,21 +14,21 @@
             android:screenOrientation="behind"
             android:theme="@style/Splash_Screen" />
         <activity
-            android:name=".ui.login.LoginActivity"
+            android:name=".auth.LoginActivity"
             android:screenOrientation="behind">
 
         </activity>
         <activity
-            android:name=".ui.login.SignupActivity"
-            android:parentActivityName=".ui.login.LoginActivity"
+            android:name=".auth.SignupActivity"
+            android:parentActivityName=".auth.LoginActivity"
             android:screenOrientation="behind" />
         <activity
-            android:name=".ui.login.ForgotPasswordActivity"
-            android:parentActivityName=".ui.login.LoginActivity"
+            android:name=".auth.ForgotPasswordActivity"
+            android:parentActivityName=".auth.LoginActivity"
             android:screenOrientation="behind" />
         <activity
             android:name=".mainscreen.MainActivity"
-            android:parentActivityName=".ui.login.LoginActivity"
+            android:parentActivityName=".auth.LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen">
             <intent-filter>
