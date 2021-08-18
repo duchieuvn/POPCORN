@@ -415,20 +415,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/detailCmt" />
 
-                <TextView
-                    android:id="@+id/userName"
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="25dp"
-                    android:layout_marginBottom="30dp"
-
-                    android:text="@{insertUsername}"
-                    android:textStyle="bold"
-
-                    app:layout_constraintLeft_toRightOf="@id/userAvatar"
-                    app:layout_constraintTop_toBottomOf="@id/detailCmt" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/userCmt"
@@ -443,12 +429,12 @@
                     app:hintAnimationEnabled="false"
                     app:hintEnabled="false"
 
-                    app:layout_constraintEnd_toEndOf="parent"
-
-                    app:layout_constraintStart_toEndOf="@id/userName"
+                    app:layout_constraintStart_toEndOf="@id/userAvatar"
+                    app:layout_constraintEnd_toStartOf="@id/sendButton"
                     app:layout_constraintTop_toBottomOf="@id/detailCmt">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/userDetailCmt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 
@@ -457,6 +443,21 @@
                         android:hint="@string/cmtHere" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <ImageButton
+                    android:id="@+id/sendButton"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="12dp"
+
+                    android:src="@drawable/ic_send"
+                    app:tint="@color/blue"
+                    android:background="@color/transparent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="1.0"
+
+                    app:layout_constraintStart_toEndOf="@id/userCmt"
+                    app:layout_constraintTop_toBottomOf="@id/detailCmt"
+                     />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,15 +1,14 @@
 package com.popcorn.cakey.report
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
 import com.popcorn.cakey.databinding.ActivityReportBinding
-import com.popcorn.cakey.databinding.ActivityWriteBlogBinding
 
 class ReportActivity : AppCompatActivity() {
 
@@ -17,18 +16,17 @@ class ReportActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityReportBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         val actionBar = supportActionBar
         actionBar!!.title = getString(R.string.report)
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        binding = ActivityReportBinding.inflate(layoutInflater)
-        val view = binding.root
-        setContentView(view)
+        var reportReason = arrayOf("The recipe is incorrect.", "Inappropriate content.", "I\'m not interested in this recipe.")
 
-        var reportReason = arrayOf("The recipe is incorrect.", "Inappropriate content.", "I\\'m not interested in this recipe.")
-
-        val adapter = ArrayAdapter(this, R.layout.list_groups, reportReason)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, reportReason)
 
         binding.listReason.adapter = adapter
 
@@ -36,13 +34,10 @@ class ReportActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { _, view, position, _ -> // value of item that is clicked
                 val itemValue =  binding.listReason.getItemAtPosition(position) as String
 
-                // Toast the values
-                Toast.makeText(applicationContext,
-                    "Position :$position\nItem Value : $itemValue", Toast.LENGTH_LONG)
-                    .show()
-
                 val i = Intent(this, ReadBlogActivity::class.java)
-                i.putExtra("reason", itemValue)
+                val bundle = Bundle()
+                bundle.putString("reason", itemValue)
+                i.putExtras(bundle)
                 startActivity(i)
             }
     }

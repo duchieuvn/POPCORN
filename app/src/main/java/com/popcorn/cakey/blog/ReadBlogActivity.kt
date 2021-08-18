@@ -5,9 +5,7 @@ package com.popcorn.cakey.blog
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -172,17 +170,33 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val cmtAdapter = CommentSection(user,cmt)
         cmtView.adapter = cmtAdapter
+
+        //If user leave a comment
+        binding.sendButton.setOnClickListener {
+            user.add("Duc Hieu")
+            cmt.add(binding.userDetailCmt.text.toString())
+            cmtView.adapter = cmtAdapter
+            binding.userDetailCmt.setText("")
+        }
+
+        //Report
+        var intent = intent
+        val bundle = intent.extras
+        if (bundle != null) {
+            val reason = intent.getStringExtra("reason")
+            Toast.makeText(this,reason, Toast.LENGTH_SHORT).show()
+        }
+
+
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_report, menu)
-
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem) : Boolean{
         when (item.itemId) {
             R.id.app_bar_report -> {
-                Toast.makeText(applicationContext, "Reported", Toast.LENGTH_LONG).show()
                 val intent = Intent(this, ReportActivity::class.java)
                 startActivity(intent)
                 return true

@@ -15,9 +15,7 @@
             android:theme="@style/Splash_Screen" />
         <activity
             android:name=".auth.LoginActivity"
-            android:screenOrientation="behind">
-
-        </activity>
+            android:screenOrientation="behind"/>
         <activity
             android:name=".auth.SignupActivity"
             android:parentActivityName=".auth.LoginActivity"
@@ -42,7 +40,6 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/search" />
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -56,14 +53,11 @@
         <activity
             android:name=".blog.WriteBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"/>
-        <activity android:name=".blog.Course">
-
-
-        </activity>
+        <activity android:name=".blog.Course"/>
         <activity
             android:name=".report.ReportActivity"
             android:parentActivityName=".blog.ReadBlogActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".faqs.FAQsActivity"
             android:parentActivityName=".mainscreen.MainActivity" />
