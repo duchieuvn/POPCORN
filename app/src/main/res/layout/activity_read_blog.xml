@@ -33,6 +33,10 @@
             name="insertDislike"
             type="String" />
 
+        <variable
+            name="insertVideoID"
+            type="String" />
+
     </data>
 
     <LinearLayout
@@ -290,6 +294,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/divider4" />
 
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youTubePlayerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp"
+                    app:videoId="@{insertVideoID}"
+                    app:layout_constraintBottom_toTopOf="@+id/divider5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/youtube"
+                    app:showFullScreenButton="false"/>
+
                 <View
                     android:id="@+id/divider5"
                     android:layout_width="match_parent"
@@ -298,7 +314,7 @@
                     android:background="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/youtube" />
+                    app:layout_constraintTop_toBottomOf="@+id/youTubePlayerView" />
 
                 <TextView
                     android:id="@+id/rating"

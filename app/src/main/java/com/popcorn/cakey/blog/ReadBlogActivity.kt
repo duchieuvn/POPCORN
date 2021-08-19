@@ -187,6 +187,8 @@ class ReadBlogActivity : AppCompatActivity() {
             Toast.makeText(this,reason, Toast.LENGTH_SHORT).show()
         }
 
+        //Youtube
+        binding.insertVideoID = "7VTtenyKRg4"
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
