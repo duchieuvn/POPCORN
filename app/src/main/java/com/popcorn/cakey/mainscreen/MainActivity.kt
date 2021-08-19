@@ -15,6 +15,7 @@ import com.popcorn.cakey.SplashActivity
 import com.popcorn.cakey.blog.Course
 import com.popcorn.cakey.blog.WriteBlogActivity
 import com.popcorn.cakey.databinding.ActivityMainBinding
+import com.popcorn.cakey.faqs.FAQsActivity
 import com.popcorn.cakey.profile.ViewProfile
 
 class MainActivity : AppCompatActivity(R.layout.activity_main)  {
@@ -48,6 +49,16 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
                 }
                 R.id.Write->{
                     i.setClass(this,WriteBlogActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.Account->{
+                    i.setClass(this,ViewProfile::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.Help->{
+                    i.setClass(this,FAQsActivity::class.java)
                     startActivity(i)
                     true
                 }
