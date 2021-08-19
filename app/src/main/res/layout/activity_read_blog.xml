@@ -33,10 +33,6 @@
             name="insertDislike"
             type="String" />
 
-        <variable
-            name="insertVideoID"
-            type="String" />
-
     </data>
 
     <LinearLayout
@@ -299,7 +295,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="20dp"
-                    app:videoId="@{insertVideoID}"
+
                     app:layout_constraintBottom_toTopOf="@+id/divider5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

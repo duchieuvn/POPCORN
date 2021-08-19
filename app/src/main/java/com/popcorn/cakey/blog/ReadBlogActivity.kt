@@ -14,6 +14,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
@@ -188,7 +190,15 @@ class ReadBlogActivity : AppCompatActivity() {
         }
 
         //Youtube
-        binding.insertVideoID = "7VTtenyKRg4"
+        val youTubePlayerView = binding.youTubePlayerView
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                val videoId = "7VTtenyKRg4"
+                youTubePlayer.loadVideo(videoId, 0f)
+            }
+        })
 
     }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
