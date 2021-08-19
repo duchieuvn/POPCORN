@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.popcorn.cakey.ui.login.LoginActivity
+import com.popcorn.cakey.auth.LoginActivity
 
 class SplashActivity : AppCompatActivity() {
 

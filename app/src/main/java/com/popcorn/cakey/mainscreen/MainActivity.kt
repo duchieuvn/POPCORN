@@ -12,9 +12,13 @@ import com.google.android.material.navigation.NavigationView
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.SplashActivity
+import com.popcorn.cakey.blog.Course
+import com.popcorn.cakey.blog.WriteBlogActivity
 import com.popcorn.cakey.databinding.ActivityMainBinding
+import com.popcorn.cakey.faqs.FAQsActivity
+import com.popcorn.cakey.profile.ViewProfile
 
-class MainActivity : AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main)  {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navigation: NavigationView
 
@@ -25,6 +29,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         if (currentUser == null) {
             val intent = Intent(this, SplashActivity::class.java)
             startActivity(intent)
+            finishAffinity()
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,17 +39,33 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         //  menuBar=findViewById(R.id.main_toolbar)
         //  setSupportActionBar(menuBar)
         navigation=findViewById(R.id.nav_view)
-        navigation.setNavigationItemSelectedListener{
+        navigation.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener {
+            val i=intent
             when(it.itemId){
-                R.id.Home->true
-                R.id.Account->true
-                R.id.Favorite->true
-                R.id.Course->true
-                R.id.Write->true
-                R.id.Help->true
-                else -> false
+                R.id.Course->{
+                    i.setClass(this,Course::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.Write->{
+                    i.setClass(this,WriteBlogActivity::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.Account->{
+                    i.setClass(this,ViewProfile::class.java)
+                    startActivity(i)
+                    true
+                }
+                R.id.Help->{
+                    i.setClass(this,FAQsActivity::class.java)
+                    startActivity(i)
+                    true
+                }
             }
-        }
+            true
+        })
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .add(R.id.one_fragment, Fragment1Activity.newInstance())
@@ -52,6 +73,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 .commit()
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
@@ -64,6 +86,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         }
         return true
     }
+
 }
 
 
