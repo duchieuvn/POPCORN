@@ -23,7 +23,7 @@ class Course : AppCompatActivity() {
         binding.insertDislike="2001"
         binding.insertDescription="tao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien netao viet khugn dien ne"
         binding.authorAvatar.setImageResource(R.drawable.avatar)
-        binding.blogCover.setImageResource(R.drawable.avatar)
+        binding.blogCover.setImageResource(R.drawable.hi)
 
         val youTubePlayerView = binding.youTubePlayerView
         lifecycle.addObserver(youTubePlayerView)

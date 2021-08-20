@@ -32,7 +32,7 @@ class ReadBlogActivity : AppCompatActivity() {
         binding.insertAuthor = "Thanh Truc"
         binding.insertServings = "$defaultServing people"
         binding.authorAvatar.setImageResource(R.drawable.avatar)
-        binding.blogCover.setImageResource(R.drawable.avatar)
+        binding.blogCover.setImageResource(R.drawable.hi)
         binding.userAvatar.setImageResource(R.drawable.avatar)
         binding.insertUsername = "Duc Hieu"
         binding.insertDescription = "Tiramisu is a classic Italian no-bake dessert made with layers of coffee-soaked ladyfingers and incredible mascarpone cream. The custard-like cream is excellent and contains no raw egg."
