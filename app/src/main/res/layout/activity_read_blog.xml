@@ -139,21 +139,20 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
 
-
                     android:text="@{insertDescription}"
                     android:textAlignment="gravity"
-                    app:layout_constraintBottom_toTopOf="@id/blogCover"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/blogDescription" />
 
                 <ImageView
                     android:id="@+id/blogCover"
+                    android:paddingTop="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:src="@drawable/hi"
-
-                    app:layout_constraintBottom_toTopOf="@id/divider"
+                    android:adjustViewBounds="true"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/blogDescription" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/detailDescription" />
 
                 <View
                     android:id="@+id/divider"
@@ -307,7 +306,6 @@
                     android:id="@+id/divider5"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
                     android:background="@color/black"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
