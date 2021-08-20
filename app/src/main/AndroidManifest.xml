@@ -48,7 +48,6 @@
             android:name=".blog.ReadBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"
             android:theme="@style/Blog">
-
         </activity>
         <activity
             android:name=".blog.WriteBlogActivity"
