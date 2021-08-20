@@ -30,10 +30,13 @@ class ViewProfile : AppCompatActivity() {
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
         //create
         binding.insertTitle=user.getString("bagde")
+        binding.profileImage.setImageResource(R.drawable.hi)
+
 
         Log.d("ttt", binding.insertID + binding.insertName + binding.insertMail + binding.insertLevel + binding.insertTitle)
         Log.d("ttt", user.getString("expireDate").toString())
 
+        //Check premium value
         if (premium>0)
         {
             binding.insertPremium=premium.toString()

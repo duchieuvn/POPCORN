@@ -66,7 +66,7 @@
             android:layout_marginTop="40dp"
             android:orientation="horizontal"
             android:paddingStart="30dp"
-            android:paddingTop="15dp"
+            android:paddingTop="10dp"
             android:paddingEnd="30dp"
             android:paddingBottom="5dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -257,8 +257,8 @@
 
         <ImageView
             android:id="@+id/avatarImg"
-            android:layout_width="144dp"
-            android:layout_height="144dp"
+            android:layout_width="168dp"
+            android:layout_height="168dp"
             android:layout_marginTop="40dp"
             android:src="@drawable/avatar"
             app:layout_constraintEnd_toEndOf="parent"

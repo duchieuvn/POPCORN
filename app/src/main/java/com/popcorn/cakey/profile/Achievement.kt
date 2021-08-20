@@ -43,6 +43,8 @@ class Achievement : AppCompatActivity() {
         //Set buttons
         binding.btReview.setOnClickListener {
             var achieve=binding.autoText.text
+            binding.imageView.setImageResource(R.drawable.hi)
+            binding.insertDescription="Đây là danh hiệu giành cho pé Lu, SKT vô địch"
             Toast.makeText(this, achieve, Toast.LENGTH_SHORT).show()
 
         }

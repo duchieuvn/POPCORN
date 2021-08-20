@@ -50,6 +50,7 @@ class EditProfile : AppCompatActivity() {
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertPassword= user.getString("password")
+        binding.avatarImg.setImageResource(R.drawable.hi)
 
         //Set avatar's change
         avatar = findViewById(R.id.avatarImg);
