@@ -29,7 +29,10 @@
             android:parentActivityName=".auth.LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen">
-
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".mainscreen.SearchActivity"
@@ -45,10 +48,6 @@
             android:name=".blog.ReadBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"
             android:theme="@style/Blog">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".blog.WriteBlogActivity"

@@ -114,9 +114,8 @@
                     android:layout_marginTop="25dp"
 
                     android:text="@{insertAuthor}"
+                    android:textSize="18dp"
                     app:layout_constraintLeft_toRightOf="@id/authorAvatar"
-
-
                     app:layout_constraintTop_toBottomOf="@id/blogTitle" />
 
                 <TextView

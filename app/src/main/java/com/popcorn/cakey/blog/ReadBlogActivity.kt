@@ -23,9 +23,8 @@ import com.popcorn.cakey.report.ReportActivity
 import com.parse.ParseQuery
 
 import com.parse.ParseObject
-import com.parse.ParseUser
-import java.util.EnumSet.range
-
+import java.lang.Math.round
+import kotlin.math.roundToInt
 
 class ReadBlogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,22 +34,22 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author")
-        var blog = queryBlog.get("STbJ0W7Dtq")
-        var author = blog.getParseUser("author")
+        val blog = queryBlog.get("STbJ0W7Dtq")
+        val author = blog.getParseUser("author")
 
         //Toolbar
         setSupportActionBar(binding.readBlogToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = blog.getString("name")
 
         //Author
         binding.insertAuthor = author?.getString("username")
         //Avatar
-        var avaImage = author?.getParseFile("img")?.file
+        val avaImage = author?.getParseFile("img")?.file
 
         if (avaImage?.exists() == true)
         {
-            val avatar = BitmapFactory.decodeFile(avaImage.getAbsolutePath())
+            val avatar = BitmapFactory.decodeFile(avaImage.absolutePath)
             binding.authorAvatar.setImageBitmap(avatar)
         }
         else
@@ -62,11 +61,11 @@ class ReadBlogActivity : AppCompatActivity() {
         binding.insertTitle = blog.getString("name")
 
         //Blog cover
-        var coverImage = blog.getParseFile("img")?.file
+        val coverImage = blog.getParseFile("img")?.file
 
         if (coverImage?.exists() == true)
         {
-            val myBitmap = BitmapFactory.decodeFile(coverImage.getAbsolutePath())
+            val myBitmap = BitmapFactory.decodeFile(coverImage.absolutePath)
             binding.blogCover.setImageBitmap(myBitmap)
         }
 
@@ -89,21 +88,28 @@ class ReadBlogActivity : AppCompatActivity() {
         val ingredientsListView = binding.detailIngredient
             ingredientsListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        var queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
+        val queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
         queryIngreList.whereEqualTo("blog", blog)
 
-        var ingreList = queryIngreList.find()
+        val ingreList = queryIngreList.find()
 
-        val quantity = ArrayList<Int>()
+        var quantity = ArrayList<Int>()
         val unit = ArrayList<String>()
         val nameIngredient = ArrayList<String>()
 
         for (item in ingreList){
-            quantity.add(item.getInt("amount"))
-            unit.add(item.getString("measurement").toString())
-            nameIngredient.add(item.getString("name").toString())
-        }
+            val amount = item.getInt("amount")
+            if (amount != 0 && item.getString("name") != null)
+            {
+                quantity.add(amount)
+                if (item.getString("measurement") == null)
+                    unit.add("")
+                else unit.add(item.getString("measurement").toString())
 
+                nameIngredient.add(item.getString("name").toString())
+            }
+
+        }
 
         val ingredientsAdapter = IngredientsList(quantity,unit,nameIngredient)
         ingredientsListView.adapter = ingredientsAdapter
@@ -112,8 +118,8 @@ class ReadBlogActivity : AppCompatActivity() {
         val guidelinesView = binding.detailStep
         guidelinesView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        var queryStep = ParseQuery.getQuery<ParseObject>("Step").include("blog")
-        var stepList = queryStep.whereEqualTo("blog", blog).find()
+        val queryStep = ParseQuery.getQuery<ParseObject>("Step").include("blog")
+        val stepList = queryStep.whereEqualTo("blog", blog).find()
 
         val stepName = ArrayList<String>()
         for (item in stepList){
@@ -138,18 +144,18 @@ class ReadBlogActivity : AppCompatActivity() {
             builder.setPositiveButton("OK") { _, _ ->
                 if (insertNumberServings.text.toString() != "")
                 {
-                    defaultServing = insertNumberServings.text.toString().toInt()
-                    binding.insertServings = "$defaultServing people"
+                    binding.insertServings = insertNumberServings.text.toString() + " people"
 
                     //reload ingredient
-                    for (item in ingreList){
-                        quantity.add(item.getInt("amount"))
+                    for (item in quantity)
+                        quantity[quantity.indexOf(item)] =
+                            (item * ((insertNumberServings.text.toString()
+                                .toInt()) / defaultServing.toFloat())).roundToInt()
 
-                    }
-
+                    //ingredientsAdapter = IngredientsList(quantity,unit,nameIngredient)
                     ingredientsListView.adapter = ingredientsAdapter
                 }
-
+                defaultServing = insertNumberServings.text.toString().toInt()
             }
             builder.setNegativeButton("CANCEL") { _, _ -> Int}
 
@@ -221,7 +227,7 @@ class ReadBlogActivity : AppCompatActivity() {
         }
 
         //Report
-        var intent = intent
+        val intent = intent
         val bundle = intent.extras
         if (bundle != null) {
             val reason = intent.getStringExtra("reason")
