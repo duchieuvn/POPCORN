@@ -19,6 +19,10 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
+import com.parse.ParseQuery
+
+import com.parse.ParseObject
+import com.parse.ParseUser
 
 
 class ReadBlogActivity : AppCompatActivity() {
@@ -27,41 +31,54 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val binding:ActivityReadBlogBinding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
 
+        val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
+        queryBlog.include("author")
+        var blog = queryBlog.get("STbJ0W7Dtq")
+        var author = blog.getParseUser("author")
+
         var defaultServing = 4
-        binding.insertTitle = "Tiramisu"
-        binding.insertAuthor = "Thanh Truc"
-        binding.insertServings = "$defaultServing people"
+        binding.insertTitle = blog.getString("name")
+        binding.insertAuthor = author?.getString("username")
+        binding.insertServings = "${blog.getInt("servings")} people"
         binding.authorAvatar.setImageResource(R.drawable.avatar)
+//<<<<<<< Updated upstream
         binding.blogCover.setImageResource(R.drawable.hi)
+//=======
+        var coverImage = blog.getParseFile("img")?.file
+        binding.blogCover.setImageResource(R.drawable.avatar)
+//>>>>>>> Stashed changes
         binding.userAvatar.setImageResource(R.drawable.avatar)
         binding.insertUsername = "Duc Hieu"
-        binding.insertDescription = "Tiramisu is a classic Italian no-bake dessert made with layers of coffee-soaked ladyfingers and incredible mascarpone cream. The custard-like cream is excellent and contains no raw egg."
-        binding.insertLike = "500"
-        binding.insertDislike = "100"
+        binding.insertDescription = blog.getString("description")
+        binding.insertLike = blog.getInt("like").toString()
+        binding.insertDislike = blog.getInt("dislike").toString()
 
 
         setSupportActionBar(binding.readBlogToolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         //supportActionBar?.setDisplayShowHomeEnabled(true);
-        supportActionBar?.title = "Tiramisu"
+        supportActionBar?.title = blog.getString("name")
         //binding.readBlogToolbar.title = "Tiramisu"
 
         //Ingredients lists
         val ingredientsListView = binding.detailIngredient
             ingredientsListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
+        var queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
+        queryIngreList.whereEqualTo("blog", blog)
+
+        var ingreList = queryIngreList.find()
+
         val quantity = ArrayList<Int>()
         val unit = ArrayList<String>()
         val nameIngredient = ArrayList<String>()
 
-        quantity.add(1000)
-        quantity.add(500)
+        for (item in ingreList){
+            quantity.add(item.getInt("amount"))
+            unit.add(item.getString("measurement").toString())
+            nameIngredient.add(item.getString("name").toString())
+        }
 
-        unit.add("ml")
-        unit.add("grams")
-
-        nameIngredient.add("water")
-        nameIngredient.add("pork")
 
         val ingredientsAdapter = IngredientsList(quantity,unit,nameIngredient)
         ingredientsListView.adapter = ingredientsAdapter
@@ -70,13 +87,15 @@ class ReadBlogActivity : AppCompatActivity() {
         val guidelinesView = binding.detailStep
         guidelinesView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        val step = ArrayList<String>()
+        var queryStep = ParseQuery.getQuery<ParseObject>("Step").include("blog")
+        var stepList = queryStep.whereEqualTo("blog", blog).find()
 
-        step.add("rua tay")
-        step.add("rua rau")
-        step.add("lam banh mi")
+        val stepName = ArrayList<String>()
+        for (item in stepList){
+            stepName.add(item.getString("text").toString())
+        }
 
-        val guidelinesAdapter = Guidelines(step)
+        val guidelinesAdapter = Guidelines(stepName)
         guidelinesView.adapter = guidelinesAdapter
 
         //Ingredients calculator
