@@ -19,7 +19,6 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
         val currentItem = bloglist[position]
         holder.itemTitle.text = currentItem.title
-        holder.itemIntro.text = currentItem.intro
         holder.itemImage.setImageResource(currentItem.image)
     }
 
@@ -30,7 +29,6 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemImage: ShapeableImageView = itemView.findViewById(R.id.blogImage)
         var itemTitle: TextView = itemView.findViewById(R.id.blogTitle)
-        var itemIntro: TextView = itemView.findViewById(R.id.blogIntro)
     }
 }
 

@@ -13,7 +13,7 @@
         card_view:cardCornerRadius="20dp"
         card_view:strokeColor="@color/black">
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.imageview.ShapeableImageView
@@ -41,29 +41,9 @@
                 android:textAllCaps="true"
                 android:textSize="20sp">
             </TextView>
-            <TextView
-                android:id="@+id/blogIntro"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="210dp"
-                android:layout_marginTop="50dp"
-                android:textColor="@color/black"
-                android:text="@string/suggestion"
-                android:textAllCaps="true"
-                android:textSize="15sp"
-                >
-            </TextView>
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="5dp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="165dp"
-                android:layout_marginEnd="0dp"
-                android:background="@color/white">
 
-            </View>
+
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
