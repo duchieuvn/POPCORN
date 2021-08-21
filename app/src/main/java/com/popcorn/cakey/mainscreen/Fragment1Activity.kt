@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.popcorn.cakey.R
 
 
-class Fragment1Activity: Fragment() {
+class SuggestionFragment: Fragment() {
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<SuggestionActivity.ViewHolder>? = null
     companion object{
-        fun newInstance():Fragment1Activity{
-            return Fragment1Activity()
+        fun newInstance():SuggestionFragment{
+            return SuggestionFragment()
         }
     }
     @Override

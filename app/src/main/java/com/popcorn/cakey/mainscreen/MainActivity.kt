@@ -17,10 +17,6 @@ import com.popcorn.cakey.blog.WriteBlogActivity
 import com.popcorn.cakey.databinding.ActivityMainBinding
 import com.popcorn.cakey.faqs.FAQsActivity
 import com.popcorn.cakey.profile.ViewProfile
-import com.parse.ParseObject
-import com.parse.ParseQuery
-import com.parse.coroutines.getById
-import com.parse.ktx.findAll
 
 class MainActivity : AppCompatActivity(R.layout.activity_main)  {
     private lateinit var binding: ActivityMainBinding
@@ -72,8 +68,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
-                .add(R.id.one_fragment, Fragment1Activity.newInstance())
-                .add(R.id.two_fragment, Fragment2Activity.newInstance())
+                .add(R.id.one_fragment, SuggestionFragment.newInstance())
+                .add(R.id.two_fragment, BlogListFragment.newInstance())
                 .commit()
         }
     }

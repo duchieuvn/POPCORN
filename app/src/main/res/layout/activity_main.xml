@@ -40,7 +40,7 @@
 
                         <androidx.fragment.app.FragmentContainerView
                             android:id="@+id/one_fragment"
-                            android:name="com.popcorn.cakey.mainscreen.Fragment1Activity"
+                            android:name="com.popcorn.cakey.mainscreen.SuggestionFragment"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:orientation="horizontal"
@@ -50,7 +50,7 @@
 
                         <androidx.fragment.app.FragmentContainerView
                             android:id="@+id/two_fragment"
-                            android:name="com.popcorn.cakey.mainscreen.Fragment2Activity"
+                            android:name="com.popcorn.cakey.mainscreen.BlogListFragment"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginBottom="5dp"

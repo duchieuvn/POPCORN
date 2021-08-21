@@ -9,12 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.parse.ParseObject
 import com.parse.ParseQuery
-import com.parse.coroutines.getById
-import com.parse.ktx.findAll
 import com.popcorn.cakey.R
 
 
-class Fragment2Activity: Fragment(R.layout.activity_fragment2) {
+class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     private lateinit var bloglist: ArrayList<BlogThumbnails>
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -25,8 +23,8 @@ class Fragment2Activity: Fragment(R.layout.activity_fragment2) {
     lateinit var image: Array<Int>
 
     companion object{
-        fun newInstance(): Fragment2Activity {
-           return Fragment2Activity()
+        fun newInstance(): BlogListFragment {
+           return BlogListFragment()
         }
     }
 
