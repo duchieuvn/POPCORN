@@ -30,10 +30,10 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View=inflater.inflate(R.layout.activity_fragment2,container,false)
         val queryBlog= ParseQuery.getQuery<ParseObject>("Blog").setLimit(8)
-        val data = queryBlog.findAll()
+        val data = queryBlog.find()
         title=ArrayList()
         for (item in data.indices){
-            title.plusElement(data[item].getString("name").toString())
+            title.add(data[item].getString("name").toString())
         }
 
 
