@@ -169,15 +169,9 @@ class ReadBlogActivity : AppCompatActivity() {
 
         //Rating
         binding.like.setOnClickListener {
-
-            like()
-        }
-
-        binding.dislike.setOnClickListener {
-            dislike()
-
             like(blog)
         }
+
 
         binding.dislike.setOnClickListener {
             dislike(blog)
