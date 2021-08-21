@@ -223,7 +223,7 @@ class ReadBlogActivity : AppCompatActivity() {
             }
 
         } else {
-            binding.insertLike = (defaultLike.toInt()-1).toString()
+            binding.insertLike = defaultLike
             likeClick = true
             binding.like.backgroundTintList =
                 ContextCompat.getColorStateList(this, R.color.pink)
@@ -238,7 +238,7 @@ class ReadBlogActivity : AppCompatActivity() {
                 dislikeClick = false
             }
         } else {
-            binding.insertDislike = (defaultDislike.toInt()-1).toString()
+            binding.insertDislike = defaultDislike
             dislikeClick = true
             binding.dislike.backgroundTintList =
                 ContextCompat.getColorStateList(this, R.color.pink)
