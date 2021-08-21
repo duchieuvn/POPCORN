@@ -3,7 +3,9 @@ package com.popcorn.cakey.blog
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -12,21 +14,27 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
+import com.parse.*
+import com.parse.boltsinternal.Task
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
-import com.parse.ParseQuery
-import com.parse.ParseObject
 import kotlin.math.roundToInt
+
 
 class ReadBlogActivity : AppCompatActivity() {
     private var likeClick = true
     private var dislikeClick = true
+    private val reactBlogCallback = FunctionCallback<Any?>() { _, err ->
+        if (err != null) {
+            undo()
+        }
+    }
     private lateinit var binding: ActivityReadBlogBinding
-    private lateinit var defaultLike:String
-    private lateinit var defaultDislike:String
+    private lateinit var defaultLike: String
+    private lateinit var defaultDislike: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
@@ -213,39 +221,44 @@ class ReadBlogActivity : AppCompatActivity() {
         })
 
     }
-    private fun like(){
+
+    private fun like(blog: ParseObject) {
         if (likeClick) {
             if (dislikeClick) {
-                binding.insertLike = (defaultLike.toInt()+1).toString()
+                binding.insertLike = (defaultLike.toInt() + 1).toString()
                 binding.like.backgroundTintList =
                     ContextCompat.getColorStateList(this, R.color.pink_variant)
                 likeClick = false
             }
-
+            reactBlog(blog, true, reactBlogCallback)
         } else {
             binding.insertLike = defaultLike
             likeClick = true
             binding.like.backgroundTintList =
                 ContextCompat.getColorStateList(this, R.color.pink)
+            destroyReactBlog(blog, reactBlogCallback)
         }
     }
-    private fun dislike(){
+
+    private fun dislike(blog: ParseObject) {
         if (dislikeClick) {
             if (likeClick) {
-                binding.insertDislike = (defaultDislike.toInt()+1).toString()
+                binding.insertDislike = (defaultDislike.toInt() + 1).toString()
                 binding.dislike.backgroundTintList =
                     ContextCompat.getColorStateList(this, R.color.pink_variant)
                 dislikeClick = false
             }
+            reactBlog(blog, false, reactBlogCallback)
         } else {
             binding.insertDislike = defaultDislike
             dislikeClick = true
             binding.dislike.backgroundTintList =
                 ContextCompat.getColorStateList(this, R.color.pink)
+            destroyReactBlog(blog, reactBlogCallback)
         }
     }
-    private fun undo()
-    {
+
+    private fun undo() {
         binding.dislike.backgroundTintList =
             ContextCompat.getColorStateList(this, R.color.pink)
         binding.insertDislike = defaultDislike
@@ -254,6 +267,7 @@ class ReadBlogActivity : AppCompatActivity() {
             ContextCompat.getColorStateList(this, R.color.pink)
         binding.insertLike = defaultLike
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_report, menu)
@@ -269,6 +283,19 @@ class ReadBlogActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun reactBlog(blog: ParseObject, type: Boolean, callback: FunctionCallback<Any?>) {
+        val params = HashMap<String, Any>()
+        params["blogId"] = blog.objectId
+        params["type"] = type
+        ParseCloud.callFunctionInBackground("reactBlog", params, callback)
+    }
+
+    private fun destroyReactBlog(blog: ParseObject, callback: FunctionCallback<Any?>) {
+        val params = HashMap<String, Any>()
+        params["blogId"] = blog.objectId
+        ParseCloud.callFunctionInBackground("destroyReactBlog", params, callback)
     }
 }
 

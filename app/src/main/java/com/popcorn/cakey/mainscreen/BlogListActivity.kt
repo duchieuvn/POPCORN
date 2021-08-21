@@ -10,21 +10,17 @@ import com.popcorn.cakey.R
 
 class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     RecyclerView.Adapter<BlogListActivity.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_main_blogs_list, parent, false)
-
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
-
         val currentItem = bloglist[position]
         holder.itemTitle.text = currentItem.title
         holder.itemIntro.text = currentItem.intro
         holder.itemImage.setImageResource(currentItem.image)
-
     }
 
     override fun getItemCount(): Int {
@@ -35,8 +31,6 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
         var itemImage: ShapeableImageView = itemView.findViewById(R.id.blogImage)
         var itemTitle: TextView = itemView.findViewById(R.id.blogTitle)
         var itemIntro: TextView = itemView.findViewById(R.id.blogIntro)
-
     }
-
 }
 
