@@ -73,7 +73,15 @@ class ReadBlogActivity : AppCompatActivity() {
         var defaultServing = blog.getInt("servings")
         binding.insertServings = "${blog.getInt("servings")} people"
 
+
         //Description
+
+        binding.authorAvatar.setImageResource(R.drawable.avatar)
+        binding.blogCover.setImageResource(R.drawable.hi)
+
+        binding.blogCover.setImageResource(R.drawable.avatar)
+        binding.userAvatar.setImageResource(R.drawable.avatar)
+
         binding.insertDescription = blog.getString("description")
 
         //Like & Dislike
@@ -94,8 +102,8 @@ class ReadBlogActivity : AppCompatActivity() {
         val ingreList = queryIngreList.find()
 
         var quantity = ArrayList<Int>()
-        val unit = ArrayList<String>()
-        val nameIngredient = ArrayList<String>()
+        var unit = ArrayList<String>()
+        var nameIngredient = ArrayList<String>()
 
         for (item in ingreList){
             val amount = item.getInt("amount")
