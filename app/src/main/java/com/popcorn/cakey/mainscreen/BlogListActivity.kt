@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.imageview.ShapeableImageView
-import com.parse.ParseObject
-import com.parse.ParseQuery
 import com.popcorn.cakey.R
 
 class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
@@ -38,9 +36,7 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
         var itemTitle: TextView = itemView.findViewById(R.id.blogTitle)
         var itemIntro: TextView = itemView.findViewById(R.id.blogIntro)
 
-
     }
 
 }
 
-data class BlogThumbnails(var intro: String, var title: String, var image: Int)

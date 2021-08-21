@@ -17,29 +17,28 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<BlogListActivity.ViewHolder>? = null
-    val queryBlog = ParseQuery.getQuery<ParseObject>("Blog").setLimit(8)
-    lateinit var title: ArrayList<String>
-    lateinit var intro: Array<String>
-    lateinit var image: Array<Int>
+    private val queryBlog: ParseQuery<ParseObject>? = ParseQuery.getQuery<ParseObject>("Blog").setLimit(8)
+    private lateinit var title: Array<String>
+    private lateinit var intro: Array<String>
+    private lateinit var image: Array<Int>
 
     companion object{
         fun newInstance(): BlogListFragment {
            return BlogListFragment()
         }
     }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val data =  queryBlog.find()
-        title= arrayListOf<String>()
-        for (item in data){
-            title.add(item.getString("name").toString())
-        }
-    }
     @Override
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View=inflater.inflate(R.layout.activity_fragment2,container,false)
+        val data =  queryBlog?.find()
+        for (item in data?.indices!!){
+            title.plusElement(data[item].getString("name").toString())
+        }
 
+
+
+
+        //title= arrayOf("Tieude1", "Tieude2","Tieude3", "Tieude4","Tieude5", "Tieude6","Tieude7", "Tieude8")
         intro= arrayOf("day la loi gioi thieu","day la loi gioi thieu","day la loi gioi thieu","day la loi gioi thieu",
             "day la loi gioi thieu","day la loi gioi thieu","day la loi gioi thieu","day la loi gioi thieu")
 
@@ -57,8 +56,8 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
         layoutManager= LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
         recyclerView=view.findViewById(R.id.MainBlogList)
         recyclerView.layoutManager=layoutManager
-        bloglist= arrayListOf<BlogThumbnails>()
-        for (i in title.indices){
+        bloglist= arrayListOf()
+        for (i in intro.indices){
             val blog=BlogThumbnails(intro[i],title[i],image[i])
             bloglist.add(blog)
         }

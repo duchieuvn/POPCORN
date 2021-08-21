@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.popcorn.cakey.R
 
 
-class SuggestionFragment: Fragment() {
+class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<SuggestionActivity.ViewHolder>? = null

@@ -10,7 +10,7 @@
     android:background="@color/white"
 
     tools:context=".mainscreen.MainActivity"
-    tools:openDrawer="end">
+    tools:openDrawer="start">
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -70,7 +70,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             app:menu="@menu/main_navigation"
-            app:itemTextColor="@color/pink"
-            tools:ignore="RtlCompat" />
+            app:itemTextColor="@color/pink" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
