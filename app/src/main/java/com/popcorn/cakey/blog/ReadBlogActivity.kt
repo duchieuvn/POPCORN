@@ -169,11 +169,19 @@ class ReadBlogActivity : AppCompatActivity() {
 
         //Rating
         binding.like.setOnClickListener {
-         //   like()
+
+            like()
         }
 
         binding.dislike.setOnClickListener {
-        //    dislike()
+            dislike()
+
+            like(blog)
+        }
+
+        binding.dislike.setOnClickListener {
+            dislike(blog)
+
         }
 
         //Comment section
@@ -247,6 +255,7 @@ class ReadBlogActivity : AppCompatActivity() {
                 binding.dislike.backgroundTintList =
                     ContextCompat.getColorStateList(this, R.color.pink_variant)
                 dislikeClick = false
+
             }
             reactBlog(blog, false, reactBlogCallback)
         } else {
