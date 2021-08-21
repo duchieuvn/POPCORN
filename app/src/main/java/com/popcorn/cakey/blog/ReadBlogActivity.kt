@@ -1,8 +1,5 @@
 package com.popcorn.cakey.blog
 
-
-
-
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -21,7 +18,6 @@ import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
 import com.parse.ParseQuery
-
 import com.parse.ParseObject
 import java.lang.Math.round
 import kotlin.math.roundToInt
@@ -30,7 +26,8 @@ class ReadBlogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding:ActivityReadBlogBinding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
+        val binding: ActivityReadBlogBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author")
@@ -47,12 +44,10 @@ class ReadBlogActivity : AppCompatActivity() {
         //Avatar
         val avaImage = author?.getParseFile("img")?.file
 
-        if (avaImage?.exists() == true)
-        {
+        if (avaImage?.exists() == true) {
             val avatar = BitmapFactory.decodeFile(avaImage.absolutePath)
             binding.authorAvatar.setImageBitmap(avatar)
-        }
-        else
+        } else
             binding.authorAvatar.setImageResource(R.drawable.splash_screen)
 
 
@@ -63,8 +58,7 @@ class ReadBlogActivity : AppCompatActivity() {
         //Blog cover
         val coverImage = blog.getParseFile("img")?.file
 
-        if (coverImage?.exists() == true)
-        {
+        if (coverImage?.exists() == true) {
             val myBitmap = BitmapFactory.decodeFile(coverImage.absolutePath)
             binding.blogCover.setImageBitmap(myBitmap)
         }
@@ -94,7 +88,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
         //Ingredients lists
         val ingredientsListView = binding.detailIngredient
-            ingredientsListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        ingredientsListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
         val queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
         queryIngreList.whereEqualTo("blog", blog)
@@ -105,10 +99,9 @@ class ReadBlogActivity : AppCompatActivity() {
         var unit = ArrayList<String>()
         var nameIngredient = ArrayList<String>()
 
-        for (item in ingreList){
+        for (item in ingreList) {
             val amount = item.getInt("amount")
-            if (amount != 0 && item.getString("name") != null)
-            {
+            if (amount != 0 && item.getString("name") != null) {
                 quantity.add(amount)
                 if (item.getString("measurement") == null)
                     unit.add("")
@@ -119,7 +112,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
         }
 
-        val ingredientsAdapter = IngredientsList(quantity,unit,nameIngredient)
+        val ingredientsAdapter = IngredientsList(quantity, unit, nameIngredient)
         ingredientsListView.adapter = ingredientsAdapter
 
         //Guidelines
@@ -130,7 +123,7 @@ class ReadBlogActivity : AppCompatActivity() {
         val stepList = queryStep.whereEqualTo("blog", blog).find()
 
         val stepName = ArrayList<String>()
-        for (item in stepList){
+        for (item in stepList) {
             stepName.add(item.getString("text").toString())
         }
 
@@ -138,20 +131,20 @@ class ReadBlogActivity : AppCompatActivity() {
         guidelinesView.adapter = guidelinesAdapter
 
         //Ingredients calculator
-        binding.calculateIngredient.setOnClickListener{
+        binding.calculateIngredient.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             val inflater = layoutInflater
 
             val dialogLayout = inflater.inflate(R.layout.ingredients_calculator_dialog, null)
 
-            val insertNumberServings  = dialogLayout.findViewById<TextInputEditText>(R.id.insertNumberServings)
+            val insertNumberServings =
+                dialogLayout.findViewById<TextInputEditText>(R.id.insertNumberServings)
             insertNumberServings.hint = "$defaultServing people"
 
             builder.setView(dialogLayout)
 
             builder.setPositiveButton("OK") { _, _ ->
-                if (insertNumberServings.text.toString() != "")
-                {
+                if (insertNumberServings.text.toString() != "") {
                     binding.insertServings = insertNumberServings.text.toString() + " people"
 
                     //reload ingredient
@@ -165,7 +158,7 @@ class ReadBlogActivity : AppCompatActivity() {
                 }
                 defaultServing = insertNumberServings.text.toString().toInt()
             }
-            builder.setNegativeButton("CANCEL") { _, _ -> Int}
+            builder.setNegativeButton("CANCEL") { _, _ -> Int }
 
             builder.show()
         }
@@ -175,38 +168,35 @@ class ReadBlogActivity : AppCompatActivity() {
         var dislikeClick = true
         //Rating
         binding.like.setOnClickListener {
-            if (likeClick)
-            {
-                if (dislikeClick)
-                {
+            if (likeClick) {
+                if (dislikeClick) {
                     //binding.insertLike = (binding.insertLike.toInt()+1).toString()
-                    binding.like.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink_variant)
+                    binding.like.backgroundTintList =
+                        ContextCompat.getColorStateList(this, R.color.pink_variant)
                     likeClick = false
                 }
 
-            }
-            else
-            {
+            } else {
                 //binding.insertLike = (binding.insertLike.toInt()-1).toString()
                 likeClick = true
-                binding.like.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink)
+                binding.like.backgroundTintList =
+                    ContextCompat.getColorStateList(this, R.color.pink)
             }
         }
 
         binding.dislike.setOnClickListener {
-            if (dislikeClick)
-            {
+            if (dislikeClick) {
                 if (likeClick) {
                     //binding.insertDislike = (binding.insertDislike.toInt()+1).toString()
-                    binding.dislike.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink_variant)
+                    binding.dislike.backgroundTintList =
+                        ContextCompat.getColorStateList(this, R.color.pink_variant)
                     dislikeClick = false
                 }
-            }
-            else
-            {
+            } else {
                 //binding.insertDislike = (binding.insertDislike.toInt()-1).toString()
                 dislikeClick = true
-                binding.dislike.backgroundTintList = ContextCompat.getColorStateList(this,R.color.pink)
+                binding.dislike.backgroundTintList =
+                    ContextCompat.getColorStateList(this, R.color.pink)
             }
         }
 
@@ -222,7 +212,7 @@ class ReadBlogActivity : AppCompatActivity() {
         user.add("clone1")
         user.add("clone2")
 
-        val cmtAdapter = CommentSection(user,cmt)
+        val cmtAdapter = CommentSection(user, cmt)
         cmtView.adapter = cmtAdapter
 
         //If user leave a comment
@@ -239,7 +229,7 @@ class ReadBlogActivity : AppCompatActivity() {
         val bundle = intent.extras
         if (bundle != null) {
             val reason = intent.getStringExtra("reason")
-            Toast.makeText(this,reason, Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
             //Gui report len admin o day
         }
 
@@ -255,12 +245,14 @@ class ReadBlogActivity : AppCompatActivity() {
         })
 
     }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_report, menu)
         return true
     }
-    override fun onOptionsItemSelected(item: MenuItem) : Boolean{
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.app_bar_report -> {
                 val intent = Intent(this, ReportActivity::class.java)

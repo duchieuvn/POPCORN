@@ -10,20 +10,21 @@ import com.parse.ParseObject
 import com.parse.ParseQuery
 import com.popcorn.cakey.R
 
-class BlogListActivity(private  val bloglist: ArrayList<BlogThumbnails>) :RecyclerView.Adapter<BlogListActivity.ViewHolder>(){
-
+class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
+    RecyclerView.Adapter<BlogListActivity.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
-        val v= LayoutInflater.from(parent.context).inflate(R.layout.activity_main_blogs_list,parent,false)
+        val v = LayoutInflater.from(parent.context)
+            .inflate(R.layout.activity_main_blogs_list, parent, false)
 
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
 
-        val currentItem= bloglist[position]
-        holder.itemTitle.text=currentItem.title
-        holder.itemIntro.text=currentItem.intro
+        val currentItem = bloglist[position]
+        holder.itemTitle.text = currentItem.title
+        holder.itemIntro.text = currentItem.intro
         holder.itemImage.setImageResource(currentItem.image)
 
     }
@@ -32,14 +33,14 @@ class BlogListActivity(private  val bloglist: ArrayList<BlogThumbnails>) :Recycl
         return bloglist.size
     }
 
-    inner class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemImage: ShapeableImageView = itemView.findViewById(R.id.blogImage)
         var itemTitle: TextView = itemView.findViewById(R.id.blogTitle)
-        var itemIntro:TextView=itemView.findViewById(R.id.blogIntro)
-
+        var itemIntro: TextView = itemView.findViewById(R.id.blogIntro)
 
 
     }
 
 }
-data class BlogThumbnails(var intro : String, var title : String, var image: Int)
+
+data class BlogThumbnails(var intro: String, var title: String, var image: Int)
