@@ -19,15 +19,17 @@ import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
 import com.parse.ParseQuery
 import com.parse.ParseObject
-import java.lang.Math.round
 import kotlin.math.roundToInt
 
 class ReadBlogActivity : AppCompatActivity() {
+    private var likeClick = true
+    private var dislikeClick = true
+    private lateinit var binding: ActivityReadBlogBinding
+    private lateinit var defaultLike:String
+    private lateinit var defaultDislike:String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val binding: ActivityReadBlogBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author")
@@ -43,7 +45,6 @@ class ReadBlogActivity : AppCompatActivity() {
         binding.insertAuthor = author?.getString("username")
         //Avatar
         val avaImage = author?.getParseFile("img")?.file
-
         if (avaImage?.exists() == true) {
             val avatar = BitmapFactory.decodeFile(avaImage.absolutePath)
             binding.authorAvatar.setImageBitmap(avatar)
@@ -57,7 +58,6 @@ class ReadBlogActivity : AppCompatActivity() {
 
         //Blog cover
         val coverImage = blog.getParseFile("img")?.file
-
         if (coverImage?.exists() == true) {
             val myBitmap = BitmapFactory.decodeFile(coverImage.absolutePath)
             binding.blogCover.setImageBitmap(myBitmap)
@@ -67,20 +67,14 @@ class ReadBlogActivity : AppCompatActivity() {
         var defaultServing = blog.getInt("servings")
         binding.insertServings = "${blog.getInt("servings")} people"
 
-
         //Description
-
-        binding.authorAvatar.setImageResource(R.drawable.avatar)
-        binding.blogCover.setImageResource(R.drawable.hi)
-
-        binding.blogCover.setImageResource(R.drawable.avatar)
-        binding.userAvatar.setImageResource(R.drawable.avatar)
-
         binding.insertDescription = blog.getString("description")
 
         //Like & Dislike
-        binding.insertLike = blog.getInt("like").toString()
-        binding.insertDislike = blog.getInt("dislike").toString()
+        defaultLike = blog.getInt("like").toString()
+        defaultDislike = blog.getInt("dislike").toString()
+        binding.insertLike = defaultLike
+        binding.insertDislike = defaultDislike
 
         //User (viewer)
         binding.insertUsername = "Duc Hieu"
@@ -95,9 +89,9 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val ingreList = queryIngreList.find()
 
-        var quantity = ArrayList<Int>()
-        var unit = ArrayList<String>()
-        var nameIngredient = ArrayList<String>()
+        val quantity = ArrayList<Int>()
+        val unit = ArrayList<String>()
+        val nameIngredient = ArrayList<String>()
 
         for (item in ingreList) {
             val amount = item.getInt("amount")
@@ -164,40 +158,14 @@ class ReadBlogActivity : AppCompatActivity() {
         }
 
         //////////////////////////////////////Tang like, dislike ////////////////////////////////////////////////////
-        var likeClick = true
-        var dislikeClick = true
+
         //Rating
         binding.like.setOnClickListener {
-            if (likeClick) {
-                if (dislikeClick) {
-                    //binding.insertLike = (binding.insertLike.toInt()+1).toString()
-                    binding.like.backgroundTintList =
-                        ContextCompat.getColorStateList(this, R.color.pink_variant)
-                    likeClick = false
-                }
-
-            } else {
-                //binding.insertLike = (binding.insertLike.toInt()-1).toString()
-                likeClick = true
-                binding.like.backgroundTintList =
-                    ContextCompat.getColorStateList(this, R.color.pink)
-            }
+            like()
         }
 
         binding.dislike.setOnClickListener {
-            if (dislikeClick) {
-                if (likeClick) {
-                    //binding.insertDislike = (binding.insertDislike.toInt()+1).toString()
-                    binding.dislike.backgroundTintList =
-                        ContextCompat.getColorStateList(this, R.color.pink_variant)
-                    dislikeClick = false
-                }
-            } else {
-                //binding.insertDislike = (binding.insertDislike.toInt()-1).toString()
-                dislikeClick = true
-                binding.dislike.backgroundTintList =
-                    ContextCompat.getColorStateList(this, R.color.pink)
-            }
+            dislike()
         }
 
         //Comment section
@@ -245,7 +213,47 @@ class ReadBlogActivity : AppCompatActivity() {
         })
 
     }
+    private fun like(){
+        if (likeClick) {
+            if (dislikeClick) {
+                binding.insertLike = (defaultLike.toInt()+1).toString()
+                binding.like.backgroundTintList =
+                    ContextCompat.getColorStateList(this, R.color.pink_variant)
+                likeClick = false
+            }
 
+        } else {
+            binding.insertLike = (defaultLike.toInt()-1).toString()
+            likeClick = true
+            binding.like.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.pink)
+        }
+    }
+    private fun dislike(){
+        if (dislikeClick) {
+            if (likeClick) {
+                binding.insertDislike = (defaultDislike.toInt()+1).toString()
+                binding.dislike.backgroundTintList =
+                    ContextCompat.getColorStateList(this, R.color.pink_variant)
+                dislikeClick = false
+            }
+        } else {
+            binding.insertDislike = (defaultDislike.toInt()-1).toString()
+            dislikeClick = true
+            binding.dislike.backgroundTintList =
+                ContextCompat.getColorStateList(this, R.color.pink)
+        }
+    }
+    private fun undo()
+    {
+        binding.dislike.backgroundTintList =
+            ContextCompat.getColorStateList(this, R.color.pink)
+        binding.insertDislike = defaultDislike
+
+        binding.like.backgroundTintList =
+            ContextCompat.getColorStateList(this, R.color.pink)
+        binding.insertLike = defaultLike
+    }
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_report, menu)
