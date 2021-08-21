@@ -17,6 +17,10 @@ import com.popcorn.cakey.blog.WriteBlogActivity
 import com.popcorn.cakey.databinding.ActivityMainBinding
 import com.popcorn.cakey.faqs.FAQsActivity
 import com.popcorn.cakey.profile.ViewProfile
+import com.parse.ParseObject
+import com.parse.ParseQuery
+import com.parse.coroutines.getById
+import com.parse.ktx.findAll
 
 class MainActivity : AppCompatActivity(R.layout.activity_main)  {
     private lateinit var binding: ActivityMainBinding
@@ -39,32 +43,32 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
         //  menuBar=findViewById(R.id.main_toolbar)
         //  setSupportActionBar(menuBar)
         navigation=findViewById(R.id.nav_view)
-        navigation.setNavigationItemSelectedListener(NavigationView.OnNavigationItemSelectedListener {
-            val i=intent
-            when(it.itemId){
-                R.id.Course->{
-                    i.setClass(this,Course::class.java)
+        navigation.setNavigationItemSelectedListener {
+            val i = intent
+            when (it.itemId) {
+                R.id.Course -> {
+                    i.setClass(this, Course::class.java)
                     startActivity(i)
-                    true
+
                 }
-                R.id.Write->{
-                    i.setClass(this,WriteBlogActivity::class.java)
+                R.id.Write -> {
+                    i.setClass(this, WriteBlogActivity::class.java)
                     startActivity(i)
-                    true
+
                 }
-                R.id.Account->{
-                    i.setClass(this,ViewProfile::class.java)
+                R.id.Account -> {
+                    i.setClass(this, ViewProfile::class.java)
                     startActivity(i)
-                    true
+
                 }
-                R.id.Help->{
-                    i.setClass(this,FAQsActivity::class.java)
+                R.id.Help -> {
+                    i.setClass(this, FAQsActivity::class.java)
                     startActivity(i)
-                    true
+
                 }
             }
             true
-        })
+        }
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
