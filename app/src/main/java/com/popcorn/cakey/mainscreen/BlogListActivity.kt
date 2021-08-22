@@ -1,5 +1,6 @@
 package com.popcorn.cakey.mainscreen
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -16,15 +17,18 @@ import com.popcorn.cakey.blog.ReadBlogActivity
 
 class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     RecyclerView.Adapter<BlogListActivity.ViewHolder>() {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_main_blogs_list, parent, false)
+
         return ViewHolder(v)
     }
 
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
         val currentItem = bloglist[position]
         holder.itemTitle.text = currentItem.title
+        val currentId=currentItem.ID
         currentItem.image.getDataInBackground(
             GetDataCallback(
                 fun(data: ByteArray, _: ParseException) {
@@ -32,25 +36,29 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
                     holder.itemImage.setImageBitmap(bmp)
                 })
         )
-        holder.itemAuthor.text=currentItem.author
-
         holder.itemImage.setOnClickListener { v ->
             val i = Intent()
             if (v != null) {
                 i.setClass(v.context, ReadBlogActivity::class.java)
+                i.putExtra("ObjectId",currentId)
                 v.context.startActivities(arrayOf(i))
             }
         }
+        holder.itemAuthor.text=currentItem.author
+
     }
 
     override fun getItemCount(): Int {
         return bloglist.size
     }
 
+
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var itemImage: ImageView = itemView.findViewById(R.id.blogImage)
         var itemTitle: TextView = itemView.findViewById(R.id.blogTitle)
         var itemAuthor: TextView=itemView.findViewById(R.id.Author)
+
+
     }
 }
 

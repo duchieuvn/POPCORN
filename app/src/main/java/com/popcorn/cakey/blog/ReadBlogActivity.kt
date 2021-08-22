@@ -32,7 +32,11 @@ class ReadBlogActivity : AppCompatActivity() {
             undo()
         }
     }
-
+    companion object{
+        fun newInstance(): ReadBlogActivity {
+            return ReadBlogActivity()
+        }
+    }
     private lateinit var binding: ActivityReadBlogBinding
     private lateinit var defaultLike: String
     private lateinit var defaultDislike: String
@@ -43,7 +47,13 @@ class ReadBlogActivity : AppCompatActivity() {
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author").include("blogContent")
         // LOL
-        val blog = queryBlog.get("tgsysJcBQt")
+        var value= String()
+        val extras = intent.extras
+        if (extras != null) {
+            value = extras.getString("ObjectId")!!
+        }
+
+        val blog = queryBlog.get(value)
         val author = blog.getParseUser("author")
 
         //Toolbar
@@ -224,8 +234,8 @@ class ReadBlogActivity : AppCompatActivity() {
         val intent = intent
         val bundle = intent.extras
         if (bundle != null) {
-            val reason = intent.getStringExtra("reason")
-            Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+            //val reason = intent.getStringExtra("reason")!!
+            //Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
             //Gui report len admin o day
         }
 

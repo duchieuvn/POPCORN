@@ -21,7 +21,8 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     private lateinit var title: ArrayList<String>
     private lateinit var image: ArrayList<ParseFile>
     //private lateinit var author: ArrayList<String>
-    //private lateinit var image: Array<Int>
+    //
+    private lateinit var BlogId: ArrayList<String>
     companion object{
         fun newInstance(): BlogListFragment {
            return BlogListFragment()
@@ -30,13 +31,18 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     @Override
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View=inflater.inflate(R.layout.activity_fragment2,container,false)
-        val queryBlog= ParseQuery.getQuery<ParseObject>("Blog").setLimit(8)
+        val queryBlog= ParseQuery.getQuery<ParseObject>("Blog").setLimit(10)
         val data = queryBlog?.find()
         title=ArrayList()
         image=ArrayList()
+        BlogId=ArrayList()
         for (i in data?.indices!!){
             title.add(data[i].getString("name").toString())
-            image.add(data[i].get("img") as ParseFile)
+            BlogId.add(data[i].objectId)
+            val pics=data[i].getParseFile("img")
+            if(pics!=null){
+                image.add(pics)
+            }
         }
 
 
@@ -63,7 +69,7 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     private fun getData(){
         bloglist= arrayListOf()
         for (i in title.indices){
-            val blog=BlogThumbnails(title[i],image[i],"Truong")
+            val blog=BlogThumbnails(BlogId[i],title[i],image[i],"Truong")
             bloglist.add(blog)
         }
     }
@@ -77,4 +83,5 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
 
         }
     }
+
 }
