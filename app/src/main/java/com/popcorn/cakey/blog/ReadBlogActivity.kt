@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.parse.*
-import com.parse.boltsinternal.Task
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.popcorn.cakey.R
@@ -27,7 +26,7 @@ import kotlin.math.roundToInt
 class ReadBlogActivity : AppCompatActivity() {
     private var likeClick = true
     private var dislikeClick = true
-    private val reactBlogCallback = FunctionCallback<Any?>() { _, err ->
+    private val reactBlogCallback = FunctionCallback<Any?> { _, err ->
         if (err != null) {
             undo()
         }
@@ -98,7 +97,7 @@ class ReadBlogActivity : AppCompatActivity() {
         //
         // val ingreList = queryIngreList.find()
 
-        val ingredients = blog.getJSONArray("blogContent")
+        val ingredients = blog.getJSONArray("ingredient")
 
         val quantity = ArrayList<Int>()
         val unit = ArrayList<String>()
@@ -116,17 +115,18 @@ class ReadBlogActivity : AppCompatActivity() {
         //     }
         //
         // }
+        if (ingredients != null) {
+            for (i in 0 until ingredients.length()) {
+                val item = ingredients.getJSONObject(i)
+                val amount = item.getInt("amount")
+                if (amount != 0 && item.has("name") && !item.isNull("name")) {
+                    quantity.add(amount)
+                    if (item.has("measurement") && !item.isNull("measurement"))
+                        unit.add(item.getString("measurement").toString())
+                    else unit.add("")
 
-        for (i in 0 until ingredients.length()) {
-            val item = ingredients.getJSONObject(i)
-            val amount = item.getInt("amount")
-            if (amount != 0 && item.has("name") && !item.isNull("name")) {
-                quantity.add(amount)
-                if (item.has("measurement") && !item.isNull("measurement"))
-                    unit.add(item.getString("measurement").toString())
-                else unit.add("")
-
-                nameIngredient.add(item.getString("name").toString())
+                    nameIngredient.add(item.getString("name").toString())
+                }
             }
         }
 
