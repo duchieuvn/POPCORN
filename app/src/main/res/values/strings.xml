@@ -96,7 +96,7 @@
     <!-- main screen -->
     <string name="suggestion">Suggestion</string>
     <string name="search">Search</string>
-
+    <string name="Author">Author</string>
     <!-- navigation drawer-->
     <string name="Account">Account</string>
     <string name="read_more">Read More</string>

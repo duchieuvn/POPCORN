@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -24,8 +25,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="1dp"
                 android:layout_marginTop="2dp"
-                android:src="@color/blue"
-               >
+                android:src="@color/blue">
 
             </com.google.android.material.imageview.ShapeableImageView>
 
@@ -38,10 +38,24 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/pink_variant"
                 android:text="@string/suggestion"
+                android:fontFamily="@font/times"
                 android:textAllCaps="true"
-                android:textSize="20sp">
+                android:textSize="20sp"
+                tools:ignore="RelativeOverlap">
             </TextView>
 
+            <TextView
+                android:id="@+id/Author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="145dp"
+                android:layout_marginEnd="40dp"
+                android:textColor="@color/blue"
+                android:textSize="15sp"
+                android:text="@string/Author"
+                tools:ignore="RelativeOverlap" />
 
 
         </RelativeLayout>

@@ -19,6 +19,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
+import com.popcorn.cakey.mainscreen.BlogListFragment
 import com.popcorn.cakey.report.ReportActivity
 import kotlin.math.roundToInt
 
@@ -31,6 +32,7 @@ class ReadBlogActivity : AppCompatActivity() {
             undo()
         }
     }
+
     private lateinit var binding: ActivityReadBlogBinding
     private lateinit var defaultLike: String
     private lateinit var defaultDislike: String

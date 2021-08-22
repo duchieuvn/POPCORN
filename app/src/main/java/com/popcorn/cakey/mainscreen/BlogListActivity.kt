@@ -1,12 +1,18 @@
 package com.popcorn.cakey.mainscreen
 
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.imageview.ShapeableImageView
+import com.parse.GetDataCallback
+import com.parse.ParseException
 import com.popcorn.cakey.R
+import com.popcorn.cakey.blog.ReadBlogActivity
+
 
 class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     RecyclerView.Adapter<BlogListActivity.ViewHolder>() {
@@ -19,7 +25,22 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
         val currentItem = bloglist[position]
         holder.itemTitle.text = currentItem.title
-        holder.itemImage.setImageResource(currentItem.image)
+        currentItem.image.getDataInBackground(
+            GetDataCallback(
+                fun(data: ByteArray, _: ParseException) {
+                    val bmp = BitmapFactory.decodeByteArray(data, 0, data.size)
+                    holder.itemImage.setImageBitmap(bmp)
+                })
+        )
+        holder.itemAuthor.text=currentItem.author
+
+        holder.itemImage.setOnClickListener { v ->
+            val i = Intent()
+            if (v != null) {
+                i.setClass(v.context, ReadBlogActivity::class.java)
+                v.context.startActivities(arrayOf(i))
+            }
+        }
     }
 
     override fun getItemCount(): Int {
@@ -27,8 +48,10 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var itemImage: ShapeableImageView = itemView.findViewById(R.id.blogImage)
+        var itemImage: ImageView = itemView.findViewById(R.id.blogImage)
         var itemTitle: TextView = itemView.findViewById(R.id.blogTitle)
+        var itemAuthor: TextView=itemView.findViewById(R.id.Author)
     }
 }
+
 

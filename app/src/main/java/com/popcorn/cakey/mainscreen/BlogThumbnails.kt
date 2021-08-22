@@ -1,3 +1,5 @@
 package com.popcorn.cakey.mainscreen
 
-data class BlogThumbnails( var title: String, var image: Int)
+import com.parse.ParseFile
+
+data class BlogThumbnails(var title: String?, var image: ParseFile,var author: String?)
