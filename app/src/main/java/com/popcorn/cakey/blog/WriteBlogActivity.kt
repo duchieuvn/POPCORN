@@ -23,7 +23,10 @@ import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityWriteBlogBinding
 import com.popcorn.cakey.mainscreen.MainActivity
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.ByteArrayOutputStream
+import java.util.ArrayList
 
 
 class WriteBlogActivity : AppCompatActivity() {
@@ -177,23 +180,19 @@ class WriteBlogActivity : AppCompatActivity() {
         //Post blogs
         binding.buttonPost.setOnClickListener {
             if (validateBlog()) {
-                val user = ParseUser.getCurrentUser()
+                val author = ParseUser.getCurrentUser()
 
                 val blog = ParseObject("Blog")
-                blog.put("userID", user)
-                blog.put("title", binding.detailTitle.text.toString())
+                blog.put("author", author)
+                blog.put("name", binding.detailTitle.text.toString())
                 blog.put("description", binding.contentDes.text.toString())
-                blog.put("serve",binding.numSer.text.toString().toInt())
-
+                blog.put("servings",binding.numSer.text.toString().toInt())
 
                 Toast.makeText(this, binding.detailTitle.text, Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, binding.contentDes.text, Toast.LENGTH_SHORT).show()
                 Toast.makeText(this, binding.numSer.text, Toast.LENGTH_SHORT).show()
 
-                val name = mutableListOf<String>()
-                val amount = mutableListOf<Int>()
-                val measurement = mutableListOf<String>()
-
+                var ingredients = JSONArray()
                 for (i in 0 until binding.detailList.childCount) {
                     val contentIngredient: View = binding.detailList.getChildAt(i)
 
@@ -208,24 +207,17 @@ class WriteBlogActivity : AppCompatActivity() {
                     Toast.makeText(this, nameIng.text, Toast.LENGTH_SHORT).show()
 
                     //database purpose (Model class)
-                    name.add(nameIng.text.toString())
-                    amount.add(quantity.text.toString().toInt())
-                    measurement.add(unit.text.toString())
+                    var newIngre = JSONObject()
+                    newIngre.put("name", nameIng.text.toString())
+                    newIngre.put("amount", quantity.text.toString().toInt())
+                    newIngre.put("measurement", unit.text.toString())
+
+                    ingredients.put(newIngre)
                 }
 
-                val ingredient = ParseObject("Ingredient")
-                ingredient.put("name", name)
-                ingredient.put("amount", amount)
-                ingredient.put("measurement", measurement)
-                ingredient.save()
-
-                var title = ArrayList<String>()
-
-                var step = ParseObject("Step")
-                val relation = step.getRelation<ParseObject>("photo")
-
-
+                var steps = ArrayList<String>()
                 for (i in 0 until binding.detailStep.childCount) {
+
                     if (i % 2 == 0) {
                         val contentGuidelines: View = binding.detailStep.getChildAt(i)
 
@@ -233,7 +225,8 @@ class WriteBlogActivity : AppCompatActivity() {
 
                         Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
 
-                        title.add(step.text.toString())
+                        //store steps for database purpose
+                        steps.add(step.text.toString())
                     }
                     else {
                         if (binding.detailStep.getChildAt(i) != null) {
@@ -246,21 +239,33 @@ class WriteBlogActivity : AppCompatActivity() {
                             var filename = "step" + i.toString() +".jpeg"
                             val file = ParseFile(filename, data)
 
-                            var photo = ParseObject("Files")
-                            photo.put("path", file)
-
-                            relation.add(photo)
 
                         }
                     }
                 }
 
-                step.put("title", title)
-                step.saveInBackground()
+                // Save data to database
+                var blogContent = ParseObject("BlogContent")
+                blogContent.put("ingredient", ingredients)
+                blogContent.save()
 
-                blog.put("ingredient", ingredient)
-                blog.put("step", step)
-                blog.saveInBackground()
+                blog.put("blogContent", blogContent)
+                blog.save()
+                // save video url in blog here (not yet)
+
+                var count = 1
+                for (item in steps){
+                    var newStep = ParseObject("Step")
+                    newStep.put("blog", blog)
+                    newStep.put("text", item)
+                    newStep.put("position", count)
+                    count += 1
+                    newStep.save()
+                    // save photo in step here (not yet)
+                }
+
+
+
 
                 //move to main screens
                 val intent = Intent(this, WriteBlogActivity::class.java)

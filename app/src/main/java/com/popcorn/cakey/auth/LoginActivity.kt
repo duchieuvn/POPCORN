@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
                     ParseUser.logInInBackground(username, pwd) { user, e ->
                         if (user != null) {
                             Utils.showToast(this, getString(R.string.auth_succeed, user.email))
-                            val intent = Intent(this, MainActivity::class.java)
+                            val intent = Intent(this, WriteBlogActivity::class.java)
                             startActivity(intent)
                             finishAffinity()
                         } else {

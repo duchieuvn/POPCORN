@@ -15,7 +15,13 @@
             android:theme="@style/Splash_Screen" />
         <activity
             android:name=".auth.LoginActivity"
-            android:screenOrientation="behind"/>
+            android:screenOrientation="behind">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".auth.SignupActivity"
             android:parentActivityName=".auth.LoginActivity"
@@ -29,10 +35,7 @@
             android:parentActivityName=".auth.LoginActivity"
             android:screenOrientation="behind"
             android:theme="@style/Main_Screen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
         <activity
             android:name=".mainscreen.SearchActivity"
@@ -52,7 +55,10 @@
         </activity>
         <activity
             android:name=".blog.WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity"/>
+            android:parentActivityName=".mainscreen.MainActivity">
+
+
+        </activity>
         <activity android:name=".blog.Course"
             android:parentActivityName=".mainscreen.MainActivity"/>
         <activity
