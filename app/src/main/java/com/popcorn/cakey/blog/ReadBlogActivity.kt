@@ -40,8 +40,9 @@ class ReadBlogActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
-        queryBlog.include("author")
-        val blog = queryBlog.get("STbJ0W7Dtq")
+        queryBlog.include("author").include("blogContent")
+        // LOL
+        val blog = queryBlog.get("tgsysJcBQt")
         val author = blog.getParseUser("author")
 
         //Toolbar
@@ -92,26 +93,41 @@ class ReadBlogActivity : AppCompatActivity() {
         val ingredientsListView = binding.detailIngredient
         ingredientsListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        val queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
-        queryIngreList.whereEqualTo("blog", blog)
+        // val queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
+        // queryIngreList.whereEqualTo("blog", blog)
+        //
+        // val ingreList = queryIngreList.find()
 
-        val ingreList = queryIngreList.find()
+        val ingredients = blog.getJSONArray("blogContent")
 
         val quantity = ArrayList<Int>()
         val unit = ArrayList<String>()
         val nameIngredient = ArrayList<String>()
 
-        for (item in ingreList) {
+        // for (item in ingreList) {
+        //     val amount = item.getInt("amount")
+        //     if (amount != 0 && item.getString("name") != null) {
+        //         quantity.add(amount)
+        //         if (item.getString("measurement") == null)
+        //             unit.add("")
+        //         else unit.add(item.getString("measurement").toString())
+        //
+        //         nameIngredient.add(item.getString("name").toString())
+        //     }
+        //
+        // }
+
+        for (i in 0 until ingredients.length()) {
+            val item = ingredients.getJSONObject(i)
             val amount = item.getInt("amount")
-            if (amount != 0 && item.getString("name") != null) {
+            if (amount != 0 && item.has("name") && !item.isNull("name")) {
                 quantity.add(amount)
-                if (item.getString("measurement") == null)
-                    unit.add("")
-                else unit.add(item.getString("measurement").toString())
+                if (item.has("measurement") && !item.isNull("measurement"))
+                    unit.add(item.getString("measurement").toString())
+                else unit.add("")
 
                 nameIngredient.add(item.getString("name").toString())
             }
-
         }
 
         val ingredientsAdapter = IngredientsList(quantity, unit, nameIngredient)
