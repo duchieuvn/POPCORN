@@ -1,10 +1,10 @@
 package com.popcorn.cakey.report
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
@@ -33,12 +33,15 @@ class ReportActivity : AppCompatActivity() {
         binding.listReason.onItemClickListener =
             AdapterView.OnItemClickListener { _, view, position, _ -> // value of item that is clicked
                 val itemValue =  binding.listReason.getItemAtPosition(position) as String
-
-                val i = Intent(this, ReadBlogActivity::class.java)
-                val bundle = Bundle()
-                bundle.putString("reason", itemValue)
-                i.putExtras(bundle)
-                startActivity(i)
+                
+                val reason = intent.putExtra("reason", itemValue)
+                setResult(Activity.RESULT_OK, reason)
+                finish()
             }
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_CANCELED)
+        finish()
     }
 }

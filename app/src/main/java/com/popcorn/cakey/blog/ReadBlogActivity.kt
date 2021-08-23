@@ -1,5 +1,6 @@
 package com.popcorn.cakey.blog
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -7,6 +8,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -19,14 +22,11 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
-import com.popcorn.cakey.mainscreen.BlogListFragment
 import com.popcorn.cakey.report.ReportActivity
 import kotlin.math.roundToInt
 
 
 class ReadBlogActivity : AppCompatActivity() {
-    private var likeClick = true
-    private var dislikeClick = true
     private val reactBlogCallback = FunctionCallback<Any?> { _, err ->
         if (err != null) {
             undo()
@@ -37,9 +37,20 @@ class ReadBlogActivity : AppCompatActivity() {
             return ReadBlogActivity()
         }
     }
+    private val reportContact =  registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            val reason = data?.getStringExtra("reason")
+            /////////////////////// Report o day ///////////////////////////////
+            Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+        }
+    }
     private lateinit var binding: ActivityReadBlogBinding
+    private var likeClick = true
+    private var dislikeClick = true
     private lateinit var defaultLike: String
     private lateinit var defaultDislike: String
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
@@ -183,7 +194,6 @@ class ReadBlogActivity : AppCompatActivity() {
                             (item * ((insertNumberServings.text.toString()
                                 .toInt()) / defaultServing.toFloat())).roundToInt()
 
-                    //ingredientsAdapter = IngredientsList(quantity,unit,nameIngredient)
                     ingredientsListView.adapter = ingredientsAdapter
                 }
                 defaultServing = insertNumberServings.text.toString().toInt()
@@ -228,15 +238,6 @@ class ReadBlogActivity : AppCompatActivity() {
             cmt.add(binding.userDetailCmt.text.toString())
             cmtView.adapter = cmtAdapter
             binding.userDetailCmt.setText("")
-        }
-
-        //Report
-        val intent = intent
-        val bundle = intent.extras
-        if (bundle != null) {
-            //val reason = intent.getStringExtra("reason")!!
-            //Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
-            //Gui report len admin o day
         }
 
         //Youtube
@@ -309,7 +310,7 @@ class ReadBlogActivity : AppCompatActivity() {
         when (item.itemId) {
             R.id.app_bar_report -> {
                 val intent = Intent(this, ReportActivity::class.java)
-                startActivity(intent)
+                reportContact.launch(intent)
                 return true
             }
         }

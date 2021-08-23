@@ -15,9 +15,7 @@
             android:theme="@style/Splash_Screen" />
         <activity
             android:name=".auth.LoginActivity"
-            android:screenOrientation="behind">
-
-        </activity>
+            android:screenOrientation="behind"/>
         <activity
             android:name=".auth.SignupActivity"
             android:parentActivityName=".auth.LoginActivity"
@@ -49,9 +47,7 @@
         <activity
             android:name=".blog.ReadBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"
-            android:theme="@style/Blog">
-
-        </activity>
+            android:theme="@style/Blog"/>
         <activity
             android:name=".blog.WriteBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity">
