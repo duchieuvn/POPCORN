@@ -120,7 +120,7 @@ class ReadBlogActivity : AppCompatActivity() {
         //
         // val ingreList = queryIngreList.find()
 
-        val ingredients = blog.getJSONArray("ingredient")
+        val ingredients = blog.getParseObject("blogContent")?.getJSONArray("ingredient")
 
         val quantity = ArrayList<Int>()
         val unit = ArrayList<String>()
@@ -186,17 +186,29 @@ class ReadBlogActivity : AppCompatActivity() {
 
             builder.setPositiveButton("OK") { _, _ ->
                 if (insertNumberServings.text.toString() != "") {
-                    binding.insertServings = insertNumberServings.text.toString() + " people"
+                    if (insertNumberServings.text.toString() == "0")
+                        Toast.makeText(this, "Invalid number!", Toast.LENGTH_SHORT).show()
+                    else
+                    {
+                        binding.insertServings = insertNumberServings.text.toString() + " people"
 
-                    //reload ingredient
-                    for (item in quantity)
-                        quantity[quantity.indexOf(item)] =
-                            (item * ((insertNumberServings.text.toString()
-                                .toInt()) / defaultServing.toFloat())).roundToInt()
+                        //reload ingredient
+                        for (item in quantity)
+                        {
+                            val amount = (item * (insertNumberServings.text.toString()
+                                .toInt()/defaultServing.toFloat())).roundToInt()
+                            if (amount != 0)
+                                quantity[quantity.indexOf(item)] = amount
+                            else
+                                quantity[quantity.indexOf(item)] = 1
+                        }
 
-                    ingredientsListView.adapter = ingredientsAdapter
+                        ingredientsListView.adapter = ingredientsAdapter
+
+                        defaultServing = insertNumberServings.text.toString().toInt()
+                    }
+
                 }
-                defaultServing = insertNumberServings.text.toString().toInt()
             }
             builder.setNegativeButton("CANCEL") { _, _ -> Int }
 
