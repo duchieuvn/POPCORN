@@ -24,15 +24,21 @@ class Course : AppCompatActivity() {
 
         //SET ATTRIBUTES-text
         var course = queryCourse.get("UYk0ofeGYE")
-        var author = course.get("userID")
+        var author = course.getParseUser("userID")
         binding.insertTitle = course.getString("title")
-        binding.insertAuthor = "Thanh Truc" //CHUA CO
+        binding.insertAuthor = author?.username.toString()
         binding.insertLike = course.getInt("like").toString()
         binding.insertDislike = course.getInt("dislike").toString()
         binding.insertDescription = course.getString("description")
 
         //IMAGES - THEM ANH AUTHOR
-        binding.authorAvatar.setImageResource(R.drawable.avatar) //chua
+        val avaFile = author?.getParseFile("avatar")?.file
+        if (avaFile?.exists() == true) {
+            val avatar = BitmapFactory.decodeFile(avaFile.absolutePath)
+            binding.authorAvatar.setImageBitmap(avatar)
+        } else
+            binding.authorAvatar.setImageResource(R.drawable.avatar)
+
 
         //IMAGES - Course cover
         val avaImage = course?.getParseFile("img")?.file
@@ -45,7 +51,10 @@ class Course : AppCompatActivity() {
         val youTubePlayerView = binding.youTubePlayerView
         lifecycle.addObserver(youTubePlayerView)
 
-        //CHUA BO LINK VIDEO
+        // receive VIDEO LINK
+        val video_link = course.getString("videoURL")
+
+        //CHUA CONVERT LINK VIDEO -> ID
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 val videoId = "orJSJGHjBLI"

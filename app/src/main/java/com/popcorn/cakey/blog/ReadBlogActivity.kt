@@ -126,18 +126,7 @@ class ReadBlogActivity : AppCompatActivity() {
         val unit = ArrayList<String>()
         val nameIngredient = ArrayList<String>()
 
-        // for (item in ingreList) {
-        //     val amount = item.getInt("amount")
-        //     if (amount != 0 && item.getString("name") != null) {
-        //         quantity.add(amount)
-        //         if (item.getString("measurement") == null)
-        //             unit.add("")
-        //         else unit.add(item.getString("measurement").toString())
-        //
-        //         nameIngredient.add(item.getString("name").toString())
-        //     }
-        //
-        // }
+
         if (ingredients != null) {
             for (i in 0 until ingredients.length()) {
                 val item = ingredients.getJSONObject(i)
