@@ -12,29 +12,28 @@ import com.popcorn.cakey.auth.LoginActivity
 
 
 class ViewProfile : AppCompatActivity() {
-
+    //RUN WHEN STARTED
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityViewProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_view_profile)
 
+        //Get user object from server
         var user = ParseUser.getCurrentUser()
 
 
-        //Set user's data
+        //Bind user's attributes
         var premium: Int=-1
         var level = user.getInt("level")
 
+        //Text attributes
         binding.insertID= user.objectId
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
-        //create
         binding.insertTitle=user.getString("bagde")
+        //Avatar - image attributes
+        //GET IMAGE HERE
         binding.profileImage.setImageResource(R.drawable.hi)
-
-
-        Log.d("ttt", binding.insertID + binding.insertName + binding.insertMail + binding.insertLevel + binding.insertTitle)
-        Log.d("ttt", user.getString("expireDate").toString())
 
         //Check premium value
         if (premium>0)
@@ -45,19 +44,21 @@ class ViewProfile : AppCompatActivity() {
         }
         else binding.insertPremium="Not activated"
 
-
-
-        //Set buttons
+        //Set buttons' listener
+        //Edit profile button -->Go to edit profile
         binding.btEditprofile.setOnClickListener{
             val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)
         }
 
+        //Change achievement button -->Go to change achievement
         binding.btAchieve.setOnClickListener {
             val intent = Intent(this,Achievement::class.java)
             startActivity(intent)
 
         }
+
+        //Log out button -->Log out, close the application
         binding.btLogout.setOnClickListener{
             ParseUser.logOut()
             val intent = Intent(this, LoginActivity::class.java)

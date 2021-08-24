@@ -20,8 +20,8 @@ import com.popcorn.cakey.databinding.ActivityViewProfileBinding
 class EditProfile : AppCompatActivity() {
     private lateinit var fab: FloatingActionButton
     private lateinit var avatar: ImageView
-    //XMl: title: same context, input: title_IO
 
+    //TO LOAD IMG FROM PHONE
     private val startForAvatar =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             val resultCode = result.resultCode
@@ -37,22 +37,25 @@ class EditProfile : AppCompatActivity() {
                 Toast.makeText(this, "Task Cancelled", Toast.LENGTH_SHORT).show()
             }
         }
-
+    //RUN WHEN STARTED
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_profile)
         val binding: ActivityEditProfileBinding = DataBindingUtil.setContentView(this,R.layout.activity_edit_profile)
 
+        //Get user object from server
         var user = ParseUser.getCurrentUser()
 
-        //Set user's data
+        //Bind user's attributes
+        //Text attribtues
         binding.insertID= user.objectId
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertPassword= user.getString("password")
+        //Current avatar - Image attributes
         binding.avatarImg.setImageResource(R.drawable.hi)
 
-        //Set avatar's change
+        //Change avatar load from phone
         avatar = findViewById(R.id.avatarImg);
         fab = findViewById(R.id.Addbutton);
 
@@ -72,11 +75,16 @@ class EditProfile : AppCompatActivity() {
         //Set button - send info to parse Server
         binding.btSubmitChanges.setOnClickListener {
             // 2 dau // la chet, //// la song'
-            //user.image=avatar
+            //Send img
+            //user.avatar=avatar
+            //Send text
             user.put("email",binding.insertMail.toString())
-           // user.setPassword(binding.insertPassword)
             user.put("username",binding.insertName.toString())
+            //Check password and set
+            var password=binding.insertPassword.toString()
+            if (password!=null) user.setPassword(password)
             user.saveInBackground()
+            //Announce
             Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
         }
 
