@@ -190,7 +190,7 @@ class WriteBlogActivity : AppCompatActivity() {
                 blog.put("servings", binding.numSer.text.toString().toInt())
 
 
-                var ingredients = ArrayList<JSONObject>()
+                var ingredients = JSONArray()
                 for (i in 0 until binding.detailList.childCount) {
                     val contentIngredient: View = binding.detailList.getChildAt(i)
 
@@ -205,9 +205,16 @@ class WriteBlogActivity : AppCompatActivity() {
                     newIngre.put("amount", quantity.text.toString().toInt())
                     newIngre.put("measurement", unit.text.toString())
 
-                    ingredients.add(newIngre)
+                    ingredients.put(newIngre)
                 }
 
+                // Save data to database
+                var blogContent = ParseObject("BlogContent")
+                blogContent.put("ingredient", ingredients)
+                blogContent.save()
+
+                blog.put("blogContent", blogContent)
+                blog.save()
 
                 for (i in 0 until binding.detailStep.childCount step 2) {
 
@@ -236,32 +243,12 @@ class WriteBlogActivity : AppCompatActivity() {
                         Step.put("img", file)
                     }
                     Step.put("blog",blog)
+                    Step.put("position", (i/2+1).toInt())
                     Step.save()
                 }
 
-                // Save data to database
-                var blogContent = ParseObject("BlogContent")
-                blogContent.put("ingredient", ingredients)
-                blogContent.save()
-
-                blog.put("blogContent", blogContent)
-                blog.save()
-                // save video url in blog here (not yet)
-                /*
-                var count = 1
-                for (item in steps) {
-                    var newStep = ParseObject("Step")
-                    newStep.put("blog", blog)
-                    newStep.put("text", item)
-                    newStep.put("position", count)
-                    count += 1
-                    newStep.save()
-                    // save photo in step here (not yet)
-                }
-                */
-
                 //move to main screens
-                val intent = Intent(this, WriteBlogActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }
         }
