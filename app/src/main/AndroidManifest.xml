@@ -61,7 +61,8 @@
         <activity
             android:name=".faqs.FAQsActivity"
             android:parentActivityName=".mainscreen.MainActivity" />
-        <activity android:name=".profile.ViewProfile" />
+        <activity android:name=".profile.ViewProfile"
+            android:parentActivityName=".mainscreen.MainActivity" />
         <activity
             android:name=".profile.Achievement"
             android:parentActivityName=".profile.ViewProfile"/>

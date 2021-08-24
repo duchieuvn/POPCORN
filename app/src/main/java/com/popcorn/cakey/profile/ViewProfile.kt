@@ -1,6 +1,7 @@
 package com.popcorn.cakey.profile
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -20,7 +21,6 @@ class ViewProfile : AppCompatActivity() {
         //Get user object from server
         var user = ParseUser.getCurrentUser()
 
-
         //Bind user's attributes
         var premium: Int=-1
         var level = user.getInt("level")
@@ -30,12 +30,18 @@ class ViewProfile : AppCompatActivity() {
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertLevel= level.toString() + " ("+user.getInt("exp").toString()+"/100)"
-        binding.insertTitle=user.getString("bagde")
-        //Avatar - image attributes
-        //GET IMAGE HERE
-        binding.profileImage.setImageResource(R.drawable.hi)
+        //CHUA CO DATA
+        binding.insertTitle=user.getString("badge")
 
-        //Check premium value
+        //Avatar - image attributes
+        val avaImage = user?.getParseFile("avatar")?.file
+        if (avaImage?.exists() == true) {
+            val avatar = BitmapFactory.decodeFile(avaImage.absolutePath)
+            binding.profileImage.setImageBitmap(avatar)
+        } else
+            binding.profileImage.setImageResource(R.drawable.splash_screen)
+
+        //Check premium value - CHUA
         if (premium>0)
         {
             binding.insertPremium=premium.toString()
@@ -55,7 +61,6 @@ class ViewProfile : AppCompatActivity() {
         binding.btAchieve.setOnClickListener {
             val intent = Intent(this,Achievement::class.java)
             startActivity(intent)
-
         }
 
         //Log out button -->Log out, close the application

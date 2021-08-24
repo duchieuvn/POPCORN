@@ -57,7 +57,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author").include("blogContent")
-        // LOL
+        // LOL lol
         var value= String()
         val extras = intent.extras
         if (extras != null) {

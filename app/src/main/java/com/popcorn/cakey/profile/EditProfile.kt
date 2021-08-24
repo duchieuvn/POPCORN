@@ -1,6 +1,7 @@
 package com.popcorn.cakey.profile
 
 import android.app.Activity
+import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -52,8 +53,15 @@ class EditProfile : AppCompatActivity() {
         binding.insertName= user.getString("username")
         binding.insertMail= user.getString("email")
         binding.insertPassword= user.getString("password")
+
         //Current avatar - Image attributes
-        binding.avatarImg.setImageResource(R.drawable.hi)
+        val avaImage = user?.getParseFile("avatar")?.file
+        if (avaImage?.exists() == true) {
+            val avatar = BitmapFactory.decodeFile(avaImage.absolutePath)
+            binding.avatarImg.setImageBitmap(avatar)
+        } else
+            binding.avatarImg.setImageResource(R.drawable.splash_screen)
+
 
         //Change avatar load from phone
         avatar = findViewById(R.id.avatarImg);
@@ -83,6 +91,7 @@ class EditProfile : AppCompatActivity() {
             //Check password and set
             var password=binding.insertPassword.toString()
             if (password!=null) user.setPassword(password)
+
             user.saveInBackground()
             //Announce
             Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
