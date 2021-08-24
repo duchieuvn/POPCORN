@@ -14,6 +14,11 @@ import com.popcorn.cakey.databinding.ActivityCourseBinding
 
 
 class Course : AppCompatActivity() {
+    companion object{
+        fun newInstance(): Course {
+            return Course()
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityCourseBinding =
@@ -21,6 +26,13 @@ class Course : AppCompatActivity() {
         //DATA BINDING FROM DB
         val queryCourse = ParseQuery.getQuery<ParseObject>("Course")
         queryCourse.include("userID")
+
+        // Used to click in main screen
+        var value= String()
+        val extras = intent.extras
+        if (extras != null) {
+            value = extras.getString("ObjectId")!!
+        }
 
         //SET ATTRIBUTES-text
         var course = queryCourse.get("UYk0ofeGYE")
