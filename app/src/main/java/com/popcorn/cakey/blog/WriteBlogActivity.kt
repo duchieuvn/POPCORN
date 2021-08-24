@@ -208,8 +208,13 @@ class WriteBlogActivity : AppCompatActivity() {
                     ingredients.put(newIngre)
                 }
 
+                // Link video
+                var link = binding.insertLink.text.toString()
+
                 // Save data to database
                 var blogContent = ParseObject("BlogContent")
+                if (link != "")
+                    blogContent.put("videoUrl", link)
                 blogContent.put("ingredient", ingredients)
                 blogContent.save()
 
@@ -246,6 +251,8 @@ class WriteBlogActivity : AppCompatActivity() {
                     Step.put("position", (i/2+1).toInt())
                     Step.save()
                 }
+
+
 
                 //move to main screens
                 val intent = Intent(this, MainActivity::class.java)
