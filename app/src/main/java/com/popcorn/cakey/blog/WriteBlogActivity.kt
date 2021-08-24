@@ -3,6 +3,7 @@ package com.popcorn.cakey.blog
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -14,7 +15,6 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.graphics.drawable.toBitmap
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.parse.ParseFile
@@ -26,7 +26,6 @@ import com.popcorn.cakey.mainscreen.MainActivity
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.ByteArrayOutputStream
-import java.util.ArrayList
 
 
 class WriteBlogActivity : AppCompatActivity() {
@@ -144,7 +143,7 @@ class WriteBlogActivity : AppCompatActivity() {
             binding.detailStep.addView(image, binding.detailStep.childCount)
 
             val del = v.findViewById<ImageView>(R.id.step_option)
-            del.setOnClickListener{
+            del.setOnClickListener {
                 val popupMenu = PopupMenu(this, del)
 
                 popupMenu.menuInflater.inflate(R.menu.menu_write_blog, popupMenu.menu)
@@ -185,14 +184,13 @@ class WriteBlogActivity : AppCompatActivity() {
                 val blog = ParseObject("Blog")
                 blog.put("author", author)
                 blog.put("name", binding.detailTitle.text.toString())
-                blog.put("description", binding.contentDes.text.toString())
-                blog.put("servings",binding.numSer.text.toString().toInt())
+                if (binding.contentDes.text.toString() != "")
+                    blog.put("description", binding.contentDes.text.toString())
 
-                Toast.makeText(this, binding.detailTitle.text, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, binding.contentDes.text, Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, binding.numSer.text, Toast.LENGTH_SHORT).show()
+                blog.put("servings", binding.numSer.text.toString().toInt())
 
-                var ingredients = JSONArray()
+
+                var ingredients = ArrayList<JSONObject>()
                 for (i in 0 until binding.detailList.childCount) {
                     val contentIngredient: View = binding.detailList.getChildAt(i)
 
@@ -201,47 +199,44 @@ class WriteBlogActivity : AppCompatActivity() {
                     val nameIng: TextInputEditText =
                         contentIngredient.findViewById((R.id.nameIngredient))
 
-
-                    Toast.makeText(this, quantity.text, Toast.LENGTH_SHORT).show()
-                    Toast.makeText(this, unit.text, Toast.LENGTH_SHORT).show()
-                    Toast.makeText(this, nameIng.text, Toast.LENGTH_SHORT).show()
-
                     //database purpose (Model class)
                     var newIngre = JSONObject()
                     newIngre.put("name", nameIng.text.toString())
                     newIngre.put("amount", quantity.text.toString().toInt())
                     newIngre.put("measurement", unit.text.toString())
 
-                    ingredients.put(newIngre)
+                    ingredients.add(newIngre)
                 }
 
-                var steps = ArrayList<String>()
-                for (i in 0 until binding.detailStep.childCount) {
 
-                    if (i % 2 == 0) {
-                        val contentGuidelines: View = binding.detailStep.getChildAt(i)
+                for (i in 0 until binding.detailStep.childCount step 2) {
 
-                        val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
+                    val Step = ParseObject("Step")
 
-                        Toast.makeText(this, step.text, Toast.LENGTH_SHORT).show()
+                    val contentGuidelines: View = binding.detailStep.getChildAt(i)
+                    val step: TextInputEditText = contentGuidelines.findViewById((R.id.Step))
 
-                        //store steps for database purpose
-                        steps.add(step.text.toString())
+                    //store steps for database purpose
+                    Step.put("text", step.text.toString())
+
+                    val contentImage: View = binding.detailStep.getChildAt(i + 1)
+                    val image: ImageView = contentImage.findViewById((R.id.stepImage))
+
+                    if (image.drawable != null) {
+                        val drawable = image.drawable as BitmapDrawable
+                        val bitmap = drawable.bitmap
+                        //val bitmap = image.drawable.toBitmap()
+
+                        val stream = ByteArrayOutputStream()
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                        val data: ByteArray = stream.toByteArray()
+                        var filename = "step$i.jpeg"
+                        val file = ParseFile(filename, data)
+
+                        Step.put("img", file)
                     }
-                    else {
-                        if (binding.detailStep.getChildAt(i) != null) {
-                            val bitmap = binding.detailStep.getChildAt(i)
-                                .findViewById<ImageView>(R.id.stepImage).drawable.toBitmap()
-
-                            val stream = ByteArrayOutputStream()
-                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                            val data: ByteArray = stream.toByteArray()
-                            var filename = "step" + i.toString() +".jpeg"
-                            val file = ParseFile(filename, data)
-
-
-                        }
-                    }
+                    Step.put("blog",blog)
+                    Step.save()
                 }
 
                 // Save data to database
@@ -252,9 +247,9 @@ class WriteBlogActivity : AppCompatActivity() {
                 blog.put("blogContent", blogContent)
                 blog.save()
                 // save video url in blog here (not yet)
-
+                /*
                 var count = 1
-                for (item in steps){
+                for (item in steps) {
                     var newStep = ParseObject("Step")
                     newStep.put("blog", blog)
                     newStep.put("text", item)
@@ -263,9 +258,7 @@ class WriteBlogActivity : AppCompatActivity() {
                     newStep.save()
                     // save photo in step here (not yet)
                 }
-
-
-
+                */
 
                 //move to main screens
                 val intent = Intent(this, WriteBlogActivity::class.java)
@@ -274,21 +267,20 @@ class WriteBlogActivity : AppCompatActivity() {
         }
 
 
-
         //Cancel blog
         binding.buttonCancel.setOnClickListener {
             val builder = AlertDialog.Builder(this)
 
             builder.setTitle("Cakey Warning!!!")
             builder.setMessage("You do not save this blog.")
-            builder.setPositiveButton("GO TO MAIN"){ _, _ ->
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
-            builder.setNegativeButton("BACK TO BLOG") { _, _ ->}
-            builder.show()
+            builder.setPositiveButton("GO TO MAIN") { _, _ ->
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
+            builder.setNegativeButton("BACK TO BLOG") { _, _ -> }
+            builder.show()
         }
+    }
 
     private fun setView(v: View) {
         currentView = v
