@@ -23,6 +23,8 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.Abs
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
+import java.util.regex.Matcher
+import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
 
@@ -242,18 +244,34 @@ class ReadBlogActivity : AppCompatActivity() {
         }
 
         //Youtube
+        val videoLink = blog.getString("videoUrl")
+
         val youTubePlayerView = binding.youTubePlayerView
         lifecycle.addObserver(youTubePlayerView)
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = "7VTtenyKRg4"
-                youTubePlayer.loadVideo(videoId, 0f)
+                val videoId = extractYTId(videoLink)
+                if (videoId != null) {
+                    youTubePlayer.loadVideo(videoId, 0f)
+                }
             }
         })
 
     }
 
+    fun extractYTId(ytUrl: String?): String? {
+        var vId: String? = null
+        val pattern: Pattern = Pattern.compile(
+            "^https?://.*(?:youtu.be/|v/|u/\\w/|embed/|watch?v=)([^#&?]*).*$",
+            Pattern.CASE_INSENSITIVE
+        )
+        val matcher: Matcher = pattern.matcher(ytUrl)
+        if (matcher.matches()) {
+            vId = matcher.group(1)
+        }
+        return vId
+    }
     private fun like(blog: ParseObject) {
         if (likeClick) {
             if (dislikeClick) {
