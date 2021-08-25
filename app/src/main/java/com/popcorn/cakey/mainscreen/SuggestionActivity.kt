@@ -24,9 +24,14 @@ class SuggestionActivity(private val Blogs: ArrayList<BlogThumbnails>):RecyclerV
         val currentItem= Blogs[position]
         currentItem.image.getDataInBackground(
             GetDataCallback(
-                fun(data: ByteArray, _: ParseException) {
-                    val bmp = BitmapFactory.decodeByteArray(data, 0, data.size)
-                    holder.itemImage.setImageBitmap(bmp)
+                fun(data: ByteArray, e: ParseException) {
+                    if(e==null){
+                        val bmp = BitmapFactory.decodeByteArray(data, 0, data.size)
+                        holder.itemImage.setImageBitmap(bmp)
+                    }
+                    else{
+                        holder.itemImage.setImageResource(R.drawable.avatar)
+                    }
                 })
         )
         holder.itemImage.setOnClickListener { v ->

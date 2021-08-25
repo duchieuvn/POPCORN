@@ -18,12 +18,12 @@ import java.io.ByteArrayOutputStream
 
 
 class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
-    private lateinit var Blogs: ArrayList<BlogThumbnails>
+    private lateinit var blogs: ArrayList<BlogThumbnails>
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<SuggestionActivity.ViewHolder>? = null
     private lateinit var image: ArrayList<ParseFile>
-    private lateinit var ID: ArrayList<String>
+    private lateinit var id: ArrayList<String>
     private val mew=R.drawable.avatar
     companion object{
         fun newInstance():SuggestionFragment{
@@ -36,7 +36,7 @@ class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
         val queryBlog= ParseQuery.getQuery<ParseObject>("Blog").setLimit(8)
         val data = queryBlog?.orderByDescending("like")?.find()
         image=ArrayList()
-        ID=ArrayList()
+        id=ArrayList()
 
         // null picture
         val icon= BitmapFactory.decodeResource(resources,mew)
@@ -47,7 +47,7 @@ class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
         temp.saveInBackground()
 
         for( i in data?.indices!!){
-            ID.add(data[i].objectId)
+            id.add(data[i].objectId)
             val pic=data[i].getParseFile("img")
             if(pic!=null){
                 image.add(pic)
@@ -61,14 +61,14 @@ class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
         recyclerView=view.findViewById(R.id.suggestionView)
         recyclerView.layoutManager=layoutManager
         getData()
-        recyclerView.adapter=SuggestionActivity(Blogs)
+        recyclerView.adapter=SuggestionActivity(blogs)
         return view
     }
     private fun getData(){
-        Blogs= arrayListOf()
-        for (i in image.indices){
-            val course=BlogThumbnails(ID[i],"null",image[i],"null")
-            Blogs.add(course)
+        blogs= arrayListOf()
+        for (i in id.indices){
+            val blog=BlogThumbnails(id[i],"null",image[i],"null")
+            blogs.add(blog)
         }
     }
 
@@ -76,7 +76,7 @@ class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
         super.onViewCreated(view, savedInstanceState)
         R.id.suggestionView.apply{
             layoutManager=LinearLayoutManager(activity)
-            adapter=SuggestionActivity(Blogs)
+            adapter=SuggestionActivity(blogs)
         }
     }
 }

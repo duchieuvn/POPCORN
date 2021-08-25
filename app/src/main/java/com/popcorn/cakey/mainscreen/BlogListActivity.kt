@@ -1,6 +1,5 @@
 package com.popcorn.cakey.mainscreen
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -31,9 +30,14 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
         val currentId=currentItem.ID
         currentItem.image.getDataInBackground(
             GetDataCallback(
-                fun(data: ByteArray, _: ParseException) {
-                    val bmp = BitmapFactory.decodeByteArray(data, 0, data.size)
-                    holder.itemImage.setImageBitmap(bmp)
+                fun(data: ByteArray, e: ParseException) {
+                    if(e==null){
+                        val bmp = BitmapFactory.decodeByteArray(data, 0, data.size)
+                        holder.itemImage.setImageBitmap(bmp)
+                    }
+                    else{
+                        holder.itemImage.setImageResource(R.drawable.avatar)
+                    }
                 })
         )
         holder.itemImage.setOnClickListener { v ->
