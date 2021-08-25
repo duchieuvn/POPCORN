@@ -251,9 +251,11 @@ class ReadBlogActivity : AppCompatActivity() {
 
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = extractYTId(videoLink)
-                if (videoId != null) {
-                    youTubePlayer.loadVideo(videoId, 0f)
+                if (videoLink != null) {
+                    val videoId = extractYTId(videoLink)
+                    if (videoId != null) {
+                        youTubePlayer.loadVideo(videoId, 0f)
+                    }
                 }
             }
         })
