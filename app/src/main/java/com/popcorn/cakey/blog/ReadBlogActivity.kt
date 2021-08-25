@@ -34,19 +34,22 @@ class ReadBlogActivity : AppCompatActivity() {
             undo()
         }
     }
-    companion object{
+
+    companion object {
         fun newInstance(): ReadBlogActivity {
             return ReadBlogActivity()
         }
     }
-    private val reportContact =  registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            val reason = data?.getStringExtra("reason")
-            /////////////////////// Report o day ///////////////////////////////
-            Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+
+    private val reportContact =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                val reason = data?.getStringExtra("reason")
+                /////////////////////// Report o day ///////////////////////////////
+                Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+            }
         }
-    }
     private lateinit var binding: ActivityReadBlogBinding
     private var likeClick = true
     private var dislikeClick = true
@@ -60,7 +63,7 @@ class ReadBlogActivity : AppCompatActivity() {
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author").include("blogContent")
         // LOL lol
-        var value= String()
+        var value = String()
         val extras = intent.extras
         if (extras != null) {
             value = extras.getString("ObjectId")!!
@@ -179,15 +182,13 @@ class ReadBlogActivity : AppCompatActivity() {
                 if (insertNumberServings.text.toString() != "") {
                     if (insertNumberServings.text.toString() == "0")
                         Toast.makeText(this, "Invalid number!", Toast.LENGTH_SHORT).show()
-                    else
-                    {
+                    else {
                         binding.insertServings = insertNumberServings.text.toString() + " people"
 
                         //reload ingredient
-                        for (item in quantity)
-                        {
+                        for (item in quantity) {
                             val amount = (item * (insertNumberServings.text.toString()
-                                .toInt()/defaultServing.toFloat())).roundToInt()
+                                .toInt() / defaultServing.toFloat())).roundToInt()
                             if (amount != 0)
                                 quantity[quantity.indexOf(item)] = amount
                             else
@@ -216,7 +217,6 @@ class ReadBlogActivity : AppCompatActivity() {
 
         binding.dislike.setOnClickListener {
             dislike(blog)
-
         }
 
         //Comment section
@@ -272,6 +272,7 @@ class ReadBlogActivity : AppCompatActivity() {
         }
         return vId
     }
+
     private fun like(blog: ParseObject) {
         if (likeClick) {
             if (dislikeClick) {
