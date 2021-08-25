@@ -62,7 +62,6 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Blog")
         queryBlog.include("author").include("blogContent")
-        // LOL lol
         var value = String()
         val extras = intent.extras
         if (extras != null) {
@@ -70,6 +69,8 @@ class ReadBlogActivity : AppCompatActivity() {
         }
 
         val blog = queryBlog.get(value)
+        // Must guarantee that blogContent exist
+        val blogContent = blog.getParseObject("blogContent")!!
         val author = blog.getParseUser("author")
 
         //Toolbar
@@ -125,7 +126,7 @@ class ReadBlogActivity : AppCompatActivity() {
         //
         // val ingreList = queryIngreList.find()
 
-        val ingredients = blog.getParseObject("blogContent")?.getJSONArray("ingredient")
+        val ingredients = blogContent.getJSONArray("ingredient")
 
         val quantity = ArrayList<Int>()
         val unit = ArrayList<String>()
@@ -244,7 +245,7 @@ class ReadBlogActivity : AppCompatActivity() {
         }
 
         //Youtube
-        val videoLink = blog.getString("videoUrl")
+        val videoLink = blogContent.getString("videoUrl")
 
         val youTubePlayerView = binding.youTubePlayerView
         lifecycle.addObserver(youTubePlayerView)
