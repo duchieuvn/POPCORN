@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.parse.FunctionCallback
+import com.parse.ParseObject
+import com.parse.ParseUser
+import com.parse.SaveCallback
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
 import com.popcorn.cakey.databinding.ActivityReportBinding
@@ -13,6 +17,14 @@ import com.popcorn.cakey.databinding.ActivityReportBinding
 class ReportActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReportBinding
+
+    private fun saveReport(blogId: String, reason: String, callback: SaveCallback) {
+        val report = ParseObject("Report")
+        report.put("blog", ParseObject.createWithoutData("Blog", blogId))
+        report.put("user", ParseUser.getCurrentUser())
+        report.put("reason", reason)
+        report.saveInBackground(callback)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,19 +36,28 @@ class ReportActivity : AppCompatActivity() {
         actionBar!!.title = getString(R.string.report)
         actionBar.setDisplayHomeAsUpEnabled(true)
 
-        var reportReason = arrayOf("The recipe is incorrect.", "Inappropriate content.", "I\'m not interested in this recipe.")
-
+        val reportReason = arrayOf(
+            "The recipe is incorrect.",
+            "Inappropriate content.",
+            "I\'m not interested in this recipe."
+        )
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, reportReason)
 
         binding.listReason.adapter = adapter
-
         binding.listReason.onItemClickListener =
             AdapterView.OnItemClickListener { _, view, position, _ -> // value of item that is clicked
-                val itemValue =  binding.listReason.getItemAtPosition(position) as String
-                
+                val itemValue = binding.listReason.getItemAtPosition(position) as String
                 val reason = intent.putExtra("reason", itemValue)
                 setResult(Activity.RESULT_OK, reason)
-                finish()
+                saveReport(blogId, itemValue) { e ->
+                    if (e == null) {
+                        // Report saved
+                        finish()
+                    } else {
+                        // Something went wrong, but I don't care
+                        finish()
+                    }
+                }
             }
     }
 
