@@ -72,7 +72,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
     private val reportContact =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
+            if (result.resultCode == RESULT_OK) {
                 val data: Intent? = result.data
                 val reason = data?.getStringExtra("reason")!!
                 /////////////////////// Report o day ///////////////////////////////

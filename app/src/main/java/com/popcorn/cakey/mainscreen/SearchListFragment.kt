@@ -16,8 +16,7 @@ import com.parse.ParseQuery
 import com.popcorn.cakey.R
 import java.io.ByteArrayOutputStream
 
-
-class BlogListFragment: Fragment(R.layout.activity_fragment2) {
+class SearchListFragment:Fragment(R.layout.activity_fragment2) {
     private lateinit var bloglist: ArrayList<BlogThumbnails>
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -25,11 +24,12 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     private lateinit var title: ArrayList<String>
     private lateinit var image: ArrayList<ParseFile>
     private lateinit var author: ArrayList<String>
-    private val mew=R.drawable.avatar
+    private val mew = R.drawable.avatar
     private lateinit var blogid: ArrayList<String>
+
     companion object{
         fun newInstance(): BlogListFragment {
-           return BlogListFragment()
+            return BlogListFragment()
         }
     }
 
@@ -92,9 +92,4 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
             adapter=BlogListActivity(bloglist)
         }
     }
-
-
-
 }
-
-

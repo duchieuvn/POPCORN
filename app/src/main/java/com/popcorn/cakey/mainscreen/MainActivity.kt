@@ -1,5 +1,6 @@
 package com.popcorn.cakey.mainscreen
 
+import android.annotation.SuppressLint
 import android.app.SearchManager
 import android.content.Context
 import android.content.Intent
@@ -12,7 +13,6 @@ import com.google.android.material.navigation.NavigationView
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.SplashActivity
-import com.popcorn.cakey.course.Course
 import com.popcorn.cakey.blog.WriteBlogActivity
 import com.popcorn.cakey.course.CourseMenu
 import com.popcorn.cakey.databinding.ActivityMainBinding
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navigation: NavigationView
 
+    @SuppressLint("WrongThread")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,12 +58,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
                 R.id.Account -> {
                     i.setClass(this, ViewProfile::class.java)
                     startActivity(i)
-
                 }
                 R.id.Help -> {
                     i.setClass(this, FAQsActivity::class.java)
                     startActivity(i)
-
                 }
             }
             true
@@ -84,10 +83,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
         if (menu != null) {
             (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
                 setSearchableInfo(searchManager.getSearchableInfo(componentName))
+
+
             }
         }
         return true
     }
+
 
 }
 
