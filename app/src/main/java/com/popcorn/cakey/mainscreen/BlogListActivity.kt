@@ -1,10 +1,13 @@
 package com.popcorn.cakey.mainscreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Filter
+import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -12,14 +15,17 @@ import com.parse.GetDataCallback
 import com.parse.ParseException
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
-    RecyclerView.Adapter<BlogListActivity.ViewHolder>() {
-
+class BlogListActivity(private var bloglist: ArrayList<BlogThumbnails>) :
+    RecyclerView.Adapter<BlogListActivity.ViewHolder>(),Filterable  {
+    private lateinit var itemListFilter: ArrayList<BlogThumbnails>
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_main_blogs_list, parent, false)
+        itemListFilter = bloglist
 
         return ViewHolder(v)
     }
@@ -63,6 +69,39 @@ class BlogListActivity(private val bloglist: ArrayList<BlogThumbnails>) :
         var itemAuthor: TextView=itemView.findViewById(R.id.Author)
 
 
+    }
+
+    override fun getFilter(): Filter {
+      return object: Filter(){
+          override fun performFiltering(charsequence: CharSequence?): FilterResults {
+              val filterResults =FilterResults()
+              if(charsequence== null || charsequence.length<0){
+                  filterResults.count=itemListFilter.size
+                  filterResults.values=itemListFilter
+              }else{
+                  val searchChr= charsequence.toString().lowercase(Locale.getDefault())
+
+                  val bloglist = ArrayList<BlogThumbnails>()
+
+                  for (item in bloglist){
+                      if(item.title?.lowercase()?.contains(searchChr)!!  || item.author?.lowercase()?.contains(searchChr)!!){
+                          bloglist.add(item)
+                      }
+                  }
+                  filterResults.count=bloglist.size
+                  filterResults.values=bloglist
+              }
+              return filterResults
+          }
+
+
+          @SuppressLint("NotifyDataSetChanged")
+          override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+              bloglist= results?.values as ArrayList<BlogThumbnails>
+              notifyDataSetChanged()
+          }
+
+      }
     }
 }
 
