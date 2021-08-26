@@ -37,10 +37,31 @@ import kotlin.math.roundToInt
 
 
 class ReadBlogActivity : AppCompatActivity() {
+    private var likeClick = true
+    private var dislikeClick = true
+    private var mPlayer: SimpleExoPlayer? = null
+    private var playWhenReady = true
+    private var currentWindow = 0
+    private var playbackPosition: Long = 0
+    private lateinit var binding: ActivityReadBlogBinding
+    private lateinit var defaultDislike: String
+    private lateinit var defaultLike: String
+    private lateinit var playerView: PlayerView
+    private lateinit var videoLink: String
+    private lateinit var blog: ParseObject
+
     private val reactBlogCallback = FunctionCallback<Any?> { _, err ->
         if (err != null) {
             undo()
         }
+    }
+
+    private fun saveReport(blog: ParseObject, reason: String, callback: SaveCallback) {
+        val report = ParseObject("Report")
+        report.put("blog", blog)
+        report.put("user", ParseUser.getCurrentUser())
+        report.put("reason", reason)
+        report.saveInBackground(callback)
     }
 
     companion object {
@@ -53,23 +74,21 @@ class ReadBlogActivity : AppCompatActivity() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
-                val reason = data?.getStringExtra("reason")
+                val reason = data?.getStringExtra("reason")!!
                 /////////////////////// Report o day ///////////////////////////////
-                Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+                saveReport(blog, reason) { e ->
+                    if (e == null) {
+                        // Report saved
+                        Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+                    } else {
+                        // Something went wrong, but I don't care
+                        Toast.makeText(this, reason, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
             }
         }
-    private lateinit var binding: ActivityReadBlogBinding
-    private var likeClick = true
-    private var dislikeClick = true
-    private lateinit var defaultLike: String
-    private lateinit var defaultDislike: String
 
-    private var mPlayer: SimpleExoPlayer? = null
-    private lateinit var playerView: PlayerView
-    private var playWhenReady = true
-    private var currentWindow = 0
-    private var playbackPosition: Long = 0
-    private lateinit var videoLink: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_read_blog)
@@ -82,7 +101,7 @@ class ReadBlogActivity : AppCompatActivity() {
             value = extras.getString("ObjectId")!!
         }
 
-        val blog = queryBlog.get(value)
+        blog = queryBlog.get(value)
         // Must guarantee that blogContent exist
         val blogContent = blog.getParseObject("blogContent")!!
         val author = blog.getParseUser("author")
@@ -264,7 +283,8 @@ class ReadBlogActivity : AppCompatActivity() {
         playerView = binding.playerView
 
     }
-    private fun initPlayer(){
+
+    private fun initPlayer() {
         mPlayer = SimpleExoPlayer.Builder(this).build()
         // Bind the player to the view.
         playerView.player = mPlayer
@@ -272,15 +292,18 @@ class ReadBlogActivity : AppCompatActivity() {
         mPlayer!!.seekTo(playbackPosition)
         mPlayer!!.prepare(buildMediaSource(), false, false)
     }
+
     private fun buildMediaSource(): MediaSource {
         val userAgent =
             Util.getUserAgent(playerView.context, playerView.context.getString(R.string.app_name))
 
         val dataSourceFactory = DefaultHttpDataSourceFactory(userAgent)
 
-        return ProgressiveMediaSource.Factory(dataSourceFactory).createMediaSource(Uri.parse(videoLink))
+        return ProgressiveMediaSource.Factory(dataSourceFactory)
+            .createMediaSource(Uri.parse(videoLink))
 
     }
+
     private fun releasePlayer() {
         if (mPlayer == null) {
             return
@@ -291,6 +314,7 @@ class ReadBlogActivity : AppCompatActivity() {
         mPlayer!!.release()
         mPlayer = null
     }
+
     override fun onStart() {
         super.onStart()
         if (Util.SDK_INT >= 24) {

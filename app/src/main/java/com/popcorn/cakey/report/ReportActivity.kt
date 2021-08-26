@@ -18,14 +18,6 @@ class ReportActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReportBinding
 
-    private fun saveReport(blogId: String, reason: String, callback: SaveCallback) {
-        val report = ParseObject("Report")
-        report.put("blog", ParseObject.createWithoutData("Blog", blogId))
-        report.put("user", ParseUser.getCurrentUser())
-        report.put("reason", reason)
-        report.saveInBackground(callback)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReportBinding.inflate(layoutInflater)
@@ -49,15 +41,7 @@ class ReportActivity : AppCompatActivity() {
                 val itemValue = binding.listReason.getItemAtPosition(position) as String
                 val reason = intent.putExtra("reason", itemValue)
                 setResult(Activity.RESULT_OK, reason)
-                saveReport(blogId, itemValue) { e ->
-                    if (e == null) {
-                        // Report saved
-                        finish()
-                    } else {
-                        // Something went wrong, but I don't care
-                        finish()
-                    }
-                }
+                finish()
             }
     }
 
