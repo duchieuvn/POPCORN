@@ -12,8 +12,9 @@ import com.google.android.material.navigation.NavigationView
 import com.parse.ParseUser
 import com.popcorn.cakey.R
 import com.popcorn.cakey.SplashActivity
-import com.popcorn.cakey.blog.Course
+import com.popcorn.cakey.course.Course
 import com.popcorn.cakey.blog.WriteBlogActivity
+import com.popcorn.cakey.course.CourseMenu
 import com.popcorn.cakey.databinding.ActivityMainBinding
 import com.popcorn.cakey.faqs.FAQsActivity
 import com.popcorn.cakey.profile.ViewProfile
@@ -43,7 +44,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main)  {
             val i = intent
             when (it.itemId) {
                 R.id.Course -> {
-                    i.setClass(this, Course::class.java)
+                    //i.setClass(this, Course::class.java)
+                    i.setClass(this, CourseMenu::class.java)
                     startActivity(i)
 
                 }

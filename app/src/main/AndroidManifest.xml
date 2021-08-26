@@ -9,13 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cakey">
+
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="behind"
             android:theme="@style/Splash_Screen" />
         <activity
             android:name=".auth.LoginActivity"
-            android:screenOrientation="behind"/>
+            android:screenOrientation="behind" />
         <activity
             android:name=".auth.SignupActivity"
             android:parentActivityName=".auth.LoginActivity"
@@ -40,6 +41,7 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/search" />
+
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -47,28 +49,34 @@
         <activity
             android:name=".blog.ReadBlogActivity"
             android:parentActivityName=".mainscreen.MainActivity"
-            android:theme="@style/Blog"/>
+            android:theme="@style/Blog" />
         <activity
             android:name=".blog.WriteBlogActivity"
-            android:parentActivityName=".mainscreen.MainActivity">
-        </activity>
-        <activity android:name=".blog.Course"
-            android:parentActivityName=".mainscreen.MainActivity"/>
+            android:parentActivityName=".mainscreen.MainActivity" />
+        <activity
+            android:name=".course.Course"
+            android:parentActivityName=".course.CourseMenu" />
         <activity
             android:name=".report.ReportActivity"
-            android:parentActivityName=".blog.ReadBlogActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:parentActivityName=".blog.ReadBlogActivity" />
         <activity
             android:name=".faqs.FAQsActivity"
             android:parentActivityName=".mainscreen.MainActivity" />
-        <activity android:name=".profile.ViewProfile"
+        <activity
+            android:name=".profile.ViewProfile"
             android:parentActivityName=".mainscreen.MainActivity" />
         <activity
             android:name=".profile.Achievement"
-            android:parentActivityName=".profile.ViewProfile"/>
+            android:parentActivityName=".profile.ViewProfile" />
         <activity
             android:name=".profile.EditProfile"
             android:parentActivityName=".profile.ViewProfile" />
+
+        <activity
+            android:name=".course.CourseMenu"
+            android:parentActivityName=".mainscreen.MainActivity" />
+
     </application>
 
 </manifest>

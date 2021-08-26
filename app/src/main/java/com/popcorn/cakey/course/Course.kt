@@ -1,4 +1,4 @@
-package com.popcorn.cakey.blog
+package com.popcorn.cakey.course
 
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -35,7 +35,7 @@ class Course : AppCompatActivity() {
         }
 
         //SET ATTRIBUTES-text
-        var course = queryCourse.get("UYk0ofeGYE")
+        var course = queryCourse.get(value)
         var author = course.getParseUser("userID")
         binding.insertTitle = course.getString("title")
         binding.insertAuthor = author?.username.toString()
@@ -69,8 +69,10 @@ class Course : AppCompatActivity() {
         //CHUA CONVERT LINK VIDEO -> ID
         youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
             override fun onReady(youTubePlayer: YouTubePlayer) {
-                val videoId = "orJSJGHjBLI"
-                youTubePlayer.loadVideo(videoId, 0f)
+                val videoId = video_link
+                if (videoId != null) {
+                    youTubePlayer.loadVideo(videoId, 0f)
+                }
             }
         })
 

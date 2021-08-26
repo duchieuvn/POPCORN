@@ -48,9 +48,9 @@ class Achievement : AppCompatActivity() {
             queryAchieve.whereEqualTo("achievement", current)
             var line = queryAchieve.find()[0]
             //BIND IMG
-            val Img = line?.getParseFile("icon")?.file
-            if (Img?.exists() == true) {
-                val avatar = BitmapFactory.decodeFile(Img.absolutePath)
+            val img = line?.getParseFile("icon")?.file
+            if (img?.exists() == true) {
+                val avatar = BitmapFactory.decodeFile(img.absolutePath)
                 binding.imageView.setImageBitmap(avatar)
             } else
                 binding.imageView.setImageResource(R.drawable.hi)
