@@ -14,12 +14,6 @@
         <variable
             name="insertAuthor"
             type="String" />
-        <variable
-            name="insertLike"
-            type="String" />
-        <variable
-            name="insertDislike"
-            type="String" />
     </data>
 
     <ScrollView
@@ -109,88 +103,16 @@
                 android:id="@+id/youTubePlayerView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="20dp"
+                android:layout_marginBottom="64dp"
 
-                app:layout_constraintBottom_toTopOf="@+id/divider4"
+
+                android:paddingTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/blogCover"
-                app:showFullScreenButton="false"/>
-            <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@color/black"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/youTubePlayerView" />
+                app:showFullScreenButton="false" />
 
-            <TextView
-                android:id="@+id/rating"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-
-                android:text="@string/rating"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-
-            <ImageButton
-                android:id="@+id/like"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="30dp"
-                android:layout_marginTop="8dp"
-
-                app:layout_constraintLeft_toRightOf="@id/rating"
-                app:layout_constraintTop_toBottomOf="@+id/divider4"
-                android:src="@drawable/ic_thumb_up"
-                android:background="@drawable/circle_style"
-                android:backgroundTint="@color/pink"
-                app:tint="@color/white"
-                />
-
-            <TextView
-                android:id="@+id/numLike"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="@{insertLike}"
-                android:textSize="20sp"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/like" />
-
-            <ImageButton
-                android:id="@+id/dislike"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="20dp"
-
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_thumb_down"
-                android:background="@drawable/circle_style"
-                android:backgroundTint="@color/pink"
-                app:tint="@color/white"
-
-                app:layout_constraintLeft_toRightOf="@+id/numLike"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-            <TextView
-                android:id="@+id/numDislike"
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="5dp"
-                android:text="@{insertDislike}"
-                android:textSize="20sp"
-
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/dislike" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
