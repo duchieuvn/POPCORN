@@ -45,7 +45,7 @@ class CourseMenu : AppCompatActivity(R.layout.activity_course_menu) {
         val temp = ParseFile(byte)
         temp.saveInBackground()
 
-        val queryBlog = ParseQuery.getQuery<ParseObject>("Course").setLimit(2)
+        val queryBlog = ParseQuery.getQuery<ParseObject>("Course").setLimit(5)
         val data = queryBlog?.find()
         titleID = ArrayList()
         imageID = ArrayList()

@@ -12,7 +12,8 @@
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="20dp"
         card_view:cardPreventCornerOverlap="true"
-        card_view:strokeColor="@color/black">
+        card_view:strokeColor="@color/black"
+        android:paddingBottom="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
                 android:layout_marginTop="5dp"
                 android:text="@string/suggestion"
                 android:textAllCaps="true"
-                android:textColor="@color/black"
+                android:textColor="@color/pink_variant"
                 android:textSize="20sp"
                 tools:ignore="RelativeOverlap" />
 
@@ -53,7 +54,7 @@
                 android:layout_marginEnd="40dp"
                 android:text="@string/Author"
                 android:textColor="@color/blue"
-                android:textSize="15sp"
+                android:textSize="18sp"
                 tools:ignore="RelativeOverlap" />
 
 
