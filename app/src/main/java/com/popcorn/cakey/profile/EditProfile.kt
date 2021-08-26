@@ -1,6 +1,7 @@
 package com.popcorn.cakey.profile
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -82,10 +83,7 @@ class EditProfile : AppCompatActivity() {
 
         //Set button - send info to parse Server
         binding.btSubmitChanges.setOnClickListener {
-            // 2 dau // la chet, //// la song'
-            //Send img
-            //user.avatar=avatar
-            //Send text
+
             user.put("email",binding.insertMail.toString())
             user.put("username",binding.insertName.toString())
             //Check password and set
@@ -95,6 +93,9 @@ class EditProfile : AppCompatActivity() {
             user.saveInBackground()
             //Announce
             Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, ViewProfile::class.java)
+            startActivity(intent)
         }
 
         val actionBar = supportActionBar

@@ -38,7 +38,6 @@
                 android:layout_marginTop="5dp"
                 android:textColor="@color/pink_variant"
                 android:text="@string/suggestion"
-                android:fontFamily="@font/times"
                 android:textAllCaps="true"
                 android:textSize="20sp"
                 tools:ignore="RelativeOverlap">
@@ -52,8 +51,8 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="145dp"
                 android:layout_marginEnd="40dp"
-                android:textColor="@color/blue"
-                android:textSize="15sp"
+                android:textColor="@color/blue_variant"
+                android:textSize="18sp"
                 android:text="@string/Author"
                 tools:ignore="RelativeOverlap" />
 

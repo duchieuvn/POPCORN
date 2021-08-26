@@ -446,7 +446,7 @@
                         android:layout_height="wrap_content"
 
                         android:gravity="center"
-
+                        android:inputType="text"
                         android:hint="@string/cmtHere" />
                 </com.google.android.material.textfield.TextInputLayout>
 

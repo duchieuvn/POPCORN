@@ -15,8 +15,6 @@ import com.popcorn.cakey.UserModel
 import com.popcorn.cakey.databinding.ActivityAchievementBinding
 
 class Achievement : AppCompatActivity() {
-    private lateinit var atv: AutoCompleteTextView
-
     //RUN WHEN STARTED
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +29,9 @@ class Achievement : AppCompatActivity() {
         //arrayList.add("Pink")
 
         //DATA BINDING FROM SERVER
-        var userModel = UserModel()
-        var user = ParseUser.getCurrentUser()
-        var achieve = userModel.getAchieList(user.getInt("level"))
+        val userModel = UserModel()
+        val user = ParseUser.getCurrentUser()
+        val achieve = userModel.getAchieList(user.getInt("level"))
 
         var queryAchieve = ParseQuery.getQuery<ParseObject>("Level")
         var arrayAdapter = ArrayAdapter<String>(applicationContext, R.layout.dropdown_item, achieve)

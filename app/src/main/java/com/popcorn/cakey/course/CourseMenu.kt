@@ -1,5 +1,6 @@
 package com.popcorn.cakey.course
 
+import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -28,7 +29,8 @@ class CourseMenu : AppCompatActivity(R.layout.activity_course_menu) {
 
     private var binding: ActivityCourseMenuBinding? = null
 
-
+    @SuppressLint("WrongThread")
+    @Override
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
