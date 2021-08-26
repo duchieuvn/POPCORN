@@ -31,6 +31,7 @@ import com.parse.*
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
+import java.io.File
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 import kotlin.math.roundToInt
@@ -146,18 +147,11 @@ class ReadBlogActivity : AppCompatActivity() {
         binding.insertLike = defaultLike
         binding.insertDislike = defaultDislike
 
-        //User (viewer)
-        binding.insertUsername = "Duc Hieu"
-        binding.userAvatar.setImageResource(R.drawable.avatar)
 
         //Ingredients lists
         val ingredientsListView = binding.detailIngredient
         ingredientsListView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        // val queryIngreList = ParseQuery.getQuery<ParseObject>("Ingredient").include("blog")
-        // queryIngreList.whereEqualTo("blog", blog)
-        //
-        // val ingreList = queryIngreList.find()
 
         val ingredients = blogContent.getJSONArray("ingredient")
 
@@ -253,28 +247,57 @@ class ReadBlogActivity : AppCompatActivity() {
             dislike(blog)
         }
 
+
         //Comment section
         val cmtView = binding.detailCmt
         cmtView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        val cmt = ArrayList<String>()
-        cmt.add("Ngon qua")
-        cmt.add("Hay qua")
+        val listText = ArrayList<String>()
+        val listUser = ArrayList<String>()
+        val listImg = ArrayList<File>()
 
-        val user = ArrayList<String>()
-        user.add("clone1")
-        user.add("clone2")
+        val queryCmt = ParseQuery.getQuery<ParseObject>("Comment")
+        queryCmt.include("blog").include("user")
+        var cmt = queryCmt.whereEqualTo("blog", blog).setLimit(4).find()
 
-        val cmtAdapter = CommentSection(user, cmt)
+        for (item in cmt){
+            val user = item.getParseUser("user")
+
+            listUser.add(user?.username.toString())
+            listText.add(item.getString("text").toString())
+            user?.getParseFile("avatar")?.file?.let { listImg.add(it) }
+        }
+
+
+        val cmtAdapter = CommentSection(listUser, listText, listImg)
         cmtView.adapter = cmtAdapter
+
+        //User (viewer)
+        val curUser = ParseUser.getCurrentUser()
+        val ava = curUser.getParseFile("avatar")?.file
+        if (ava?.exists() == true) {
+            val myBitmap = BitmapFactory.decodeFile(ava.absolutePath)
+            binding.userAvatar.setImageBitmap(myBitmap)
+        }
+        binding.insertUsername = curUser.username
 
         //If user leave a comment
         binding.sendButton.setOnClickListener {
             ////////////////////////////Update cai ten lai + push cmt///////////////////////////////////
-            user.add("Duc Hieu")
-            cmt.add(binding.userDetailCmt.text.toString())
+            val text = binding.userDetailCmt.text.toString()
+            listUser.add(curUser.username)
+            listText.add(text)
+            curUser?.getParseFile("avatar")?.file?.let { listImg.add(it) }
+
             cmtView.adapter = cmtAdapter
             binding.userDetailCmt.setText("")
+
+            val comment = ParseObject("Comment")
+            comment.put("text", text)
+            comment.put("user", curUser)
+            comment.put("blog", blog)
+            comment.saveInBackground()
+
         }
 
         //Youtube
