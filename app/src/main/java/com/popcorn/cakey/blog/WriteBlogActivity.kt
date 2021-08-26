@@ -237,7 +237,6 @@ class WriteBlogActivity : AppCompatActivity() {
                     if (image.drawable != null) {
                         val drawable = image.drawable as BitmapDrawable
                         val bitmap = drawable.bitmap
-                        //val bitmap = image.drawable.toBitmap()
 
                         val stream = ByteArrayOutputStream()
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
@@ -249,7 +248,7 @@ class WriteBlogActivity : AppCompatActivity() {
                     }
                     Step.put("blog",blog)
                     Step.put("position", (i/2+1).toInt())
-                    Step.save()
+                    Step.saveInBackground()
                 }
 
 
