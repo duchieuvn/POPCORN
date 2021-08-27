@@ -2,8 +2,6 @@ package com.popcorn.cakey.mainscreen
 
 
 import android.annotation.SuppressLint
-import android.app.SearchManager
-import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
@@ -39,6 +37,7 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
     @Override
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         setHasOptionsMenu(true)
+
         val view: View=inflater.inflate(R.layout.activity_fragment2,container,false)
         val queryBlog= ParseQuery.getQuery<ParseObject>("Blog").setLimit(10)
         val data = queryBlog?.orderByDescending("updateAt")?.find()
@@ -46,6 +45,7 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
         image=ArrayList()
         blogid=ArrayList()
         author= ArrayList()
+
         // null picture
         val icon= BitmapFactory.decodeResource(resources,mew)
         val stream= ByteArrayOutputStream()
@@ -74,10 +74,12 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
         getdata()
         adapter= BlogListActivity()
         adapter!!.setData(bloglist)
+
         layoutManager= LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
         recyclerView=view.findViewById(R.id.MainBlogList)
         recyclerView.layoutManager=layoutManager
         recyclerView.adapter=adapter
+
         return view
 
     }
@@ -111,12 +113,8 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
         val searchView = menuItem!!.actionView as SearchView
-
         searchView.setOnQueryTextListener(this)
-
-
-
-
+        searchView.queryHint="enter blog's name"
         super.onCreateOptionsMenu(menu, inflater)
 
 
