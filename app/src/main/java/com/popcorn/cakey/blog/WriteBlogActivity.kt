@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.URLUtil
 import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -32,7 +33,7 @@ class WriteBlogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityWriteBlogBinding
     private lateinit var stepImage: ImageView
     private lateinit var currentView: View
-
+    private var blogImgFlag = false
     private val startForBlogImageResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
             val resultCode = result.resultCode
@@ -45,6 +46,7 @@ class WriteBlogActivity : AppCompatActivity() {
 
                     // Use Uri object instead of File to avoid storage permissions
                     binding.blogImage.setImageURI(uri)
+                    blogImgFlag = true
                 }
                 ImagePicker.RESULT_ERROR -> {
                     Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
@@ -251,7 +253,17 @@ class WriteBlogActivity : AppCompatActivity() {
                     Step.saveInBackground()
                 }
 
+                //Put blog Image here
+                /*
+                val drawable = binding.blogImage.drawable as BitmapDrawable
+                val bitmap = drawable.bitmap
 
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                val data: ByteArray = stream.toByteArray()
+                var filename = "blogCover.jpeg"
+                val file = ParseFile(filename, data)
+                   */
 
                 //move to main screens
                 val intent = Intent(this, MainActivity::class.java)
@@ -294,7 +306,7 @@ class WriteBlogActivity : AppCompatActivity() {
     }
 
     private fun validateBlog(): Boolean {
-        if (binding.detailTitle.text.toString().isEmpty()) {
+        if (binding.detailTitle.text.toString().isEmpty() || binding.detailTitle.text.toString().isBlank()) {
             binding.detailTitle.error = "Title required!"
             binding.detailTitle.requestFocus()
             return false
@@ -355,7 +367,18 @@ class WriteBlogActivity : AppCompatActivity() {
                 }
             }
         }
+        if (binding.insertLink.text.toString() != "" && !URLUtil.isValidUrl(binding.insertLink.text.toString()))
+        {
+            binding.insertLink.error = "Invalid link!"
+            binding.insertLink.requestFocus()
+            return false
+        }
 
+        if (!blogImgFlag)
+        {
+            Toast.makeText(this, "Blog Cover required!", Toast.LENGTH_SHORT).show()
+            return false
+        }
         return true
     }
 
