@@ -27,16 +27,13 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
                             android:isScrollContainer="true"
-                            android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
+                            android:theme="@style/ThemeOverlay.MaterialComponents.Light"
                             app:layout_constraintTop_toTopOf="parent">
 
                                 <androidx.appcompat.widget.Toolbar
                                     android:id="@+id/main_toolbar"
                                     android:layout_width="match_parent"
-                                    android:layout_height="?attr/actionBarSize"
-                                    app:menu="@menu/main_menu">
-
-                                </androidx.appcompat.widget.Toolbar>
+                                    android:layout_height="?attr/actionBarSize"/>
 
                         </com.google.android.material.appbar.AppBarLayout>
 

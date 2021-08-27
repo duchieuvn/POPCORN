@@ -1,11 +1,14 @@
 package com.popcorn.cakey.mainscreen
 
+
 import android.annotation.SuppressLint
+import android.app.SearchManager
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.*
-import android.widget.SearchView
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +19,7 @@ import com.popcorn.cakey.R
 import java.io.ByteArrayOutputStream
 
 
-class BlogListFragment: Fragment(R.layout.activity_fragment2) {
+class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQueryTextListener {
     private lateinit var bloglist: ArrayList<BlogThumbnails>
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -69,11 +72,11 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
 
         }
         getdata()
-        adapter=BlogListActivity(bloglist)
+        adapter= BlogListActivity()
+        adapter!!.setData(bloglist)
         layoutManager= LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
         recyclerView=view.findViewById(R.id.MainBlogList)
         recyclerView.layoutManager=layoutManager
-        //setFragmentResult("bloglist", bundleOf("BlogListActivity",adapter))
         recyclerView.adapter=adapter
         return view
 
@@ -90,7 +93,7 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
         super.onViewCreated(view, savedInstanceState)
         R.id.MainBlogList.apply {
             layoutManager=LinearLayoutManager(activity)
-            adapter=BlogListActivity(bloglist)
+            adapter
         }
 
 
@@ -102,35 +105,36 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2) {
     }
     @Override
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-
         menu.clear()
-        val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
+        val menuItem= menu.findItem(R.id.app_bar_search)
+        menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
-        val searchView = SearchView((context as MainActivity).supportActionBar?.themedContext ?: context)
-        menu.findItem(R.id.app_bar_search).apply {
-            setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
-            actionView = searchView
-        }
-        searchView.isIconifiedByDefault = false
-        //val menuItem= menu.findItem(R.id.app_bar_search)
-        //val searView= menuItem.actionView as SearchView
+        val searchView = menuItem!!.actionView as SearchView
 
-        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                adapter!!.filter.filter(query)
-                return true
-            }
+        searchView.setOnQueryTextListener(this)
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                adapter!!.filter.filter(newText)
-                return true
-            }
 
-        })
+
+
+        super.onCreateOptionsMenu(menu, inflater)
+
+
+
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        adapter!!.filter.filter(query)
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean {
+        adapter!!.filter.filter(newText)
+        return true
     }
 
 
 }
+
 
 

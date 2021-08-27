@@ -19,17 +19,25 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class BlogListActivity(private var bloglist: ArrayList<BlogThumbnails>) :
+class BlogListActivity :
     RecyclerView.Adapter<BlogListActivity.ViewHolder>(),Filterable  {
-    private lateinit var itemListFilter: ArrayList<BlogThumbnails>
+    private var itemListFilter: ArrayList<BlogThumbnails> = ArrayList()
+    private var bloglist: ArrayList<BlogThumbnails> = ArrayList()
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
         val v = LayoutInflater.from(parent.context)
             .inflate(R.layout.activity_main_blogs_list, parent, false)
-        itemListFilter = bloglist
-
         return ViewHolder(v)
     }
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(bloglist: ArrayList<BlogThumbnails>){
+        this.bloglist=bloglist
+        this.itemListFilter=bloglist
+        notifyDataSetChanged()
 
+
+    }
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
         val currentItem = bloglist[position]
         holder.itemTitle.text = currentItem.title
@@ -73,23 +81,23 @@ class BlogListActivity(private var bloglist: ArrayList<BlogThumbnails>) :
 
     override fun getFilter(): Filter {
       return object: Filter(){
-          override fun performFiltering(charsequence: CharSequence?): FilterResults {
+          override fun performFiltering(charSequence: CharSequence?): FilterResults {
               val filterResults =FilterResults()
-              if(charsequence== null || charsequence.length<0){
+              if(charSequence== null || charSequence.length<0){
                   filterResults.count=itemListFilter.size
                   filterResults.values=itemListFilter
               }else{
-                  val searchChr= charsequence.toString().lowercase(Locale.getDefault())
+                  val searchChr= charSequence.toString().lowercase(Locale.getDefault())
 
-                  val bloglist = ArrayList<BlogThumbnails>()
+                  val blogs = ArrayList<BlogThumbnails>()
 
                   for (item in bloglist){
                       if(item.title?.lowercase()?.contains(searchChr)!!  || item.author?.lowercase()?.contains(searchChr)!!){
-                          bloglist.add(item)
+                          blogs.add(item)
                       }
                   }
-                  filterResults.count=bloglist.size
-                  filterResults.values=bloglist
+                  filterResults.count=blogs.size
+                  filterResults.values=blogs
               }
               return filterResults
           }
@@ -97,6 +105,7 @@ class BlogListActivity(private var bloglist: ArrayList<BlogThumbnails>) :
 
           @SuppressLint("NotifyDataSetChanged")
           override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
+              bloglist.clear()
               bloglist= results?.values as ArrayList<BlogThumbnails>
               notifyDataSetChanged()
           }

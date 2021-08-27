@@ -1,12 +1,9 @@
 package com.popcorn.cakey.mainscreen
 
-import android.app.SearchManager
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
-import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.navigation.NavigationView
 import com.parse.ParseUser
@@ -93,21 +90,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main){
     /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.main_menu, menu)
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        if (menu != null) {
-            (menu.findItem(R.id.app_bar_search).actionView as SearchView).apply {
-                // Assumes current activity is the searchable activity
-                setSearchableInfo(searchManager.getSearchableInfo(componentName))
-                isIconifiedByDefault = false // Do not iconify the widget; expand it by default
-            }
-        }
         return true
-
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        return super.onPrepareOptionsMenu(menu)
     }*/
+
+
+
+
 
 
 
