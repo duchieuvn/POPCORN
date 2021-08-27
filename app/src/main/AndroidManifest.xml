@@ -32,7 +32,8 @@
             android:name=".mainscreen.MainActivity"
             android:parentActivityName=".auth.LoginActivity"
             android:screenOrientation="behind"
-            android:theme="@style/Main_Screen">
+            android:theme="@style/Main_Screen"
+            android:windowSoftInputMode="adjustPan|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

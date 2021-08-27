@@ -83,21 +83,23 @@ class BlogListActivity :
       return object: Filter(){
           override fun performFiltering(charSequence: CharSequence?): FilterResults {
               val filterResults =FilterResults()
-              if(charSequence== null || charSequence.length<0){
-                  filterResults.count=itemListFilter.size
-                  filterResults.values=itemListFilter
-              }else{
-                  val searchChr= charSequence.toString().lowercase(Locale.getDefault())
+              if (charSequence != null) {
+                  if(charSequence== "" || charSequence.length<0){
+                      filterResults.count=itemListFilter.size
+                      filterResults.values=itemListFilter
+                  } else{
+                      val searchChr= charSequence.toString().lowercase(Locale.getDefault())
 
-                  val blogs = ArrayList<BlogThumbnails>()
+                      val blogs = ArrayList<BlogThumbnails>()
 
-                  for (item in bloglist){
-                      if(item.title?.lowercase()?.contains(searchChr)!!  || item.author?.lowercase()?.contains(searchChr)!!){
-                          blogs.add(item)
+                      for (item in bloglist){
+                          if(item.title?.lowercase()?.contains(searchChr)!!  || item.author?.lowercase()?.contains(searchChr)!!){
+                              blogs.add(item)
+                          }
                       }
+                      filterResults.count=blogs.size
+                      filterResults.values=blogs
                   }
-                  filterResults.count=blogs.size
-                  filterResults.values=blogs
               }
               return filterResults
           }
@@ -105,7 +107,6 @@ class BlogListActivity :
 
           @SuppressLint("NotifyDataSetChanged")
           override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-              bloglist.clear()
               bloglist= results?.values as ArrayList<BlogThumbnails>
               notifyDataSetChanged()
           }
