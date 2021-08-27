@@ -1,7 +1,6 @@
 package com.popcorn.cakey.blog
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
@@ -22,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.exoplayer2.SimpleExoPlayer
 import com.google.android.exoplayer2.source.MediaSource
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
-import com.google.android.exoplayer2.source.hls.HlsMediaSource
 import com.google.android.exoplayer2.ui.PlayerView
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory
 import com.google.android.exoplayer2.util.Util
@@ -32,8 +30,6 @@ import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
 import java.io.File
-import java.util.regex.Matcher
-import java.util.regex.Pattern
 import kotlin.math.roundToInt
 
 
@@ -51,11 +47,11 @@ class ReadBlogActivity : AppCompatActivity() {
     private lateinit var videoLink: String
     private lateinit var blog: ParseObject
 
-    private val reactBlogCallback = FunctionCallback<Any?> { _, err ->
-        if (err != null) {
-            undo()
-        }
-    }
+    // private val reactBlogCallback = FunctionCallback<Any?> { _, err ->
+    //     if (err != null) {
+    //         undo()
+    //     }
+    // }
 
     private fun saveReport(blog: ParseObject, reason: String, callback: SaveCallback) {
         val report = ParseObject("Report")
@@ -258,16 +254,15 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val queryCmt = ParseQuery.getQuery<ParseObject>("Comment")
         queryCmt.include("blog").include("user")
-        var cmt = queryCmt.whereEqualTo("blog", blog).setLimit(4).find()
+        val cmt = queryCmt.whereEqualTo("blog", blog).setLimit(4).find()
 
-        for (item in cmt){
+        for (item in cmt) {
             val user = item.getParseUser("user")
 
             listUser.add(user?.username.toString())
             listText.add(item.getString("text").toString())
             user?.getParseFile("avatar")?.file?.let { listImg.add(it) }
         }
-
 
         val cmtAdapter = CommentSection(listUser, listText, listImg)
         cmtView.adapter = cmtAdapter
@@ -386,13 +381,17 @@ class ReadBlogActivity : AppCompatActivity() {
                     ContextCompat.getColorStateList(this, R.color.pink_variant)
                 likeClick = false
             }
-            reactBlog(blog, true, reactBlogCallback)
+            reactBlog(blog, true) { e ->
+                if (e != null) undo()
+            }
         } else {
             binding.insertLike = defaultLike
             likeClick = true
             binding.like.backgroundTintList =
                 ContextCompat.getColorStateList(this, R.color.pink)
-            destroyReactBlog(blog, reactBlogCallback)
+            destroyReactBlog(blog) { e ->
+                if (e != null) undo()
+            }
         }
     }
 
@@ -405,13 +404,17 @@ class ReadBlogActivity : AppCompatActivity() {
                 dislikeClick = false
 
             }
-            reactBlog(blog, false, reactBlogCallback)
+            reactBlog(blog, false) { e ->
+                if (e != null) undo()
+            }
         } else {
             binding.insertDislike = defaultDislike
             dislikeClick = true
             binding.dislike.backgroundTintList =
                 ContextCompat.getColorStateList(this, R.color.pink)
-            destroyReactBlog(blog, reactBlogCallback)
+            destroyReactBlog(blog) { e ->
+                if (e != null) undo()
+            }
         }
     }
 
@@ -442,17 +445,48 @@ class ReadBlogActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun reactBlog(blog: ParseObject, type: Boolean, callback: FunctionCallback<Any?>) {
-        val params = HashMap<String, Any>()
-        params["blogId"] = blog.objectId
-        params["type"] = type
-        ParseCloud.callFunctionInBackground("reactBlog", params, callback)
+    private fun reactBlog(blog: ParseObject, type: Boolean, callback: SaveCallback) {
+        // val params = HashMap<String, Any>()
+        // params["blogId"] = blog.objectId
+        // params["type"] = type
+        // ParseCloud.callFunctionInBackground("reactBlog", params, callback)
+        val user = ParseUser.getCurrentUser()
+        val queryLike = ParseQuery.getQuery<ParseObject>("Like")
+        queryLike.whereEqualTo("blog", blog)
+        queryLike.whereEqualTo("user", user)
+        queryLike.getFirstInBackground { like, e ->
+            if (e == null) {
+                if (like == null) { // Create new Like
+                    val newLike = ParseObject("Like")
+                    newLike.put("blog", blog)
+                    newLike.put("user", user)
+                    newLike.put("type", type)
+                    newLike.saveInBackground(callback)
+                } else { // Like existed, just update the old one
+                    like.put("type", type)
+                    like.saveInBackground(callback)
+                }
+            } else {
+                // DO SOMETHING ABOUT "LIKE" ERROR
+            }
+        }
     }
 
-    private fun destroyReactBlog(blog: ParseObject, callback: FunctionCallback<Any?>) {
-        val params = HashMap<String, Any>()
-        params["blogId"] = blog.objectId
-        ParseCloud.callFunctionInBackground("destroyReactBlog", params, callback)
+    private fun destroyReactBlog(blog: ParseObject, callback: DeleteCallback) {
+        // val params = HashMap<String, Any>()
+        // params["blogId"] = blog.objectId
+        // ParseCloud.callFunctionInBackground("destroyReactBlog", params, callback)
+        val user = ParseUser.getCurrentUser()
+        val queryLike = ParseQuery.getQuery<ParseObject>("Like")
+        queryLike.whereEqualTo("blog", blog)
+        queryLike.whereEqualTo("user", user)
+        queryLike.getFirstInBackground { like, e ->
+            if (e == null) {
+                like.deleteInBackground(callback)
+            } else {
+                // DO SOMETHING ABOUT "LIKE" ERROR
+            }
+        }
     }
 }
 

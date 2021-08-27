@@ -36,8 +36,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main){
             finishAffinity()
         }
 
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
