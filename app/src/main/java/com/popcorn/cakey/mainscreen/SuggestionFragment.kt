@@ -44,7 +44,6 @@ class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
         icon.compress(Bitmap.CompressFormat.PNG,100,stream)
         val byte= stream.toByteArray()
         val temp =ParseFile(byte)
-        temp.saveInBackground()
 
         for( i in data?.indices!!){
             id.add(data[i].objectId)
