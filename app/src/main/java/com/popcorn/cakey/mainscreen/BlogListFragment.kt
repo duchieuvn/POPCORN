@@ -52,7 +52,6 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
         icon.compress(Bitmap.CompressFormat.PNG,100,stream)
         val byte= stream.toByteArray()
         val temp = ParseFile(byte)
-        temp.saveInBackground()
 
         for (i in data?.indices!!){
             val pics=data[i].getParseFile("img")

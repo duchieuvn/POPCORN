@@ -43,7 +43,6 @@ class CourseMenu : AppCompatActivity(R.layout.activity_course_menu) {
         icon.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val byte = stream.toByteArray()
         val temp = ParseFile(byte)
-        temp.saveInBackground()
 
         val queryBlog = ParseQuery.getQuery<ParseObject>("Course").setLimit(5)
         val data = queryBlog?.find()
