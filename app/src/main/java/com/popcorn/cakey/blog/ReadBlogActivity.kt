@@ -455,19 +455,17 @@ class ReadBlogActivity : AppCompatActivity() {
         queryLike.whereEqualTo("blog", blog)
         queryLike.whereEqualTo("user", user)
         queryLike.getFirstInBackground { like, e ->
-            if (e == null) {
-                if (like == null) { // Create new Like
-                    val newLike = ParseObject("Like")
-                    newLike.put("blog", blog)
-                    newLike.put("user", user)
-                    newLike.put("type", type)
-                    newLike.saveInBackground(callback)
-                } else { // Like existed, just update the old one
-                    like.put("type", type)
-                    like.saveInBackground(callback)
-                }
-            } else {
-                // DO SOMETHING ABOUT "LIKE" ERROR
+            if (e == null && like != null) {
+                // Like existed, just update the old one
+                like.put("type", type)
+                like.saveInBackground(callback)
+            } else if (e.code == ParseException.OBJECT_NOT_FOUND) {
+                // Create new Like
+                val newLike = ParseObject("Like")
+                newLike.put("blog", blog)
+                newLike.put("user", user)
+                newLike.put("type", type)
+                newLike.saveInBackground(callback)
             }
         }
     }
@@ -484,7 +482,7 @@ class ReadBlogActivity : AppCompatActivity() {
             if (e == null) {
                 like.deleteInBackground(callback)
             } else {
-                // DO SOMETHING ABOUT "LIKE" ERROR
+                // OBJECT NOT FOUND, just ignore it
             }
         }
     }
