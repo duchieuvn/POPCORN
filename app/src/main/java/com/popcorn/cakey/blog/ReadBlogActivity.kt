@@ -2,7 +2,9 @@ package com.popcorn.cakey.blog
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -204,7 +206,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
             builder.setPositiveButton("OK") { _, _ ->
                 if (insertNumberServings.text.toString() != "") {
-                    if (insertNumberServings.text.toString() == "0")
+                    if (insertNumberServings.text.toString() == "0" || insertNumberServings.text.toString() > "100")
                         Toast.makeText(this, "Invalid number!", Toast.LENGTH_SHORT).show()
                     else {
                         binding.insertServings = insertNumberServings.text.toString() + " people"
@@ -231,7 +233,6 @@ class ReadBlogActivity : AppCompatActivity() {
             builder.show()
         }
 
-        //////////////////////////////////////Tang like, dislike ////////////////////////////////////////////////////
 
         //Rating
         binding.like.setOnClickListener {
@@ -250,7 +251,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
         val listText = ArrayList<String>()
         val listUser = ArrayList<String>()
-        val listImg = ArrayList<File>()
+        val listImg = ArrayList<Bitmap>()
 
         val queryCmt = ParseQuery.getQuery<ParseObject>("Comment")
         queryCmt.include("blog").include("user")
@@ -261,7 +262,18 @@ class ReadBlogActivity : AppCompatActivity() {
 
             listUser.add(user?.username.toString())
             listText.add(item.getString("text").toString())
-            user?.getParseFile("avatar")?.file?.let { listImg.add(it) }
+            val ava = user?.getParseFile("avatar")?.file
+            if (ava?.exists() == true) {
+                val myBitmap = BitmapFactory.decodeFile(ava.absolutePath)
+                listImg.add(myBitmap)
+            } else {
+
+                val drawable = resources.getDrawable(R.drawable.splash_screen) as BitmapDrawable
+                val bitmap = drawable.bitmap
+
+                listImg.add(bitmap)
+            }
+
         }
 
         val cmtAdapter = CommentSection(listUser, listText, listImg)
@@ -273,16 +285,18 @@ class ReadBlogActivity : AppCompatActivity() {
         if (ava?.exists() == true) {
             val myBitmap = BitmapFactory.decodeFile(ava.absolutePath)
             binding.userAvatar.setImageBitmap(myBitmap)
-        }
+        } else
+            binding.userAvatar.setImageResource(R.drawable.splash_screen)
+
         binding.insertUsername = curUser.username
 
         //If user leave a comment
         binding.sendButton.setOnClickListener {
-            ////////////////////////////Update cai ten lai + push cmt///////////////////////////////////
             val text = binding.userDetailCmt.text.toString()
             listUser.add(curUser.username)
             listText.add(text)
-            curUser?.getParseFile("avatar")?.file?.let { listImg.add(it) }
+            val myBitmap = BitmapFactory.decodeFile(ava?.absolutePath)
+            listImg.add(myBitmap)
 
             cmtView.adapter = cmtAdapter
             binding.userDetailCmt.setText("")
