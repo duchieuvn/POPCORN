@@ -20,8 +20,8 @@ import kotlin.collections.ArrayList
 
 class BlogListActivity :
     RecyclerView.Adapter<BlogListActivity.ViewHolder>(), Filterable {
-    private var itemListFilter: ArrayList<BlogThumbnails> = ArrayList()
-    private var bloglist: ArrayList<BlogThumbnails> = ArrayList()
+    private var itemListFilter: ArrayList<Blog> = ArrayList()
+    private var bloglist: ArrayList<Blog> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
@@ -31,7 +31,7 @@ class BlogListActivity :
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setData(bloglist: ArrayList<BlogThumbnails>) {
+    fun setData(bloglist: ArrayList<Blog>) {
         this.bloglist = bloglist
         this.itemListFilter = bloglist
         notifyDataSetChanged()
@@ -88,7 +88,7 @@ class BlogListActivity :
                     } else {
                         val searchChr = charSequence.toString().lowercase(Locale.getDefault())
 
-                        val blogs = ArrayList<BlogThumbnails>()
+                        val blogs = ArrayList<Blog>()
 
                         for (item in bloglist) {
                             if (item.title?.lowercase()
@@ -108,7 +108,7 @@ class BlogListActivity :
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                bloglist = results?.values as ArrayList<BlogThumbnails>
+                bloglist = results?.values as ArrayList<Blog>
                 notifyDataSetChanged()
             }
 

@@ -13,7 +13,7 @@ import com.parse.ParseException
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
 
-class SuggestionActivity(private val Blogs: ArrayList<BlogThumbnails>):RecyclerView.Adapter<SuggestionActivity.ViewHolder>() {
+class SuggestionActivity(private val Blogs: ArrayList<Blog>):RecyclerView.Adapter<SuggestionActivity.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionActivity.ViewHolder {
         val v= LayoutInflater.from(parent.context).inflate(R.layout.activity_suggestion,parent,false)

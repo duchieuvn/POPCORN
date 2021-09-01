@@ -18,7 +18,7 @@ import java.io.ByteArrayOutputStream
 
 
 class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
-    private lateinit var blogs: ArrayList<BlogThumbnails>
+    private lateinit var blogs: ArrayList<Blog>
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
     private var adapter: RecyclerView.Adapter<SuggestionActivity.ViewHolder>? = null
@@ -66,7 +66,7 @@ class SuggestionFragment: Fragment(R.layout.activity_fragment1) {
     private fun getData(){
         blogs= arrayListOf()
         for (i in id.indices){
-            val blog=BlogThumbnails(id[i],"null",image[i],"null")
+            val blog=Blog(id[i],"null",image[i],"null")
             blogs.add(blog)
         }
     }

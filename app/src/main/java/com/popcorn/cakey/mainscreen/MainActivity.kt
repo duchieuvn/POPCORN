@@ -18,7 +18,7 @@ import com.popcorn.cakey.profile.ViewProfile
 class MainActivity : AppCompatActivity(R.layout.activity_main){
 
     private lateinit var binding: ActivityMainBinding
-    //private lateinit var bloglist: ArrayList<BlogThumbnails>
+    //private lateinit var bloglist: ArrayList<Blog>
     private lateinit var navigation: NavigationView
     //private  var itemAdapter: BlogListActivity?=null
     /*private lateinit var title: ArrayList<String>
