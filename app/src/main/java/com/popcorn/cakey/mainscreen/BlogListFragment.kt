@@ -17,7 +17,7 @@ import com.popcorn.cakey.R
 import java.io.ByteArrayOutputStream
 
 
-class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQueryTextListener {
+class BlogListFragment : Fragment(R.layout.activity_fragment2), SearchView.OnQueryTextListener {
     private lateinit var bloglist: ArrayList<BlogThumbnails>
     private lateinit var recyclerView: RecyclerView
     private var layoutManager: RecyclerView.LayoutManager? = null
@@ -25,75 +25,80 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
     private lateinit var title: ArrayList<String>
     private lateinit var image: ArrayList<ParseFile>
     private lateinit var author: ArrayList<String>
-    private val mew=R.drawable.avatar
+    private val mew = R.drawable.avatar
     private lateinit var blogid: ArrayList<String>
-    companion object{
+
+    companion object {
         fun newInstance(): BlogListFragment {
-           return BlogListFragment()
+            return BlogListFragment()
         }
     }
 
     @SuppressLint("WrongThread")
     @Override
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         setHasOptionsMenu(true)
 
-        val view: View=inflater.inflate(R.layout.activity_fragment2,container,false)
-        val queryBlog= ParseQuery.getQuery<ParseObject>("Blog").setLimit(10)
+        val view: View = inflater.inflate(R.layout.activity_fragment2, container, false)
+        val queryBlog = ParseQuery.getQuery<ParseObject>("Blog").setLimit(10)
         val data = queryBlog?.orderByDescending("updateAt")?.find()
-        title=ArrayList()
-        image=ArrayList()
-        blogid=ArrayList()
-        author= ArrayList()
+        title = ArrayList()
+        image = ArrayList()
+        blogid = ArrayList()
+        author = ArrayList()
 
         // null picture
-        val icon= BitmapFactory.decodeResource(resources,mew)
-        val stream= ByteArrayOutputStream()
-        icon.compress(Bitmap.CompressFormat.PNG,100,stream)
-        val byte= stream.toByteArray()
+        val icon = BitmapFactory.decodeResource(resources, mew)
+        val stream = ByteArrayOutputStream()
+        icon.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val byte = stream.toByteArray()
         val temp = ParseFile(byte)
 
-        for (i in data?.indices!!){
-            val pics=data[i].getParseFile("img")
+        for (i in data?.indices!!) {
+            val pics = data[i].getParseFile("img")
             var name = data[i].getParseUser("author")?.fetchIfNeeded()?.get("username")
-            if(name== null){
+            if (name == null) {
                 name = "Example Author"
             }
             title.add(data[i].getString("name").toString())
             author.add(name as String)
             blogid.add(data[i].objectId)
-            if(pics!=null){
+            if (pics != null) {
                 image.add(pics)
-            }
-            else{
+            } else {
                 image.add(temp)
             }
 
         }
         getdata()
-        adapter= BlogListActivity()
+        adapter = BlogListActivity()
         adapter!!.setData(bloglist)
 
-        layoutManager= LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL,false)
-        recyclerView=view.findViewById(R.id.MainBlogList)
-        recyclerView.layoutManager=layoutManager
-        recyclerView.adapter=adapter
+        layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+        recyclerView = view.findViewById(R.id.MainBlogList)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.adapter = adapter
 
         return view
 
     }
 
-    private fun getdata(){
-        bloglist= arrayListOf()
-        for (i in title.indices){
-            val blog=BlogThumbnails(blogid[i],title[i],image[i],author[i])
+    private fun getdata() {
+        bloglist = arrayListOf()
+        for (i in title.indices) {
+            val blog = BlogThumbnails(blogid[i], title[i], image[i], author[i])
             bloglist.add(blog)
         }
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         R.id.MainBlogList.apply {
-            layoutManager=LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(activity)
             adapter
         }
 
@@ -104,18 +109,18 @@ class BlogListFragment: Fragment(R.layout.activity_fragment2),SearchView.OnQuery
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
     }
+
     @Override
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         inflater.inflate(R.menu.main_menu, menu)
-        val menuItem= menu.findItem(R.id.app_bar_search)
+        val menuItem = menu.findItem(R.id.app_bar_search)
         menuItem.setShowAsAction(MenuItem.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW or MenuItem.SHOW_AS_ACTION_IF_ROOM)
 
         val searchView = menuItem!!.actionView as SearchView
         searchView.setOnQueryTextListener(this)
-        searchView.queryHint="enter blog's name"
+        searchView.queryHint = "enter blog's name"
         super.onCreateOptionsMenu(menu, inflater)
-
 
 
     }
