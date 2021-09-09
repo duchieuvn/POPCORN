@@ -20,7 +20,7 @@ import kotlin.collections.ArrayList
 class BlogListActivity :
     RecyclerView.Adapter<BlogListActivity.ViewHolder>(), Filterable {
     private var itemListFilter: ArrayList<Blog> = ArrayList()
-    private var bloglist: ArrayList<Blog> = ArrayList()
+    private var blogList: ArrayList<Blog> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BlogListActivity.ViewHolder {
@@ -29,17 +29,15 @@ class BlogListActivity :
         return ViewHolder(v)
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun setData(bloglist: ArrayList<Blog>) {
-        this.bloglist = bloglist
-        this.itemListFilter = bloglist
+    // @SuppressLint("NotifyDataSetChanged")
+    fun setData(blogList: ArrayList<Blog>) {
+        this.blogList = blogList
+        this.itemListFilter = blogList
         notifyDataSetChanged()
-
-
     }
 
     override fun onBindViewHolder(holder: BlogListActivity.ViewHolder, position: Int) {
-        val currentItem = bloglist[position]
+        val currentItem = blogList[position]
         holder.itemTitle.text = currentItem.title
         val currentId = currentItem.ID
         currentItem.image.getDataInBackground { data, e ->
@@ -64,7 +62,7 @@ class BlogListActivity :
     }
 
     override fun getItemCount(): Int {
-        return bloglist.size
+        return blogList.size
     }
 
 
@@ -89,7 +87,7 @@ class BlogListActivity :
 
                         val blogs = ArrayList<Blog>()
 
-                        for (item in bloglist) {
+                        for (item in blogList) {
                             if (item.title?.lowercase()
                                     ?.contains(searchChr)!! || item.author?.lowercase()
                                     ?.contains(searchChr)!!
@@ -107,7 +105,7 @@ class BlogListActivity :
 
             @SuppressLint("NotifyDataSetChanged")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                bloglist = results?.values as ArrayList<Blog>
+                blogList = results?.values as ArrayList<Blog>
                 notifyDataSetChanged()
             }
 

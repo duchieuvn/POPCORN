@@ -31,21 +31,20 @@ import com.parse.*
 import com.popcorn.cakey.R
 import com.popcorn.cakey.databinding.ActivityReadBlogBinding
 import com.popcorn.cakey.report.ReportActivity
-import java.io.File
 import kotlin.math.roundToInt
 
 
 class ReadBlogActivity : AppCompatActivity() {
     private var likeClick = true
     private var dislikeClick = true
-    private var mPlayer: SimpleExoPlayer? = null
     private var playWhenReady = true
     private var currentWindow = 0
+    private var defaultAvatar = false
     private var playbackPosition: Long = 0
+    private var mPlayer: SimpleExoPlayer? = null
     private lateinit var binding: ActivityReadBlogBinding
     private lateinit var defaultDislike: String
     private lateinit var defaultLike: String
-    private var defaultAvatar = false
     private lateinit var playerView: PlayerView
     private lateinit var videoLink: String
     private lateinit var blog: ParseObject
@@ -207,7 +206,9 @@ class ReadBlogActivity : AppCompatActivity() {
 
             builder.setPositiveButton("OK") { _, _ ->
                 if (insertNumberServings.text.toString() != "") {
-                    if (insertNumberServings.text.toString() == "0"|| insertNumberServings.text.toString().toInt() > 100)
+                    if (insertNumberServings.text.toString() == "0" || insertNumberServings.text.toString()
+                            .toInt() > 100
+                    )
                         Toast.makeText(this, "Invalid number!", Toast.LENGTH_SHORT).show()
                     else {
                         binding.insertServings = insertNumberServings.text.toString() + " people"
@@ -286,8 +287,7 @@ class ReadBlogActivity : AppCompatActivity() {
         if (ava?.exists() == true) {
             val myBitmap = BitmapFactory.decodeFile(ava.absolutePath)
             binding.userAvatar.setImageBitmap(myBitmap)
-        } else
-        {
+        } else {
             binding.userAvatar.setImageResource(R.drawable.splash_screen)
             defaultAvatar = true
         }
@@ -300,15 +300,12 @@ class ReadBlogActivity : AppCompatActivity() {
             val text = binding.userDetailCmt.text.toString()
             listUser.add(curUser.username)
             listText.add(text)
-            if (defaultAvatar)
-            {
+            if (defaultAvatar) {
                 val drawable = resources.getDrawable(R.drawable.splash_screen) as BitmapDrawable
                 val bitmap = drawable.bitmap
 
                 listImg.add(bitmap)
-            }
-            else
-            {
+            } else {
                 val myBitmap = BitmapFactory.decodeFile(ava?.absolutePath)
                 listImg.add(myBitmap)
             }
