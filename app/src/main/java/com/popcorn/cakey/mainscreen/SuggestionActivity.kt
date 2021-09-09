@@ -1,5 +1,6 @@
 package com.popcorn.cakey.mainscreen
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
@@ -13,13 +14,21 @@ import com.parse.ParseException
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
 
-class SuggestionActivity(private val Blogs: ArrayList<Blog>):RecyclerView.Adapter<SuggestionActivity.ViewHolder>() {
+class SuggestionActivity()
+    :RecyclerView.Adapter<SuggestionActivity.ViewHolder>() {
+    private var Blogs: ArrayList<Blog> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SuggestionActivity.ViewHolder {
         val v= LayoutInflater.from(parent.context).inflate(R.layout.activity_suggestion,parent,false)
         return ViewHolder(v)
     }
+    @SuppressLint("NotifyDataSetChanged")
+    fun setData(bloglist: ArrayList<Blog>) {
+        this.Blogs = bloglist
+        notifyDataSetChanged()
 
+
+    }
     override fun onBindViewHolder(holder:SuggestionActivity.ViewHolder, position: Int) {
         val currentItem= Blogs[position]
         currentItem.image.getDataInBackground(

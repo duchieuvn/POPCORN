@@ -11,7 +11,6 @@ import android.widget.Filterable
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.parse.ParseException
 import com.popcorn.cakey.R
 import com.popcorn.cakey.blog.ReadBlogActivity
 import java.util.*
