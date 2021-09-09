@@ -220,6 +220,17 @@ class WriteBlogActivity : AppCompatActivity() {
                 blogContent.put("ingredient", ingredients)
                 blogContent.save()
 
+                //Put blog Image here
+                val drawable = binding.blogImage.drawable as BitmapDrawable
+                val bitmap = drawable.bitmap
+
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
+                val data: ByteArray = stream.toByteArray()
+                var filename = "blogCover.jpeg"
+                val file = ParseFile(filename, data)
+                blog.put("img",file)
+
                 blog.put("blogContent", blogContent)
                 blog.save()
 
@@ -253,17 +264,8 @@ class WriteBlogActivity : AppCompatActivity() {
                     Step.saveInBackground()
                 }
 
-                //Put blog Image here
-                /*
-                val drawable = binding.blogImage.drawable as BitmapDrawable
-                val bitmap = drawable.bitmap
 
-                val stream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream)
-                val data: ByteArray = stream.toByteArray()
-                var filename = "blogCover.jpeg"
-                val file = ParseFile(filename, data)
-                   */
+
 
                 //move to main screens
                 val intent = Intent(this, MainActivity::class.java)
