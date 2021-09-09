@@ -45,12 +45,12 @@ class BlogListFragment : Fragment(R.layout.activity_fragment2), SearchView.OnQue
         setHasOptionsMenu(true)
 
         val view: View = inflater.inflate(R.layout.activity_fragment2, container, false)
-        val queryBlog = ParseQuery.getQuery<ParseObject>("Blog").setLimit(10)
-        val data = queryBlog?.orderByDescending("updateAt")?.find()
-        title = ArrayList()
-        image = ArrayList()
-        blogid = ArrayList()
-        author = ArrayList()
+       // val queryBlog = ParseQuery.getQuery<ParseObject>("Blog").setLimit(10)
+        //val data = queryBlog?.orderByDescending("updateAt")?.find()
+        //title = ArrayList()
+        //image = ArrayList()
+        //blogid = ArrayList()
+        //author = ArrayList()
 
         // null picture
         val icon = BitmapFactory.decodeResource(resources, mew)
@@ -125,13 +125,13 @@ class BlogListFragment : Fragment(R.layout.activity_fragment2), SearchView.OnQue
         else queryBlog.findInBackground()
     }
 
-    private fun getdata() {
-        blogList = arrayListOf()
-        for (i in title.indices) {
-            val blog = Blog(blogid[i], title[i], image[i], author[i])
-            blogList.add(blog)
-        }
-    }
+    //private fun getdata() {
+    //    blogList = arrayListOf()
+    //    for (i in title.indices) {
+    //        val blog = Blog(blogid[i], title[i], image[i], author[i])
+    //        blogList.add(blog)
+    //    }
+    //}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
