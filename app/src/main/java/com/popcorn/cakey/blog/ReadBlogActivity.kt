@@ -206,7 +206,7 @@ class ReadBlogActivity : AppCompatActivity() {
 
             builder.setPositiveButton("OK") { _, _ ->
                 if (insertNumberServings.text.toString() != "") {
-                    if (insertNumberServings.text.toString() == "0" || insertNumberServings.text.toString() > "100")
+                    if (insertNumberServings.text.toString() == "0"|| insertNumberServings.text.toString().toInt() > 100)
                         Toast.makeText(this, "Invalid number!", Toast.LENGTH_SHORT).show()
                     else {
                         binding.insertServings = insertNumberServings.text.toString() + " people"
