@@ -45,6 +45,7 @@ class ReadBlogActivity : AppCompatActivity() {
     private lateinit var binding: ActivityReadBlogBinding
     private lateinit var defaultDislike: String
     private lateinit var defaultLike: String
+    private var defaultAvatar = false
     private lateinit var playerView: PlayerView
     private lateinit var videoLink: String
     private lateinit var blog: ParseObject
@@ -286,7 +287,11 @@ class ReadBlogActivity : AppCompatActivity() {
             val myBitmap = BitmapFactory.decodeFile(ava.absolutePath)
             binding.userAvatar.setImageBitmap(myBitmap)
         } else
+        {
             binding.userAvatar.setImageResource(R.drawable.splash_screen)
+            defaultAvatar = true
+        }
+
 
         binding.insertUsername = curUser.username
 
@@ -295,8 +300,18 @@ class ReadBlogActivity : AppCompatActivity() {
             val text = binding.userDetailCmt.text.toString()
             listUser.add(curUser.username)
             listText.add(text)
-            val myBitmap = BitmapFactory.decodeFile(ava?.absolutePath)
-            listImg.add(myBitmap)
+            if (defaultAvatar)
+            {
+                val drawable = resources.getDrawable(R.drawable.splash_screen) as BitmapDrawable
+                val bitmap = drawable.bitmap
+
+                listImg.add(bitmap)
+            }
+            else
+            {
+                val myBitmap = BitmapFactory.decodeFile(ava?.absolutePath)
+                listImg.add(myBitmap)
+            }
 
             cmtView.adapter = cmtAdapter
             binding.userDetailCmt.setText("")
